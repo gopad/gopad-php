@@ -1,0 +1,30 @@
+{
+    "name": "gopad/gopad",
+    "type": "library",
+    "description": "etherpad for markdown with go",
+    "keywords": ["etherpad", "markdown"],
+    "homepage": "https://gopad.webhippie.de",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Thomas Boerger",
+            "email": "thomas@webhippie.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Gopad\\": "lib/Gopad"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gopad\\Tests\\": "tests/Gopad/Tests"
+        }
+    }
+}
