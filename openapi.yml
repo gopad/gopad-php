@@ -1,0 +1,4 @@
+variableNamingConvention: camelCase
+invokerPackage: Gopad
+packageName: gopad
+artifactVersion: 1.0.0-alpha1
