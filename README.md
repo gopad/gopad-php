@@ -69,10 +69,10 @@ $api = new Gopad\Api\AuthApi(
     new GuzzleHttp\Client()
 );
 
-$auth = new \Gopad\Model\InlineObject(); // \Gopad\Model\InlineObject | 
+$params = new \Gopad\Model\AuthLogin(); // \Gopad\Model\AuthLogin | The credentials to authenticate
 
 try {
-    $result = $api->loginUser($auth);
+    $result = $api->loginUser($params);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AuthApi->loginUser: ', $e->getMessage(), PHP_EOL;
@@ -114,20 +114,39 @@ Class | Method | HTTP request | Description
 
 ## Documentation for models
 
+ - [AuthLogin](docs/Model/AuthLogin.md)
  - [AuthToken](docs/Model/AuthToken.md)
  - [AuthVerify](docs/Model/AuthVerify.md)
- - [InlineObject](docs/Model/InlineObject.md)
+ - [GeneralError](docs/Model/GeneralError.md)
  - [Profile](docs/Model/Profile.md)
  - [Team](docs/Model/Team.md)
  - [TeamUser](docs/Model/TeamUser.md)
  - [TeamUserParams](docs/Model/TeamUserParams.md)
  - [User](docs/Model/User.md)
  - [UserTeamParams](docs/Model/UserTeamParams.md)
+ - [ValidationError](docs/Model/ValidationError.md)
+ - [ValidationErrorErrors](docs/Model/ValidationErrorErrors.md)
 
 
 ## Documentation for authorization
 
-All endpoints do not require authorization.
+
+
+## BasicAuth
+
+
+- **Type**: HTTP basic authentication
+
+
+
+## HeaderAuth
+
+
+- **Type**: API key
+- **API key parameter name**: X-API-Key
+- **Location**: HTTP header
+
+
 
 
 ## Security

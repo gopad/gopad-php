@@ -122,15 +122,15 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\InlineObject $auth auth (required)
+     * @param  \Gopad\Model\AuthLogin $params The credentials to authenticate (required)
      *
      * @throws \Gopad\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthToken|object|object
+     * @return \Gopad\Model\AuthToken|\Gopad\Model\GeneralError|\Gopad\Model\GeneralError
      */
-    public function loginUser($auth)
+    public function loginUser($params)
     {
-        list($response) = $this->loginUserWithHttpInfo($auth);
+        list($response) = $this->loginUserWithHttpInfo($params);
         return $response;
     }
 
@@ -139,15 +139,15 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\InlineObject $auth (required)
+     * @param  \Gopad\Model\AuthLogin $params The credentials to authenticate (required)
      *
      * @throws \Gopad\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthToken|object|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\GeneralError|\Gopad\Model\GeneralError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function loginUserWithHttpInfo($auth)
+    public function loginUserWithHttpInfo($params)
     {
-        $request = $this->loginUserRequest($auth);
+        $request = $this->loginUserRequest($params);
 
         try {
             $options = $this->createHttpClientOption();
@@ -192,26 +192,26 @@ class AuthApi
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Gopad\Model\GeneralError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\GeneralError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 default:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Gopad\Model\GeneralError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\GeneralError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -244,7 +244,7 @@ class AuthApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Gopad\Model\GeneralError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -252,7 +252,7 @@ class AuthApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Gopad\Model\GeneralError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -267,14 +267,14 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\InlineObject $auth (required)
+     * @param  \Gopad\Model\AuthLogin $params The credentials to authenticate (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginUserAsync($auth)
+    public function loginUserAsync($params)
     {
-        return $this->loginUserAsyncWithHttpInfo($auth)
+        return $this->loginUserAsyncWithHttpInfo($params)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -287,15 +287,15 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\InlineObject $auth (required)
+     * @param  \Gopad\Model\AuthLogin $params The credentials to authenticate (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginUserAsyncWithHttpInfo($auth)
+    public function loginUserAsyncWithHttpInfo($params)
     {
         $returnType = '\Gopad\Model\AuthToken';
-        $request = $this->loginUserRequest($auth);
+        $request = $this->loginUserRequest($params);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -334,17 +334,17 @@ class AuthApi
     /**
      * Create request for operation 'loginUser'
      *
-     * @param  \Gopad\Model\InlineObject $auth (required)
+     * @param  \Gopad\Model\AuthLogin $params The credentials to authenticate (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function loginUserRequest($auth)
+    protected function loginUserRequest($params)
     {
-        // verify the required parameter 'auth' is set
-        if ($auth === null || (is_array($auth) && count($auth) === 0)) {
+        // verify the required parameter 'params' is set
+        if ($params === null || (is_array($params) && count($params) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $auth when calling loginUser'
+                'Missing the required parameter $params when calling loginUser'
             );
         }
 
@@ -359,8 +359,8 @@ class AuthApi
 
         // body params
         $_tempBody = null;
-        if (isset($auth)) {
-            $_tempBody = $auth;
+        if (isset($params)) {
+            $_tempBody = $params;
         }
 
         if ($multipart) {
@@ -432,7 +432,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthToken|object|object
+     * @return \Gopad\Model\AuthToken|\Gopad\Model\GeneralError|\Gopad\Model\GeneralError
      */
     public function refreshAuth()
     {
@@ -448,7 +448,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthToken|object|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\GeneralError|\Gopad\Model\GeneralError, HTTP status code, HTTP response headers (array of strings)
      */
     public function refreshAuthWithHttpInfo()
     {
@@ -497,26 +497,26 @@ class AuthApi
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Gopad\Model\GeneralError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\GeneralError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 default:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Gopad\Model\GeneralError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\GeneralError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -549,7 +549,7 @@ class AuthApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Gopad\Model\GeneralError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -557,7 +557,7 @@ class AuthApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Gopad\Model\GeneralError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -726,7 +726,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthVerify|object|object
+     * @return \Gopad\Model\AuthVerify|\Gopad\Model\GeneralError|\Gopad\Model\GeneralError
      */
     public function verifyAuth($token)
     {
@@ -743,7 +743,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthVerify|object|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthVerify|\Gopad\Model\GeneralError|\Gopad\Model\GeneralError, HTTP status code, HTTP response headers (array of strings)
      */
     public function verifyAuthWithHttpInfo($token)
     {
@@ -792,26 +792,26 @@ class AuthApi
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Gopad\Model\GeneralError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\GeneralError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 default:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Gopad\Model\GeneralError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\GeneralError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -844,7 +844,7 @@ class AuthApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Gopad\Model\GeneralError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -852,7 +852,7 @@ class AuthApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Gopad\Model\GeneralError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

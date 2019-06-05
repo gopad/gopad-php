@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineObject
+ * ValidationError
  *
  * PHP version 5
  *
@@ -34,15 +34,16 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * InlineObject Class Doc Comment
+ * ValidationError Class Doc Comment
  *
  * @category Class
+ * @description Validation error which shows failed fields
  * @package  Gopad
  * @author   Thomas Boerger <thomas@webhippie.de>
  * @license  http://www.apache.org/licenses/LICENSE-2.0.html Apache-2.0
  * @link     https://github.com/gopad/gopad-php
  */
-class InlineObject implements ModelInterface, ArrayAccess
+class ValidationError implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -51,7 +52,7 @@ class InlineObject implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'inline_object';
+    protected static $openAPIModelName = 'validation_error';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +60,9 @@ class InlineObject implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'username' => 'string',
-        'password' => 'string'
+        'status' => 'int',
+        'message' => 'string',
+        'errors' => '\Gopad\Model\ValidationErrorErrors[]'
     ];
 
     /**
@@ -69,8 +71,9 @@ class InlineObject implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'username' => null,
-        'password' => null
+        'status' => null,
+        'message' => null,
+        'errors' => null
     ];
 
     /**
@@ -100,8 +103,9 @@ class InlineObject implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'username' => 'username',
-        'password' => 'password'
+        'status' => 'status',
+        'message' => 'message',
+        'errors' => 'errors'
     ];
 
     /**
@@ -110,8 +114,9 @@ class InlineObject implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'username' => 'setUsername',
-        'password' => 'setPassword'
+        'status' => 'setStatus',
+        'message' => 'setMessage',
+        'errors' => 'setErrors'
     ];
 
     /**
@@ -120,8 +125,9 @@ class InlineObject implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'username' => 'getUsername',
-        'password' => 'getPassword'
+        'status' => 'getStatus',
+        'message' => 'getMessage',
+        'errors' => 'getErrors'
     ];
 
     /**
@@ -184,8 +190,9 @@ class InlineObject implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['username'] = isset($data['username']) ? $data['username'] : null;
-        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -197,11 +204,11 @@ class InlineObject implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['username'] === null) {
-            $invalidProperties[] = "'username' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['password'] === null) {
-            $invalidProperties[] = "'password' can't be null";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
         return $invalidProperties;
     }
@@ -219,49 +226,73 @@ class InlineObject implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets username
+     * Gets status
      *
-     * @return string
+     * @return int
      */
-    public function getUsername()
+    public function getStatus()
     {
-        return $this->container['username'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets username
+     * Sets status
      *
-     * @param string $username username
+     * @param int $status status
      *
      * @return $this
      */
-    public function setUsername($username)
+    public function setStatus($status)
     {
-        $this->container['username'] = $username;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets password
+     * Gets message
      *
      * @return string
      */
-    public function getPassword()
+    public function getMessage()
     {
-        return $this->container['password'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets password
+     * Sets message
      *
-     * @param string $password password
+     * @param string $message message
      *
      * @return $this
      */
-    public function setPassword($password)
+    public function setMessage($message)
     {
-        $this->container['password'] = $password;
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets errors
+     *
+     * @return \Gopad\Model\ValidationErrorErrors[]|null
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+
+    /**
+     * Sets errors
+     *
+     * @param \Gopad\Model\ValidationErrorErrors[]|null $errors errors
+     *
+     * @return $this
+     */
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

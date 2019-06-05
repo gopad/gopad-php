@@ -1,6 +1,6 @@
 # Gopad\AuthApi
 
-All URIs are relative to *http://http:/api/v1*
+All URIs are relative to *http://try.gopad.tech/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## loginUser
 
-> \Gopad\Model\AuthToken loginUser($auth)
+> \Gopad\Model\AuthToken loginUser($params)
 
 Authenticate an user by credentials
 
@@ -28,10 +28,10 @@ $apiInstance = new Gopad\Api\AuthApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$auth = new \Gopad\Model\InlineObject(); // \Gopad\Model\InlineObject | 
+$params = new \Gopad\Model\AuthLogin(); // \Gopad\Model\AuthLogin | The credentials to authenticate
 
 try {
-    $result = $apiInstance->loginUser($auth);
+    $result = $apiInstance->loginUser($params);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AuthApi->loginUser: ', $e->getMessage(), PHP_EOL;
@@ -44,7 +44,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **auth** | [**\Gopad\Model\InlineObject**](../Model/InlineObject.md)|  |
+ **params** | [**\Gopad\Model\AuthLogin**](../Model/AuthLogin.md)| The credentials to authenticate |
 
 ### Return type
 
