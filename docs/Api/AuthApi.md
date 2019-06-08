@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## loginUser
 
-> \Gopad\Model\AuthToken loginUser($params)
+> \Gopad\Model\AuthToken loginUser($authLogin)
 
 Authenticate an user by credentials
 
@@ -28,10 +28,10 @@ $apiInstance = new Gopad\Api\AuthApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$params = new \Gopad\Model\AuthLogin(); // \Gopad\Model\AuthLogin | The credentials to authenticate
+$authLogin = new \Gopad\Model\AuthLogin(); // \Gopad\Model\AuthLogin | The credentials to authenticate
 
 try {
-    $result = $apiInstance->loginUser($params);
+    $result = $apiInstance->loginUser($authLogin);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AuthApi->loginUser: ', $e->getMessage(), PHP_EOL;
@@ -44,7 +44,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **params** | [**\Gopad\Model\AuthLogin**](../Model/AuthLogin.md)| The credentials to authenticate |
+ **authLogin** | [**\Gopad\Model\AuthLogin**](../Model/AuthLogin.md)| The credentials to authenticate |
 
 ### Return type
 
