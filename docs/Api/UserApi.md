@@ -1,24 +1,25 @@
 # Gopad\UserApi
 
-All URIs are relative to *http://try.gopad.tech/api/v1*
+All URIs are relative to http://try.gopad.tech/api/v1.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**appendUserToTeam**](UserApi.md#appendUserToTeam) | **POST** /users/{user_id}/teams | Assign a team to user
-[**createUser**](UserApi.md#createUser) | **POST** /users | Create a new user
-[**deleteUser**](UserApi.md#deleteUser) | **DELETE** /users/{user_id} | Delete a specific user
-[**deleteUserFromTeam**](UserApi.md#deleteUserFromTeam) | **DELETE** /users/{user_id}/teams | Remove a team from user
-[**listUserTeams**](UserApi.md#listUserTeams) | **GET** /users/{user_id}/teams | Fetch all teams assigned to user
-[**listUsers**](UserApi.md#listUsers) | **GET** /users | Fetch all available users
-[**permitUserTeam**](UserApi.md#permitUserTeam) | **PUT** /users/{user_id}/teams | Update team perms for user
-[**showUser**](UserApi.md#showUser) | **GET** /users/{user_id} | Fetch a specific user
-[**updateUser**](UserApi.md#updateUser) | **PUT** /users/{user_id} | Update a specific user
+[**appendUserToTeam()**](UserApi.md#appendUserToTeam) | **POST** /users/{user_id}/teams | Assign a team to user
+[**createUser()**](UserApi.md#createUser) | **POST** /users | Create a new user
+[**deleteUser()**](UserApi.md#deleteUser) | **DELETE** /users/{user_id} | Delete a specific user
+[**deleteUserFromTeam()**](UserApi.md#deleteUserFromTeam) | **DELETE** /users/{user_id}/teams | Remove a team from user
+[**listUserTeams()**](UserApi.md#listUserTeams) | **GET** /users/{user_id}/teams | Fetch all teams assigned to user
+[**listUsers()**](UserApi.md#listUsers) | **GET** /users | Fetch all available users
+[**permitUserTeam()**](UserApi.md#permitUserTeam) | **PUT** /users/{user_id}/teams | Update team perms for user
+[**showUser()**](UserApi.md#showUser) | **GET** /users/{user_id} | Fetch a specific user
+[**updateUser()**](UserApi.md#updateUser) | **PUT** /users/{user_id} | Update a specific user
 
 
+## `appendUserToTeam()`
 
-## appendUserToTeam
-
-> \Gopad\Model\GeneralError appendUserToTeam($userId, $userTeam)
+```php
+appendUserToTeam($userId, $userTeam): \Gopad\Model\GeneralError
+```
 
 Assign a team to user
 
@@ -27,6 +28,7 @@ Assign a team to user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -43,11 +45,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->appendUserToTeam: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -64,17 +64,18 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createUser()`
 
-## createUser
-
-> \Gopad\Model\User createUser($user)
+```php
+createUser($user): \Gopad\Model\User
+```
 
 Create a new user
 
@@ -83,6 +84,7 @@ Create a new user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -98,11 +100,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->createUser: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -118,17 +118,18 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `deleteUser()`
 
-## deleteUser
-
-> \Gopad\Model\GeneralError deleteUser($userId)
+```php
+deleteUser($userId): \Gopad\Model\GeneralError
+```
 
 Delete a specific user
 
@@ -137,6 +138,7 @@ Delete a specific user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -152,11 +154,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->deleteUser: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -173,16 +173,17 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `deleteUserFromTeam()`
 
-## deleteUserFromTeam
-
-> \Gopad\Model\GeneralError deleteUserFromTeam($userId, $userTeam)
+```php
+deleteUserFromTeam($userId, $userTeam): \Gopad\Model\GeneralError
+```
 
 Remove a team from user
 
@@ -191,6 +192,7 @@ Remove a team from user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -207,11 +209,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->deleteUserFromTeam: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -228,17 +228,18 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listUserTeams()`
 
-## listUserTeams
-
-> \Gopad\Model\TeamUser[] listUserTeams($userId)
+```php
+listUserTeams($userId): \Gopad\Model\TeamUser[]
+```
 
 Fetch all teams assigned to user
 
@@ -247,6 +248,7 @@ Fetch all teams assigned to user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -262,11 +264,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->listUserTeams: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -283,16 +283,17 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listUsers()`
 
-## listUsers
-
-> \Gopad\Model\User[] listUsers()
+```php
+listUsers(): \Gopad\Model\User[]
+```
 
 Fetch all available users
 
@@ -301,6 +302,7 @@ Fetch all available users
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -315,7 +317,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->listUsers: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -333,16 +334,17 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `permitUserTeam()`
 
-## permitUserTeam
-
-> \Gopad\Model\GeneralError permitUserTeam($userId, $userTeam)
+```php
+permitUserTeam($userId, $userTeam): \Gopad\Model\GeneralError
+```
 
 Update team perms for user
 
@@ -351,6 +353,7 @@ Update team perms for user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -367,11 +370,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->permitUserTeam: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -388,17 +389,18 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `showUser()`
 
-## showUser
-
-> \Gopad\Model\User showUser($userId)
+```php
+showUser($userId): \Gopad\Model\User
+```
 
 Fetch a specific user
 
@@ -407,6 +409,7 @@ Fetch a specific user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -422,11 +425,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->showUser: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -443,16 +444,17 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `updateUser()`
 
-## updateUser
-
-> \Gopad\Model\User updateUser($userId, $user)
+```php
+updateUser($userId, $user): \Gopad\Model\User
+```
 
 Update a specific user
 
@@ -461,6 +463,7 @@ Update a specific user
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\UserApi(
@@ -477,11 +480,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling UserApi->updateUser: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -498,10 +499,9 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
-

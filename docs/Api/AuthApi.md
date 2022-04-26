@@ -1,18 +1,19 @@
 # Gopad\AuthApi
 
-All URIs are relative to *http://try.gopad.tech/api/v1*
+All URIs are relative to http://try.gopad.tech/api/v1.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**loginUser**](AuthApi.md#loginUser) | **POST** /auth/login | Authenticate an user by credentials
-[**refreshAuth**](AuthApi.md#refreshAuth) | **GET** /auth/refresh | Refresh an auth token before it expires
-[**verifyAuth**](AuthApi.md#verifyAuth) | **GET** /auth/verify/{token} | Verify validity for an authentication token
+[**loginUser()**](AuthApi.md#loginUser) | **POST** /auth/login | Authenticate an user by credentials
+[**refreshAuth()**](AuthApi.md#refreshAuth) | **GET** /auth/refresh | Refresh an auth token before it expires
+[**verifyAuth()**](AuthApi.md#verifyAuth) | **GET** /auth/verify/{token} | Verify validity for an authentication token
 
 
+## `loginUser()`
 
-## loginUser
-
-> \Gopad\Model\AuthToken loginUser($authLogin)
+```php
+loginUser($authLogin): \Gopad\Model\AuthToken
+```
 
 Authenticate an user by credentials
 
@@ -21,6 +22,7 @@ Authenticate an user by credentials
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\AuthApi(
@@ -36,11 +38,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling AuthApi->loginUser: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -56,17 +56,18 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `refreshAuth()`
 
-## refreshAuth
-
-> \Gopad\Model\AuthToken refreshAuth()
+```php
+refreshAuth(): \Gopad\Model\AuthToken
+```
 
 Refresh an auth token before it expires
 
@@ -75,6 +76,7 @@ Refresh an auth token before it expires
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\AuthApi(
@@ -89,7 +91,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling AuthApi->refreshAuth: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -107,16 +108,17 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `verifyAuth()`
 
-## verifyAuth
-
-> \Gopad\Model\AuthVerify verifyAuth($token)
+```php
+verifyAuth($token): \Gopad\Model\AuthVerify
+```
 
 Verify validity for an authentication token
 
@@ -125,6 +127,7 @@ Verify validity for an authentication token
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 
 $apiInstance = new Gopad\Api\AuthApi(
@@ -140,11 +143,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling AuthApi->verifyAuth: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -161,9 +162,8 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
-

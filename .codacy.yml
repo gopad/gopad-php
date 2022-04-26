@@ -1,0 +1,9 @@
+---
+exclude_paths:
+  - .github/**
+  - changelog/**
+  - hack/**
+
+  - CHANGELOG.md
+
+...
