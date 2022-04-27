@@ -111,21 +111,20 @@ Class | Method | HTTP request | Description
 
 ## Documentation for models
 
-- [AuthLogin](docs/Model/AuthLogin.md)
-- [AuthToken](docs/Model/AuthToken.md)
-- [AuthVerify](docs/Model/AuthVerify.md)
-- [GeneralError](docs/Model/GeneralError.md)
-- [Profile](docs/Model/Profile.md)
-- [Team](docs/Model/Team.md)
-- [TeamUser](docs/Model/TeamUser.md)
-- [TeamUserParams](docs/Model/TeamUserParams.md)
-- [User](docs/Model/User.md)
-- [UserTeamParams](docs/Model/UserTeamParams.md)
-- [ValidationError](docs/Model/ValidationError.md)
-- [ValidationErrorErrors](docs/Model/ValidationErrorErrors.md)
+-   [AuthLogin](docs/Model/AuthLogin.md)
+-   [AuthToken](docs/Model/AuthToken.md)
+-   [AuthVerify](docs/Model/AuthVerify.md)
+-   [GeneralError](docs/Model/GeneralError.md)
+-   [Profile](docs/Model/Profile.md)
+-   [Team](docs/Model/Team.md)
+-   [TeamUser](docs/Model/TeamUser.md)
+-   [TeamUserParams](docs/Model/TeamUserParams.md)
+-   [User](docs/Model/User.md)
+-   [UserTeamParams](docs/Model/UserTeamParams.md)
+-   [ValidationError](docs/Model/ValidationError.md)
+-   [ValidationErrorErrors](docs/Model/ValidationErrorErrors.md)
 
 ## Documentation for authorization
-
 
 ### BasicAuth
 
@@ -136,7 +135,6 @@ Class | Method | HTTP request | Description
 -   **Type**: API key
 -   **API key parameter name**: X-API-Key
 -   **Location**: HTTP header
-
 
 ## Security
 
