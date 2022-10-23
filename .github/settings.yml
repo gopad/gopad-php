@@ -3,7 +3,7 @@ repository:
   name: gopad-php
   description: "Gopad: SDK for PHP"
   homepage: https://gopad.eu
-  topics: gopad, etherpad, sdk, openapi, php
+  topics: gopad, etherpad, sdk, client, grpc, php
 
   private: false
   has_issues: true
