@@ -11,7 +11,7 @@ fi
 SPEC_VERSION="1.0.0-alpha1"
 SPEC_DOWNLOAD=${SPEC:-https://dl.gopad.eu/openapi/${SPEC_VERSION}.yml}
 
-echo "> deleteing apis and models"
+echo "> deleteing library folder"
 rm -rf lib
 
 if hash openapi-generator-cli 2>/dev/null; then

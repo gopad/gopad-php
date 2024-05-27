@@ -22,11 +22,14 @@ jobs:
         id: php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: "8.3"
 
       - name: Install generator
-        run: |
-          npm install @openapitools/openapi-generator-cli -g
+        run: npm install @openapitools/openapi-generator-cli -g
+
+      - name: Run generate
+        id: generate
+        run: bash hack/generate-client.sh
 
       - name: Run install
         id: deps

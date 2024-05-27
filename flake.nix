@@ -47,6 +47,10 @@
                   package = pkgs.php83;
                 };
               };
+
+              packages = with pkgs; [
+                openapi-generator-cli
+              ];
             };
           };
         };
