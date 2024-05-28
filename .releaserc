@@ -110,9 +110,74 @@
             }
         ],
         [
-            "@semantic-release/exec",
+            "semantic-release-replace-plugin",
             {
-                "prepareCmd": "./hack/semantic-version.sh ${nextRelease.version} && ./hack/generate-client.sh"
+                "replacements": [
+                    {
+                        "files": [
+                            "openapi.yml"
+                        ],
+                        "from": "artifactVersion: .*",
+                        "to": "artifactVersion: ${nextRelease.version}",
+                        "results": [
+                            {
+                                "file": "openapi.yml",
+                                "hasChanged": true,
+                                "numMatches": 1,
+                                "numReplacements": 1
+                            }
+                        ],
+                        "countMatches": true
+                    },
+                    {
+                        "files": [
+                            "README.md"
+                        ],
+                        "from": "Package version: .*",
+                        "to": "Package version: ${nextRelease.version}",
+                        "results": [
+                            {
+                                "file": "README.md",
+                                "hasChanged": true,
+                                "numMatches": 1,
+                                "numReplacements": 1
+                            }
+                        ],
+                        "countMatches": true
+                    },
+                    {
+                        "files": [
+                            "lib/Configuration.php"
+                        ],
+                        "from": "SDK Package Version: .*'",
+                        "to": "SDK Package Version: ${nextRelease.version}'",
+                        "results": [
+                            {
+                                "file": "lib/Configuration.php",
+                                "hasChanged": true,
+                                "numMatches": 1,
+                                "numReplacements": 1
+                            }
+                        ],
+                        "countMatches": true
+                    },
+                    {
+                        "files": [
+                            "composer.json"
+                        ],
+                        "from": "\"version\": \".*\"",
+                        "to": "\"version\": \"${nextRelease.version}\"",
+                        "results": [
+                            {
+                                "file": "composer.json",
+                                "hasChanged": true,
+                                "numMatches": 1,
+                                "numReplacements": 1
+                            }
+                        ],
+                        "countMatches": true
+                    }
+                ]
             }
         ],
         [
@@ -120,13 +185,11 @@
             {
                 "message": "chore: release ${nextRelease.version}",
                 "assets": [
-                    "composer.json",
                     "CHANGELOG.md",
-                    "README.md",
+                    "composer.json",
                     "openapi.yml",
-                    "docs/*",
-                    "lib/*",
-                    "test/*"
+                    "README.md",
+                    "lib/Configuration.php"
                 ]
             }
         ],
