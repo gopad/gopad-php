@@ -675,6 +675,10 @@ class UserApi
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
         }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -1134,6 +1138,10 @@ class UserApi
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -1630,6 +1638,10 @@ class UserApi
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -2146,6 +2158,10 @@ class UserApi
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
         }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -2175,8 +2191,8 @@ class UserApi
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
+     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional)
      * @param  int $offset Paging offset (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
@@ -2185,7 +2201,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \Gopad\Model\UserTeams|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function listUserTeams($userId, $search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserTeams($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
     {
         list($response) = $this->listUserTeamsWithHttpInfo($userId, $search, $sort, $order, $limit, $offset, $contentType);
         return $response;
@@ -2198,8 +2214,8 @@ class UserApi
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
+     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional)
      * @param  int $offset Paging offset (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
@@ -2208,7 +2224,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return array of \Gopad\Model\UserTeams|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listUserTeamsWithHttpInfo($userId, $search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserTeamsWithHttpInfo($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
     {
         $request = $this->listUserTeamsRequest($userId, $search, $sort, $order, $limit, $offset, $contentType);
 
@@ -2467,8 +2483,8 @@ class UserApi
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
+     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional)
      * @param  int $offset Paging offset (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
@@ -2476,7 +2492,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserTeamsAsync($userId, $search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserTeamsAsync($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
     {
         return $this->listUserTeamsAsyncWithHttpInfo($userId, $search, $sort, $order, $limit, $offset, $contentType)
             ->then(
@@ -2493,8 +2509,8 @@ class UserApi
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
+     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional)
      * @param  int $offset Paging offset (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
@@ -2502,7 +2518,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserTeamsAsyncWithHttpInfo($userId, $search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserTeamsAsyncWithHttpInfo($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
     {
         $returnType = '\Gopad\Model\UserTeams';
         $request = $this->listUserTeamsRequest($userId, $search, $sort, $order, $limit, $offset, $contentType);
@@ -2548,8 +2564,8 @@ class UserApi
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
+     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional)
      * @param  int $offset Paging offset (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
@@ -2557,7 +2573,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listUserTeamsRequest($userId, $search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserTeamsRequest($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
     {
 
         // verify the required parameter 'userId' is set
@@ -2682,6 +2698,10 @@ class UserApi
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
         }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -2710,17 +2730,17 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
+     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Gopad\Model\Users|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function listUsers($search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsers($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         list($response) = $this->listUsersWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType);
         return $response;
@@ -2732,17 +2752,17 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
+     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Gopad\Model\Users|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listUsersWithHttpInfo($search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersWithHttpInfo($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         $request = $this->listUsersRequest($search, $sort, $order, $limit, $offset, $contentType);
 
@@ -2965,16 +2985,16 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
+     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUsersAsync($search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersAsync($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         return $this->listUsersAsyncWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType)
             ->then(
@@ -2990,16 +3010,16 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
+     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUsersAsyncWithHttpInfo($search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersAsyncWithHttpInfo($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         $returnType = '\Gopad\Model\Users';
         $request = $this->listUsersRequest($search, $sort, $order, $limit, $offset, $contentType);
@@ -3044,16 +3064,16 @@ class UserApi
      * Create request for operation 'listUsers'
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional)
-     * @param  string $order Sorting order (optional)
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
+     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listUsersRequest($search = null, $sort = null, $order = null, $limit = null, $offset = null, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersRequest($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
 
 
@@ -3162,6 +3182,10 @@ class UserApi
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -3713,6 +3737,10 @@ class UserApi
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
         }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -4173,6 +4201,10 @@ class UserApi
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -4688,6 +4720,10 @@ class UserApi
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];

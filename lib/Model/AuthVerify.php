@@ -1,6 +1,6 @@
 <?php
 /**
- * UserTeam
+ * AuthVerify
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserTeam Class Doc Comment
+ * AuthVerify Class Doc Comment
  *
  * @category Class
- * @description Model to represent user team
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
+class AuthVerify implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'user_team';
+    protected static $openAPIModelName = 'auth_verify';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,13 +58,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'userId' => 'string',
-        'user' => '\Gopad\Model\User',
-        'teamId' => 'string',
-        'team' => '\Gopad\Model\Team',
-        'perm' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'username' => 'string',
+        'createdAt' => '\DateTime'
     ];
 
     /**
@@ -76,13 +70,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'userId' => null,
-        'user' => null,
-        'teamId' => null,
-        'team' => null,
-        'perm' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'username' => null,
+        'createdAt' => 'date-time'
     ];
 
     /**
@@ -91,13 +80,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'userId' => false,
-        'user' => false,
-        'teamId' => false,
-        'team' => false,
-        'perm' => false,
-        'createdAt' => false,
-        'updatedAt' => false
+        'username' => false,
+        'createdAt' => true
     ];
 
     /**
@@ -186,13 +170,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'userId' => 'user_id',
-        'user' => 'user',
-        'teamId' => 'team_id',
-        'team' => 'team',
-        'perm' => 'perm',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'username' => 'username',
+        'createdAt' => 'created_at'
     ];
 
     /**
@@ -201,13 +180,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'userId' => 'setUserId',
-        'user' => 'setUser',
-        'teamId' => 'setTeamId',
-        'team' => 'setTeam',
-        'perm' => 'setPerm',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'username' => 'setUsername',
+        'createdAt' => 'setCreatedAt'
     ];
 
     /**
@@ -216,13 +190,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'userId' => 'getUserId',
-        'user' => 'getUser',
-        'teamId' => 'getTeamId',
-        'team' => 'getTeam',
-        'perm' => 'getPerm',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'username' => 'getUsername',
+        'createdAt' => 'getCreatedAt'
     ];
 
     /**
@@ -266,23 +235,6 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const PERM_USER = 'user';
-    public const PERM_ADMIN = 'admin';
-    public const PERM_OWNER = 'owner';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPermAllowableValues()
-    {
-        return [
-            self::PERM_USER,
-            self::PERM_ADMIN,
-            self::PERM_OWNER,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -299,13 +251,8 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('userId', $data ?? [], null);
-        $this->setIfExists('user', $data ?? [], null);
-        $this->setIfExists('teamId', $data ?? [], null);
-        $this->setIfExists('team', $data ?? [], null);
-        $this->setIfExists('perm', $data ?? [], 'user');
+        $this->setIfExists('username', $data ?? [], null);
         $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
     }
 
     /**
@@ -335,21 +282,9 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['userId'] === null) {
-            $invalidProperties[] = "'userId' can't be null";
+        if ($this->container['username'] === null) {
+            $invalidProperties[] = "'username' can't be null";
         }
-        if ($this->container['teamId'] === null) {
-            $invalidProperties[] = "'teamId' can't be null";
-        }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!is_null($this->container['perm']) && !in_array($this->container['perm'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'perm', must be one of '%s'",
-                $this->container['perm'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -366,146 +301,28 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets userId
+     * Gets username
      *
      * @return string
      */
-    public function getUserId()
+    public function getUsername()
     {
-        return $this->container['userId'];
+        return $this->container['username'];
     }
 
     /**
-     * Sets userId
+     * Sets username
      *
-     * @param string $userId userId
+     * @param string $username username
      *
      * @return self
      */
-    public function setUserId($userId)
+    public function setUsername($username)
     {
-        if (is_null($userId)) {
-            throw new \InvalidArgumentException('non-nullable userId cannot be null');
+        if (is_null($username)) {
+            throw new \InvalidArgumentException('non-nullable username cannot be null');
         }
-        $this->container['userId'] = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Gets user
-     *
-     * @return \Gopad\Model\User|null
-     */
-    public function getUser()
-    {
-        return $this->container['user'];
-    }
-
-    /**
-     * Sets user
-     *
-     * @param \Gopad\Model\User|null $user user
-     *
-     * @return self
-     */
-    public function setUser($user)
-    {
-        if (is_null($user)) {
-            throw new \InvalidArgumentException('non-nullable user cannot be null');
-        }
-        $this->container['user'] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Gets teamId
-     *
-     * @return string
-     */
-    public function getTeamId()
-    {
-        return $this->container['teamId'];
-    }
-
-    /**
-     * Sets teamId
-     *
-     * @param string $teamId teamId
-     *
-     * @return self
-     */
-    public function setTeamId($teamId)
-    {
-        if (is_null($teamId)) {
-            throw new \InvalidArgumentException('non-nullable teamId cannot be null');
-        }
-        $this->container['teamId'] = $teamId;
-
-        return $this;
-    }
-
-    /**
-     * Gets team
-     *
-     * @return \Gopad\Model\Team|null
-     */
-    public function getTeam()
-    {
-        return $this->container['team'];
-    }
-
-    /**
-     * Sets team
-     *
-     * @param \Gopad\Model\Team|null $team team
-     *
-     * @return self
-     */
-    public function setTeam($team)
-    {
-        if (is_null($team)) {
-            throw new \InvalidArgumentException('non-nullable team cannot be null');
-        }
-        $this->container['team'] = $team;
-
-        return $this;
-    }
-
-    /**
-     * Gets perm
-     *
-     * @return string|null
-     */
-    public function getPerm()
-    {
-        return $this->container['perm'];
-    }
-
-    /**
-     * Sets perm
-     *
-     * @param string|null $perm perm
-     *
-     * @return self
-     */
-    public function setPerm($perm)
-    {
-        if (is_null($perm)) {
-            throw new \InvalidArgumentException('non-nullable perm cannot be null');
-        }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!in_array($perm, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'perm', must be one of '%s'",
-                    $perm,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['perm'] = $perm;
+        $this->container['username'] = $username;
 
         return $this;
     }
@@ -530,36 +347,16 @@ class UserTeam implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCreatedAt($createdAt)
     {
         if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'createdAt');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('createdAt', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }

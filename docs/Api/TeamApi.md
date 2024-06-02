@@ -45,6 +45,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -76,7 +79,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -117,6 +120,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -146,7 +152,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -187,6 +193,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -216,7 +225,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -257,6 +266,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -288,7 +300,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -329,6 +341,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -338,10 +353,10 @@ $apiInstance = new Gopad\Api\TeamApi(
 );
 $teamId = 'teamId_example'; // string | A team identifier or slug
 $search = 'search_example'; // string | Search query
-$sort = 'sort_example'; // string | Sorting column
-$order = 'order_example'; // string | Sorting order
-$limit = 56; // int | Paging limit
-$offset = 56; // int | Paging offset
+$sort = 'username'; // string | Sorting column
+$order = 'asc'; // string | Sorting order
+$limit = 100; // int | Paging limit
+$offset = 0; // int | Paging offset
 
 try {
     $result = $apiInstance->listTeamUsers($teamId, $search, $sort, $order, $limit, $offset);
@@ -357,10 +372,10 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **teamId** | **string**| A team identifier or slug | |
 | **search** | **string**| Search query | [optional] |
-| **sort** | **string**| Sorting column | [optional] |
-| **order** | **string**| Sorting order | [optional] |
-| **limit** | **int**| Paging limit | [optional] |
-| **offset** | **int**| Paging offset | [optional] |
+| **sort** | **string**| Sorting column | [optional] [default to &#39;username&#39;] |
+| **order** | **string**| Sorting order | [optional] [default to &#39;asc&#39;] |
+| **limit** | **int**| Paging limit | [optional] [default to 100] |
+| **offset** | **int**| Paging offset | [optional] [default to 0] |
 
 ### Return type
 
@@ -368,7 +383,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -409,6 +424,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -417,10 +435,10 @@ $apiInstance = new Gopad\Api\TeamApi(
     $config
 );
 $search = 'search_example'; // string | Search query
-$sort = 'sort_example'; // string | Sorting column
-$order = 'order_example'; // string | Sorting order
-$limit = 56; // int | Paging limit
-$offset = 56; // int | Paging offset
+$sort = 'name'; // string | Sorting column
+$order = 'asc'; // string | Sorting order
+$limit = 100; // int | Paging limit
+$offset = 0; // int | Paging offset
 
 try {
     $result = $apiInstance->listTeams($search, $sort, $order, $limit, $offset);
@@ -435,10 +453,10 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **search** | **string**| Search query | [optional] |
-| **sort** | **string**| Sorting column | [optional] |
-| **order** | **string**| Sorting order | [optional] |
-| **limit** | **int**| Paging limit | [optional] |
-| **offset** | **int**| Paging offset | [optional] |
+| **sort** | **string**| Sorting column | [optional] [default to &#39;name&#39;] |
+| **order** | **string**| Sorting order | [optional] [default to &#39;asc&#39;] |
+| **limit** | **int**| Paging limit | [optional] [default to 100] |
+| **offset** | **int**| Paging offset | [optional] [default to 0] |
 
 ### Return type
 
@@ -446,7 +464,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -487,6 +505,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -518,7 +539,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -559,6 +580,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -588,7 +612,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -629,6 +653,9 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Gopad\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-Key', 'Bearer');
 
+// Configure Bearer authorization: Bearer
+$config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Gopad\Api\TeamApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -660,7 +687,7 @@ try {
 
 ### Authorization
 
-[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header)
+[Cookie](../../README.md#Cookie), [Basic](../../README.md#Basic), [Header](../../README.md#Header), [Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
