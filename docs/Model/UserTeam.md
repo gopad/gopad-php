@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **user** | [**\Gopad\Model\User**](User.md) |  | [optional]
 **teamId** | **string** |  |
 **team** | [**\Gopad\Model\Team**](Team.md) |  | [optional]
-**perm** | **string** |  | [optional]
+**perm** | **string** |  | [optional] [default to 'user']
 **createdAt** | **\DateTime** |  | [optional] [readonly]
 **updatedAt** | **\DateTime** |  | [optional] [readonly]
 

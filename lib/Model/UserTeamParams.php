@@ -270,7 +270,7 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('team', $data ?? [], null);
-        $this->setIfExists('perm', $data ?? [], null);
+        $this->setIfExists('perm', $data ?? [], 'user');
     }
 
     /**
