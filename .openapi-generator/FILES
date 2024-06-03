@@ -47,8 +47,3 @@ lib/Model/Users.php
 lib/Model/Validation.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Api/ProfileApiTest.php
-test/Model/AuthLoginTest.php
-test/Model/AuthTokenTest.php
-test/Model/AuthVerifyTest.php
-test/Model/ProfileTest.php
