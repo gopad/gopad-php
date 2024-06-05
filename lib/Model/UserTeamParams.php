@@ -36,7 +36,7 @@ use \Gopad\ObjectSerializer;
  * UserTeamParams Class Doc Comment
  *
  * @category Class
- * @description Parameters to attach or remove user team
+ * @description Parameters to attach or unlink user team
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

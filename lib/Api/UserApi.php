@@ -150,7 +150,7 @@ class UserApi
     /**
      * Operation attachUserToTeam
      *
-     * Assign a team to user
+     * Attach a team to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
@@ -169,7 +169,7 @@ class UserApi
     /**
      * Operation attachUserToTeamWithHttpInfo
      *
-     * Assign a team to user
+     * Attach a team to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
@@ -504,7 +504,7 @@ class UserApi
     /**
      * Operation attachUserToTeamAsync
      *
-     * Assign a team to user
+     * Attach a team to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
@@ -526,7 +526,7 @@ class UserApi
     /**
      * Operation attachUserToTeamAsyncWithHttpInfo
      *
-     * Assign a team to user
+     * Attach a team to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
@@ -1668,10 +1668,10 @@ class UserApi
     /**
      * Operation deleteUserFromTeam
      *
-     * Remove a team from user
+     * Unlink a team from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to delete (required)
+     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1687,10 +1687,10 @@ class UserApi
     /**
      * Operation deleteUserFromTeamWithHttpInfo
      *
-     * Remove a team from user
+     * Unlink a team from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to delete (required)
+     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1987,10 +1987,10 @@ class UserApi
     /**
      * Operation deleteUserFromTeamAsync
      *
-     * Remove a team from user
+     * Unlink a team from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to delete (required)
+     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2009,10 +2009,10 @@ class UserApi
     /**
      * Operation deleteUserFromTeamAsyncWithHttpInfo
      *
-     * Remove a team from user
+     * Unlink a team from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to delete (required)
+     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2063,7 +2063,7 @@ class UserApi
      * Create request for operation 'deleteUserFromTeam'
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to delete (required)
+     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2187,7 +2187,7 @@ class UserApi
     /**
      * Operation listUserTeams
      *
-     * Fetch all teams assigned to user
+     * Fetch all teams attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
@@ -2210,7 +2210,7 @@ class UserApi
     /**
      * Operation listUserTeamsWithHttpInfo
      *
-     * Fetch all teams assigned to user
+     * Fetch all teams attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
@@ -2479,7 +2479,7 @@ class UserApi
     /**
      * Operation listUserTeamsAsync
      *
-     * Fetch all teams assigned to user
+     * Fetch all teams attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
@@ -2505,7 +2505,7 @@ class UserApi
     /**
      * Operation listUserTeamsAsyncWithHttpInfo
      *
-     * Fetch all teams assigned to user
+     * Fetch all teams attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
