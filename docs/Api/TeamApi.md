@@ -4,11 +4,11 @@ All URIs are relative to https://try.gopad.eu/api/v1, except if the operation de
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**attachTeamToUser()**](TeamApi.md#attachTeamToUser) | **POST** /teams/{team_id}/users | Assign a user to team |
+| [**attachTeamToUser()**](TeamApi.md#attachTeamToUser) | **POST** /teams/{team_id}/users | Attach a user to team |
 | [**createTeam()**](TeamApi.md#createTeam) | **POST** /teams | Create a new team |
 | [**deleteTeam()**](TeamApi.md#deleteTeam) | **DELETE** /teams/{team_id} | Delete a specific team |
-| [**deleteTeamFromUser()**](TeamApi.md#deleteTeamFromUser) | **DELETE** /teams/{team_id}/users | Remove a user from team |
-| [**listTeamUsers()**](TeamApi.md#listTeamUsers) | **GET** /teams/{team_id}/users | Fetch all users assigned to team |
+| [**deleteTeamFromUser()**](TeamApi.md#deleteTeamFromUser) | **DELETE** /teams/{team_id}/users | Unlink a user from team |
+| [**listTeamUsers()**](TeamApi.md#listTeamUsers) | **GET** /teams/{team_id}/users | Fetch all users attached to team |
 | [**listTeams()**](TeamApi.md#listTeams) | **GET** /teams | Fetch all available teams |
 | [**permitTeamUser()**](TeamApi.md#permitTeamUser) | **PUT** /teams/{team_id}/users | Update user perms for team |
 | [**showTeam()**](TeamApi.md#showTeam) | **GET** /teams/{team_id} | Fetch a specific team |
@@ -21,7 +21,7 @@ All URIs are relative to https://try.gopad.eu/api/v1, except if the operation de
 attachTeamToUser($teamId, $teamUserParams): \Gopad\Model\Notification
 ```
 
-Assign a user to team
+Attach a user to team
 
 ### Example
 
@@ -242,7 +242,7 @@ try {
 deleteTeamFromUser($teamId, $teamUserParams): \Gopad\Model\Notification
 ```
 
-Remove a user from team
+Unlink a user from team
 
 ### Example
 
@@ -277,7 +277,7 @@ $apiInstance = new Gopad\Api\TeamApi(
     $config
 );
 $teamId = 'teamId_example'; // string | A team identifier or slug
-$teamUserParams = new \Gopad\Model\TeamUserParams(); // \Gopad\Model\TeamUserParams | The team user data to delete
+$teamUserParams = new \Gopad\Model\TeamUserParams(); // \Gopad\Model\TeamUserParams | The team user data to unlink
 
 try {
     $result = $apiInstance->deleteTeamFromUser($teamId, $teamUserParams);
@@ -292,7 +292,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **teamId** | **string**| A team identifier or slug | |
-| **teamUserParams** | [**\Gopad\Model\TeamUserParams**](../Model/TeamUserParams.md)| The team user data to delete | |
+| **teamUserParams** | [**\Gopad\Model\TeamUserParams**](../Model/TeamUserParams.md)| The team user data to unlink | |
 
 ### Return type
 
@@ -317,7 +317,7 @@ try {
 listTeamUsers($teamId, $search, $sort, $order, $limit, $offset): \Gopad\Model\TeamUsers
 ```
 
-Fetch all users assigned to team
+Fetch all users attached to team
 
 ### Example
 
