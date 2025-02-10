@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0](https://github.com/gopad/gopad-php/compare/v1.3.0...v2.0.0) (2025-02-10)
+
+
+### Features
+
+* **deps:** update dependency phpunit/phpunit to v12 ([#63](https://github.com/gopad/gopad-php/issues/63)) ([a5047fd](https://github.com/gopad/gopad-php/commit/a5047fda0af802a60c95e51d40fb0a6c27c18b01))
+
 ## [1.3.0](https://github.com/gopad/gopad-php/compare/v1.2.0...v1.3.0) (2024-06-10)
 
 
