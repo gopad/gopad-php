@@ -1,10 +1,12 @@
-.direnv
-.devenv
+.direnv/
+.devenv/
 
 composer.phar
 composer.lock
 
-/vendor/
+vendor/
 
 .php_cs.cache
 .phpunit.result.cache
+
+.pre-commit-config.yaml
