@@ -1,6 +1,6 @@
 <?php
 /**
- * Team
+ * ListGroups200Response
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * Team Class Doc Comment
+ * ListGroups200Response Class Doc Comment
  *
  * @category Class
- * @description Model to represent team
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Team implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'team';
+    protected static $openAPIModelName = 'ListGroups_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,12 +58,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'slug' => 'string',
-        'name' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime',
-        'users' => '\Gopad\Model\UserTeam[]'
+        'total' => 'int',
+        'limit' => 'int',
+        'offset' => 'int',
+        'groups' => '\Gopad\Model\Group[]'
     ];
 
     /**
@@ -75,12 +72,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'slug' => null,
-        'name' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time',
-        'users' => null
+        'total' => 'int64',
+        'limit' => 'int64',
+        'offset' => 'int64',
+        'groups' => null
     ];
 
     /**
@@ -89,12 +84,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'slug' => true,
-        'name' => true,
-        'createdAt' => false,
-        'updatedAt' => false,
-        'users' => true
+        'total' => false,
+        'limit' => false,
+        'offset' => false,
+        'groups' => false
     ];
 
     /**
@@ -183,12 +176,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'slug' => 'slug',
-        'name' => 'name',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at',
-        'users' => 'users'
+        'total' => 'total',
+        'limit' => 'limit',
+        'offset' => 'offset',
+        'groups' => 'groups'
     ];
 
     /**
@@ -197,12 +188,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'slug' => 'setSlug',
-        'name' => 'setName',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt',
-        'users' => 'setUsers'
+        'total' => 'setTotal',
+        'limit' => 'setLimit',
+        'offset' => 'setOffset',
+        'groups' => 'setGroups'
     ];
 
     /**
@@ -211,12 +200,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'slug' => 'getSlug',
-        'name' => 'getName',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt',
-        'users' => 'getUsers'
+        'total' => 'getTotal',
+        'limit' => 'getLimit',
+        'offset' => 'getOffset',
+        'groups' => 'getGroups'
     ];
 
     /**
@@ -276,12 +263,10 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('slug', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
-        $this->setIfExists('users', $data ?? [], null);
+        $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
+        $this->setIfExists('offset', $data ?? [], null);
+        $this->setIfExists('groups', $data ?? [], null);
     }
 
     /**
@@ -311,6 +296,18 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['total'] === null) {
+            $invalidProperties[] = "'total' can't be null";
+        }
+        if ($this->container['limit'] === null) {
+            $invalidProperties[] = "'limit' can't be null";
+        }
+        if ($this->container['offset'] === null) {
+            $invalidProperties[] = "'offset' can't be null";
+        }
+        if ($this->container['groups'] === null) {
+            $invalidProperties[] = "'groups' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -327,184 +324,109 @@ class Team implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets total
      *
-     * @return string|null
+     * @return int
      */
-    public function getId()
+    public function getTotal()
     {
-        return $this->container['id'];
+        return $this->container['total'];
     }
 
     /**
-     * Sets id
+     * Sets total
      *
-     * @param string|null $id id
+     * @param int $total total
      *
      * @return self
      */
-    public function setId($id)
+    public function setTotal($total)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['total'] = $total;
 
         return $this;
     }
 
     /**
-     * Gets slug
+     * Gets limit
      *
-     * @return string|null
+     * @return int
      */
-    public function getSlug()
+    public function getLimit()
     {
-        return $this->container['slug'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets slug
+     * Sets limit
      *
-     * @param string|null $slug slug
+     * @param int $limit limit
      *
      * @return self
      */
-    public function setSlug($slug)
+    public function setLimit($limit)
     {
-        if (is_null($slug)) {
-            array_push($this->openAPINullablesSetToNull, 'slug');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('slug', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['slug'] = $slug;
+        $this->container['limit'] = $limit;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets offset
      *
-     * @return string|null
+     * @return int
      */
-    public function getName()
+    public function getOffset()
     {
-        return $this->container['name'];
+        return $this->container['offset'];
     }
 
     /**
-     * Sets name
+     * Sets offset
      *
-     * @param string|null $name name
+     * @param int $offset offset
      *
      * @return self
      */
-    public function setName($name)
+    public function setOffset($offset)
     {
-        if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($offset)) {
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['offset'] = $offset;
 
         return $this;
     }
 
     /**
-     * Gets createdAt
+     * Gets groups
      *
-     * @return \DateTime|null
+     * @return \Gopad\Model\Group[]
      */
-    public function getCreatedAt()
+    public function getGroups()
     {
-        return $this->container['createdAt'];
+        return $this->container['groups'];
     }
 
     /**
-     * Sets createdAt
+     * Sets groups
      *
-     * @param \DateTime|null $createdAt createdAt
+     * @param \Gopad\Model\Group[] $groups groups
      *
      * @return self
      */
-    public function setCreatedAt($createdAt)
+    public function setGroups($groups)
     {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
+        if (is_null($groups)) {
+            throw new \InvalidArgumentException('non-nullable groups cannot be null');
         }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets users
-     *
-     * @return \Gopad\Model\UserTeam[]|null
-     */
-    public function getUsers()
-    {
-        return $this->container['users'];
-    }
-
-    /**
-     * Sets users
-     *
-     * @param \Gopad\Model\UserTeam[]|null $users users
-     *
-     * @return self
-     */
-    public function setUsers($users)
-    {
-        if (is_null($users)) {
-            array_push($this->openAPINullablesSetToNull, 'users');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('users', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['users'] = $users;
+        $this->container['groups'] = $groups;
 
         return $this;
     }

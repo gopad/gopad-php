@@ -138,7 +138,7 @@ class ProfileApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
     public function showProfile(string $contentType = self::contentTypes['showProfile'][0])
     {
@@ -155,7 +155,7 @@ class ProfileApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
     public function showProfileWithHttpInfo(string $contentType = self::contentTypes['showProfile'][0])
     {
@@ -278,33 +278,6 @@ class ProfileApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Profile';
@@ -354,14 +327,6 @@ class ProfileApi
                     $e->setResponseObject($data);
                     break;
                 case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gopad\Model\Notification',
@@ -499,11 +464,6 @@ class ProfileApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -548,7 +508,7 @@ class ProfileApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
     public function tokenProfile(string $contentType = self::contentTypes['tokenProfile'][0])
     {
@@ -565,7 +525,7 @@ class ProfileApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
     public function tokenProfileWithHttpInfo(string $contentType = self::contentTypes['tokenProfile'][0])
     {
@@ -688,33 +648,6 @@ class ProfileApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\AuthToken';
@@ -764,14 +697,6 @@ class ProfileApi
                     $e->setResponseObject($data);
                     break;
                 case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gopad\Model\Notification',
@@ -909,11 +834,6 @@ class ProfileApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -954,16 +874,16 @@ class ProfileApi
      *
      * Update your own profile information
      *
-     * @param  \Gopad\Model\Profile $profile The profile data to update (required)
+     * @param  \Gopad\Model\UpdateProfileRequest $updateProfileRequest The profile data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProfile'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function updateProfile($profile, string $contentType = self::contentTypes['updateProfile'][0])
+    public function updateProfile($updateProfileRequest, string $contentType = self::contentTypes['updateProfile'][0])
     {
-        list($response) = $this->updateProfileWithHttpInfo($profile, $contentType);
+        list($response) = $this->updateProfileWithHttpInfo($updateProfileRequest, $contentType);
         return $response;
     }
 
@@ -972,16 +892,16 @@ class ProfileApi
      *
      * Update your own profile information
      *
-     * @param  \Gopad\Model\Profile $profile The profile data to update (required)
+     * @param  \Gopad\Model\UpdateProfileRequest $updateProfileRequest The profile data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProfile'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Profile|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateProfileWithHttpInfo($profile, string $contentType = self::contentTypes['updateProfile'][0])
+    public function updateProfileWithHttpInfo($updateProfileRequest, string $contentType = self::contentTypes['updateProfile'][0])
     {
-        $request = $this->updateProfileRequest($profile, $contentType);
+        $request = $this->updateProfileRequest($updateProfileRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1127,33 +1047,6 @@ class ProfileApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Profile';
@@ -1218,14 +1111,6 @@ class ProfileApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -1236,15 +1121,15 @@ class ProfileApi
      *
      * Update your own profile information
      *
-     * @param  \Gopad\Model\Profile $profile The profile data to update (required)
+     * @param  \Gopad\Model\UpdateProfileRequest $updateProfileRequest The profile data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProfile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateProfileAsync($profile, string $contentType = self::contentTypes['updateProfile'][0])
+    public function updateProfileAsync($updateProfileRequest, string $contentType = self::contentTypes['updateProfile'][0])
     {
-        return $this->updateProfileAsyncWithHttpInfo($profile, $contentType)
+        return $this->updateProfileAsyncWithHttpInfo($updateProfileRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1257,16 +1142,16 @@ class ProfileApi
      *
      * Update your own profile information
      *
-     * @param  \Gopad\Model\Profile $profile The profile data to update (required)
+     * @param  \Gopad\Model\UpdateProfileRequest $updateProfileRequest The profile data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProfile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateProfileAsyncWithHttpInfo($profile, string $contentType = self::contentTypes['updateProfile'][0])
+    public function updateProfileAsyncWithHttpInfo($updateProfileRequest, string $contentType = self::contentTypes['updateProfile'][0])
     {
         $returnType = '\Gopad\Model\Profile';
-        $request = $this->updateProfileRequest($profile, $contentType);
+        $request = $this->updateProfileRequest($updateProfileRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1307,19 +1192,19 @@ class ProfileApi
     /**
      * Create request for operation 'updateProfile'
      *
-     * @param  \Gopad\Model\Profile $profile The profile data to update (required)
+     * @param  \Gopad\Model\UpdateProfileRequest $updateProfileRequest The profile data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProfile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateProfileRequest($profile, string $contentType = self::contentTypes['updateProfile'][0])
+    public function updateProfileRequest($updateProfileRequest, string $contentType = self::contentTypes['updateProfile'][0])
     {
 
-        // verify the required parameter 'profile' is set
-        if ($profile === null || (is_array($profile) && count($profile) === 0)) {
+        // verify the required parameter 'updateProfileRequest' is set
+        if ($updateProfileRequest === null || (is_array($updateProfileRequest) && count($updateProfileRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $profile when calling updateProfile'
+                'Missing the required parameter $updateProfileRequest when calling updateProfile'
             );
         }
 
@@ -1342,12 +1227,12 @@ class ProfileApi
         );
 
         // for model (json/xml)
-        if (isset($profile)) {
+        if (isset($updateProfileRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($profile));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($updateProfileRequest));
             } else {
-                $httpBody = $profile;
+                $httpBody = $updateProfileRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1373,6 +1258,19 @@ class ProfileApi
             }
         }
 
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {

@@ -50,7 +50,7 @@ class AuthVerify implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'auth_verify';
+    protected static $openAPIModelName = 'AuthVerify';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

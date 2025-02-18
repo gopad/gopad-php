@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * PermitGroupUserRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * Users Class Doc Comment
+ * PermitGroupUserRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent list of users
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Users implements ModelInterface, ArrayAccess, \JsonSerializable
+class PermitGroupUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'users';
+    protected static $openAPIModelName = 'PermitGroupUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'total' => 'int',
-        'users' => '\Gopad\Model\User[]'
+        'user' => 'string',
+        'perm' => 'string'
     ];
 
     /**
@@ -71,8 +70,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'total' => 'int64',
-        'users' => null
+        'user' => null,
+        'perm' => null
     ];
 
     /**
@@ -81,8 +80,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'total' => false,
-        'users' => false
+        'user' => false,
+        'perm' => false
     ];
 
     /**
@@ -171,8 +170,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'total' => 'total',
-        'users' => 'users'
+        'user' => 'user',
+        'perm' => 'perm'
     ];
 
     /**
@@ -181,8 +180,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'total' => 'setTotal',
-        'users' => 'setUsers'
+        'user' => 'setUser',
+        'perm' => 'setPerm'
     ];
 
     /**
@@ -191,8 +190,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'total' => 'getTotal',
-        'users' => 'getUsers'
+        'user' => 'getUser',
+        'perm' => 'getPerm'
     ];
 
     /**
@@ -252,8 +251,8 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('users', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
+        $this->setIfExists('perm', $data ?? [], null);
     }
 
     /**
@@ -283,6 +282,12 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['user'] === null) {
+            $invalidProperties[] = "'user' can't be null";
+        }
+        if ($this->container['perm'] === null) {
+            $invalidProperties[] = "'perm' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -299,55 +304,55 @@ class Users implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets total
+     * Gets user
      *
-     * @return int|null
+     * @return string
      */
-    public function getTotal()
+    public function getUser()
     {
-        return $this->container['total'];
+        return $this->container['user'];
     }
 
     /**
-     * Sets total
+     * Sets user
      *
-     * @param int|null $total total
+     * @param string $user user
      *
      * @return self
      */
-    public function setTotal($total)
+    public function setUser($user)
     {
-        if (is_null($total)) {
-            throw new \InvalidArgumentException('non-nullable total cannot be null');
+        if (is_null($user)) {
+            throw new \InvalidArgumentException('non-nullable user cannot be null');
         }
-        $this->container['total'] = $total;
+        $this->container['user'] = $user;
 
         return $this;
     }
 
     /**
-     * Gets users
+     * Gets perm
      *
-     * @return \Gopad\Model\User[]|null
+     * @return string
      */
-    public function getUsers()
+    public function getPerm()
     {
-        return $this->container['users'];
+        return $this->container['perm'];
     }
 
     /**
-     * Sets users
+     * Sets perm
      *
-     * @param \Gopad\Model\User[]|null $users users
+     * @param string $perm perm
      *
      * @return self
      */
-    public function setUsers($users)
+    public function setPerm($perm)
     {
-        if (is_null($users)) {
-            throw new \InvalidArgumentException('non-nullable users cannot be null');
+        if (is_null($perm)) {
+            throw new \InvalidArgumentException('non-nullable perm cannot be null');
         }
-        $this->container['users'] = $users;
+        $this->container['perm'] = $perm;
 
         return $this;
     }

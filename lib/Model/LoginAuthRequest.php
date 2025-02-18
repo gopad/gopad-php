@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAuth
+ * LoginAuthRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserAuth Class Doc Comment
+ * LoginAuthRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent user auth
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
+class LoginAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAuth';
+    protected static $openAPIModelName = 'LoginAuth_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +58,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'provider' => 'string',
-        'ref' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'username' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -73,10 +70,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'provider' => null,
-        'ref' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'username' => null,
+        'password' => 'password'
     ];
 
     /**
@@ -85,10 +80,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'provider' => false,
-        'ref' => false,
-        'createdAt' => false,
-        'updatedAt' => false
+        'username' => false,
+        'password' => false
     ];
 
     /**
@@ -177,10 +170,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'provider' => 'provider',
-        'ref' => 'ref',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'username' => 'username',
+        'password' => 'password'
     ];
 
     /**
@@ -189,10 +180,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'provider' => 'setProvider',
-        'ref' => 'setRef',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'username' => 'setUsername',
+        'password' => 'setPassword'
     ];
 
     /**
@@ -201,10 +190,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'provider' => 'getProvider',
-        'ref' => 'getRef',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'username' => 'getUsername',
+        'password' => 'getPassword'
     ];
 
     /**
@@ -264,10 +251,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('provider', $data ?? [], null);
-        $this->setIfExists('ref', $data ?? [], null);
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
+        $this->setIfExists('username', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
     }
 
     /**
@@ -297,6 +282,12 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['username'] === null) {
+            $invalidProperties[] = "'username' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -313,109 +304,55 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets provider
+     * Gets username
      *
-     * @return string|null
+     * @return string
      */
-    public function getProvider()
+    public function getUsername()
     {
-        return $this->container['provider'];
+        return $this->container['username'];
     }
 
     /**
-     * Sets provider
+     * Sets username
      *
-     * @param string|null $provider provider
+     * @param string $username username
      *
      * @return self
      */
-    public function setProvider($provider)
+    public function setUsername($username)
     {
-        if (is_null($provider)) {
-            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        if (is_null($username)) {
+            throw new \InvalidArgumentException('non-nullable username cannot be null');
         }
-        $this->container['provider'] = $provider;
+        $this->container['username'] = $username;
 
         return $this;
     }
 
     /**
-     * Gets ref
+     * Gets password
      *
-     * @return string|null
+     * @return string
      */
-    public function getRef()
+    public function getPassword()
     {
-        return $this->container['ref'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets ref
+     * Sets password
      *
-     * @param string|null $ref ref
+     * @param string $password password
      *
      * @return self
      */
-    public function setRef($ref)
+    public function setPassword($password)
     {
-        if (is_null($ref)) {
-            throw new \InvalidArgumentException('non-nullable ref cannot be null');
+        if (is_null($password)) {
+            throw new \InvalidArgumentException('non-nullable password cannot be null');
         }
-        $this->container['ref'] = $ref;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
-        }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['password'] = $password;
 
         return $this;
     }

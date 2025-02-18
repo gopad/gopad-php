@@ -1,6 +1,6 @@
 <?php
 /**
- * User
+ * UpdateProfileRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * User Class Doc Comment
+ * UpdateProfileRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent user
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class User implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateProfileRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'User';
+    protected static $openAPIModelName = 'UpdateProfile_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,17 +58,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
         'username' => 'string',
         'password' => 'string',
         'email' => 'string',
-        'fullname' => 'string',
-        'profile' => 'string',
-        'admin' => 'bool',
-        'active' => 'bool',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime',
-        'auths' => '\Gopad\Model\UserAuth[]'
+        'fullname' => 'string'
     ];
 
     /**
@@ -80,17 +72,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
         'username' => null,
         'password' => 'password',
         'email' => null,
-        'fullname' => null,
-        'profile' => null,
-        'admin' => null,
-        'active' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time',
-        'auths' => null
+        'fullname' => null
     ];
 
     /**
@@ -99,17 +84,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
         'username' => true,
         'password' => true,
         'email' => true,
-        'fullname' => true,
-        'profile' => true,
-        'admin' => true,
-        'active' => true,
-        'createdAt' => false,
-        'updatedAt' => false,
-        'auths' => true
+        'fullname' => true
     ];
 
     /**
@@ -198,17 +176,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
         'username' => 'username',
         'password' => 'password',
         'email' => 'email',
-        'fullname' => 'fullname',
-        'profile' => 'profile',
-        'admin' => 'admin',
-        'active' => 'active',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at',
-        'auths' => 'auths'
+        'fullname' => 'fullname'
     ];
 
     /**
@@ -217,17 +188,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
         'username' => 'setUsername',
         'password' => 'setPassword',
         'email' => 'setEmail',
-        'fullname' => 'setFullname',
-        'profile' => 'setProfile',
-        'admin' => 'setAdmin',
-        'active' => 'setActive',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt',
-        'auths' => 'setAuths'
+        'fullname' => 'setFullname'
     ];
 
     /**
@@ -236,17 +200,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
         'username' => 'getUsername',
         'password' => 'getPassword',
         'email' => 'getEmail',
-        'fullname' => 'getFullname',
-        'profile' => 'getProfile',
-        'admin' => 'getAdmin',
-        'active' => 'getActive',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt',
-        'auths' => 'getAuths'
+        'fullname' => 'getFullname'
     ];
 
     /**
@@ -306,17 +263,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('username', $data ?? [], null);
         $this->setIfExists('password', $data ?? [], null);
         $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('fullname', $data ?? [], null);
-        $this->setIfExists('profile', $data ?? [], null);
-        $this->setIfExists('admin', $data ?? [], null);
-        $this->setIfExists('active', $data ?? [], null);
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
-        $this->setIfExists('auths', $data ?? [], null);
     }
 
     /**
@@ -360,33 +310,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
 
     /**
      * Gets username
@@ -520,196 +443,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['fullname'] = $fullname;
-
-        return $this;
-    }
-
-    /**
-     * Gets profile
-     *
-     * @return string|null
-     */
-    public function getProfile()
-    {
-        return $this->container['profile'];
-    }
-
-    /**
-     * Sets profile
-     *
-     * @param string|null $profile profile
-     *
-     * @return self
-     */
-    public function setProfile($profile)
-    {
-        if (is_null($profile)) {
-            array_push($this->openAPINullablesSetToNull, 'profile');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('profile', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['profile'] = $profile;
-
-        return $this;
-    }
-
-    /**
-     * Gets admin
-     *
-     * @return bool|null
-     */
-    public function getAdmin()
-    {
-        return $this->container['admin'];
-    }
-
-    /**
-     * Sets admin
-     *
-     * @param bool|null $admin admin
-     *
-     * @return self
-     */
-    public function setAdmin($admin)
-    {
-        if (is_null($admin)) {
-            array_push($this->openAPINullablesSetToNull, 'admin');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('admin', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['admin'] = $admin;
-
-        return $this;
-    }
-
-    /**
-     * Gets active
-     *
-     * @return bool|null
-     */
-    public function getActive()
-    {
-        return $this->container['active'];
-    }
-
-    /**
-     * Sets active
-     *
-     * @param bool|null $active active
-     *
-     * @return self
-     */
-    public function setActive($active)
-    {
-        if (is_null($active)) {
-            array_push($this->openAPINullablesSetToNull, 'active');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('active', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['active'] = $active;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
-        }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets auths
-     *
-     * @return \Gopad\Model\UserAuth[]|null
-     */
-    public function getAuths()
-    {
-        return $this->container['auths'];
-    }
-
-    /**
-     * Sets auths
-     *
-     * @param \Gopad\Model\UserAuth[]|null $auths auths
-     *
-     * @return self
-     */
-    public function setAuths($auths)
-    {
-        if (is_null($auths)) {
-            array_push($this->openAPINullablesSetToNull, 'auths');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auths', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auths'] = $auths;
 
         return $this;
     }

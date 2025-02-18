@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAuth
+ * CreateGroupRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserAuth Class Doc Comment
+ * CreateGroupRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent user auth
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAuth';
+    protected static $openAPIModelName = 'CreateGroup_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +58,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'provider' => 'string',
-        'ref' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'slug' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -73,10 +70,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'provider' => null,
-        'ref' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'slug' => null,
+        'name' => null
     ];
 
     /**
@@ -85,10 +80,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'provider' => false,
-        'ref' => false,
-        'createdAt' => false,
-        'updatedAt' => false
+        'slug' => true,
+        'name' => true
     ];
 
     /**
@@ -177,10 +170,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'provider' => 'provider',
-        'ref' => 'ref',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'slug' => 'slug',
+        'name' => 'name'
     ];
 
     /**
@@ -189,10 +180,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'provider' => 'setProvider',
-        'ref' => 'setRef',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'slug' => 'setSlug',
+        'name' => 'setName'
     ];
 
     /**
@@ -201,10 +190,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'provider' => 'getProvider',
-        'ref' => 'getRef',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'slug' => 'getSlug',
+        'name' => 'getName'
     ];
 
     /**
@@ -264,10 +251,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('provider', $data ?? [], null);
-        $this->setIfExists('ref', $data ?? [], null);
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
+        $this->setIfExists('slug', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -313,109 +298,69 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets provider
+     * Gets slug
      *
      * @return string|null
      */
-    public function getProvider()
+    public function getSlug()
     {
-        return $this->container['provider'];
+        return $this->container['slug'];
     }
 
     /**
-     * Sets provider
+     * Sets slug
      *
-     * @param string|null $provider provider
+     * @param string|null $slug slug
      *
      * @return self
      */
-    public function setProvider($provider)
+    public function setSlug($slug)
     {
-        if (is_null($provider)) {
-            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        if (is_null($slug)) {
+            array_push($this->openAPINullablesSetToNull, 'slug');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('slug', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['provider'] = $provider;
+        $this->container['slug'] = $slug;
 
         return $this;
     }
 
     /**
-     * Gets ref
+     * Gets name
      *
      * @return string|null
      */
-    public function getRef()
+    public function getName()
     {
-        return $this->container['ref'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets ref
+     * Sets name
      *
-     * @param string|null $ref ref
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setRef($ref)
+    public function setName($name)
     {
-        if (is_null($ref)) {
-            throw new \InvalidArgumentException('non-nullable ref cannot be null');
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['ref'] = $ref;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
-        }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['name'] = $name;
 
         return $this;
     }

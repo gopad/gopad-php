@@ -72,7 +72,7 @@ class UserApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'attachUserToTeam' => [
+        'attachUserToGroup' => [
             'application/json',
         ],
         'createUser' => [
@@ -81,16 +81,16 @@ class UserApi
         'deleteUser' => [
             'application/json',
         ],
-        'deleteUserFromTeam' => [
+        'deleteUserFromGroup' => [
             'application/json',
         ],
-        'listUserTeams' => [
+        'listUserGroups' => [
             'application/json',
         ],
         'listUsers' => [
             'application/json',
         ],
-        'permitUserTeam' => [
+        'permitUserGroup' => [
             'application/json',
         ],
         'showUser' => [
@@ -148,40 +148,40 @@ class UserApi
     }
 
     /**
-     * Operation attachUserToTeam
+     * Operation attachUserToGroup
      *
-     * Attach a team to user
+     * Attach a group to user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function attachUserToTeam($userId, $userTeamParams, string $contentType = self::contentTypes['attachUserToTeam'][0])
+    public function attachUserToGroup($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['attachUserToGroup'][0])
     {
-        list($response) = $this->attachUserToTeamWithHttpInfo($userId, $userTeamParams, $contentType);
+        list($response) = $this->attachUserToGroupWithHttpInfo($userId, $permitUserGroupRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation attachUserToTeamWithHttpInfo
+     * Operation attachUserToGroupWithHttpInfo
      *
-     * Attach a team to user
+     * Attach a group to user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function attachUserToTeamWithHttpInfo($userId, $userTeamParams, string $contentType = self::contentTypes['attachUserToTeam'][0])
+    public function attachUserToGroupWithHttpInfo($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['attachUserToGroup'][0])
     {
-        $request = $this->attachUserToTeamRequest($userId, $userTeamParams, $contentType);
+        $request = $this->attachUserToGroupRequest($userId, $permitUserGroupRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -381,33 +381,6 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Notification';
@@ -488,34 +461,26 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation attachUserToTeamAsync
+     * Operation attachUserToGroupAsync
      *
-     * Attach a team to user
+     * Attach a group to user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function attachUserToTeamAsync($userId, $userTeamParams, string $contentType = self::contentTypes['attachUserToTeam'][0])
+    public function attachUserToGroupAsync($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['attachUserToGroup'][0])
     {
-        return $this->attachUserToTeamAsyncWithHttpInfo($userId, $userTeamParams, $contentType)
+        return $this->attachUserToGroupAsyncWithHttpInfo($userId, $permitUserGroupRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -524,21 +489,21 @@ class UserApi
     }
 
     /**
-     * Operation attachUserToTeamAsyncWithHttpInfo
+     * Operation attachUserToGroupAsyncWithHttpInfo
      *
-     * Attach a team to user
+     * Attach a group to user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function attachUserToTeamAsyncWithHttpInfo($userId, $userTeamParams, string $contentType = self::contentTypes['attachUserToTeam'][0])
+    public function attachUserToGroupAsyncWithHttpInfo($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['attachUserToGroup'][0])
     {
         $returnType = '\Gopad\Model\Notification';
-        $request = $this->attachUserToTeamRequest($userId, $userTeamParams, $contentType);
+        $request = $this->attachUserToGroupRequest($userId, $permitUserGroupRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -577,34 +542,34 @@ class UserApi
     }
 
     /**
-     * Create request for operation 'attachUserToTeam'
+     * Create request for operation 'attachUserToGroup'
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachUserToGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function attachUserToTeamRequest($userId, $userTeamParams, string $contentType = self::contentTypes['attachUserToTeam'][0])
+    public function attachUserToGroupRequest($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['attachUserToGroup'][0])
     {
 
         // verify the required parameter 'userId' is set
         if ($userId === null || (is_array($userId) && count($userId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userId when calling attachUserToTeam'
+                'Missing the required parameter $userId when calling attachUserToGroup'
             );
         }
 
-        // verify the required parameter 'userTeamParams' is set
-        if ($userTeamParams === null || (is_array($userTeamParams) && count($userTeamParams) === 0)) {
+        // verify the required parameter 'permitUserGroupRequest' is set
+        if ($permitUserGroupRequest === null || (is_array($permitUserGroupRequest) && count($permitUserGroupRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userTeamParams when calling attachUserToTeam'
+                'Missing the required parameter $permitUserGroupRequest when calling attachUserToGroup'
             );
         }
 
 
-        $resourcePath = '/users/{user_id}/teams';
+        $resourcePath = '/users/{user_id}/groups';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -630,12 +595,12 @@ class UserApi
         );
 
         // for model (json/xml)
-        if (isset($userTeamParams)) {
+        if (isset($permitUserGroupRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($userTeamParams));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($permitUserGroupRequest));
             } else {
-                $httpBody = $userTeamParams;
+                $httpBody = $permitUserGroupRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -661,11 +626,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -706,16 +666,16 @@ class UserApi
      *
      * Create a new user
      *
-     * @param  \Gopad\Model\User $user The user data to create (required)
+     * @param  \Gopad\Model\CreateUserRequest $createUserRequest The user data to create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function createUser($user, string $contentType = self::contentTypes['createUser'][0])
+    public function createUser($createUserRequest, string $contentType = self::contentTypes['createUser'][0])
     {
-        list($response) = $this->createUserWithHttpInfo($user, $contentType);
+        list($response) = $this->createUserWithHttpInfo($createUserRequest, $contentType);
         return $response;
     }
 
@@ -724,16 +684,16 @@ class UserApi
      *
      * Create a new user
      *
-     * @param  \Gopad\Model\User $user The user data to create (required)
+     * @param  \Gopad\Model\CreateUserRequest $createUserRequest The user data to create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createUserWithHttpInfo($user, string $contentType = self::contentTypes['createUser'][0])
+    public function createUserWithHttpInfo($createUserRequest, string $contentType = self::contentTypes['createUser'][0])
     {
-        $request = $this->createUserRequest($user, $contentType);
+        $request = $this->createUserRequest($createUserRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -879,33 +839,6 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\User';
@@ -970,14 +903,6 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -988,15 +913,15 @@ class UserApi
      *
      * Create a new user
      *
-     * @param  \Gopad\Model\User $user The user data to create (required)
+     * @param  \Gopad\Model\CreateUserRequest $createUserRequest The user data to create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createUserAsync($user, string $contentType = self::contentTypes['createUser'][0])
+    public function createUserAsync($createUserRequest, string $contentType = self::contentTypes['createUser'][0])
     {
-        return $this->createUserAsyncWithHttpInfo($user, $contentType)
+        return $this->createUserAsyncWithHttpInfo($createUserRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1009,16 +934,16 @@ class UserApi
      *
      * Create a new user
      *
-     * @param  \Gopad\Model\User $user The user data to create (required)
+     * @param  \Gopad\Model\CreateUserRequest $createUserRequest The user data to create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createUserAsyncWithHttpInfo($user, string $contentType = self::contentTypes['createUser'][0])
+    public function createUserAsyncWithHttpInfo($createUserRequest, string $contentType = self::contentTypes['createUser'][0])
     {
         $returnType = '\Gopad\Model\User';
-        $request = $this->createUserRequest($user, $contentType);
+        $request = $this->createUserRequest($createUserRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1059,19 +984,19 @@ class UserApi
     /**
      * Create request for operation 'createUser'
      *
-     * @param  \Gopad\Model\User $user The user data to create (required)
+     * @param  \Gopad\Model\CreateUserRequest $createUserRequest The user data to create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createUserRequest($user, string $contentType = self::contentTypes['createUser'][0])
+    public function createUserRequest($createUserRequest, string $contentType = self::contentTypes['createUser'][0])
     {
 
-        // verify the required parameter 'user' is set
-        if ($user === null || (is_array($user) && count($user) === 0)) {
+        // verify the required parameter 'createUserRequest' is set
+        if ($createUserRequest === null || (is_array($createUserRequest) && count($createUserRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $user when calling createUser'
+                'Missing the required parameter $createUserRequest when calling createUser'
             );
         }
 
@@ -1094,12 +1019,12 @@ class UserApi
         );
 
         // for model (json/xml)
-        if (isset($user)) {
+        if (isset($createUserRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($user));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($createUserRequest));
             } else {
-                $httpBody = $user;
+                $httpBody = $createUserRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1125,11 +1050,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -1175,7 +1095,7 @@ class UserApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
     public function deleteUser($userId, string $contentType = self::contentTypes['deleteUser'][0])
     {
@@ -1193,7 +1113,7 @@ class UserApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteUserWithHttpInfo($userId, string $contentType = self::contentTypes['deleteUser'][0])
     {
@@ -1370,33 +1290,6 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Notification';
@@ -1462,14 +1355,6 @@ class UserApi
                     $e->setResponseObject($data);
                     break;
                 case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gopad\Model\Notification',
@@ -1625,11 +1510,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -1666,40 +1546,40 @@ class UserApi
     }
 
     /**
-     * Operation deleteUserFromTeam
+     * Operation deleteUserFromGroup
      *
-     * Unlink a team from user
+     * Unlink a group from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\DeleteUserFromGroupRequest $deleteUserFromGroupRequest The user group data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function deleteUserFromTeam($userId, $userTeamParams, string $contentType = self::contentTypes['deleteUserFromTeam'][0])
+    public function deleteUserFromGroup($userId, $deleteUserFromGroupRequest, string $contentType = self::contentTypes['deleteUserFromGroup'][0])
     {
-        list($response) = $this->deleteUserFromTeamWithHttpInfo($userId, $userTeamParams, $contentType);
+        list($response) = $this->deleteUserFromGroupWithHttpInfo($userId, $deleteUserFromGroupRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation deleteUserFromTeamWithHttpInfo
+     * Operation deleteUserFromGroupWithHttpInfo
      *
-     * Unlink a team from user
+     * Unlink a group from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\DeleteUserFromGroupRequest $deleteUserFromGroupRequest The user group data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteUserFromTeamWithHttpInfo($userId, $userTeamParams, string $contentType = self::contentTypes['deleteUserFromTeam'][0])
+    public function deleteUserFromGroupWithHttpInfo($userId, $deleteUserFromGroupRequest, string $contentType = self::contentTypes['deleteUserFromGroup'][0])
     {
-        $request = $this->deleteUserFromTeamRequest($userId, $userTeamParams, $contentType);
+        $request = $this->deleteUserFromGroupRequest($userId, $deleteUserFromGroupRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1846,33 +1726,6 @@ class UserApi
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
                     if ('\Gopad\Model\Notification' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
@@ -1971,34 +1824,26 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation deleteUserFromTeamAsync
+     * Operation deleteUserFromGroupAsync
      *
-     * Unlink a team from user
+     * Unlink a group from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\DeleteUserFromGroupRequest $deleteUserFromGroupRequest The user group data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteUserFromTeamAsync($userId, $userTeamParams, string $contentType = self::contentTypes['deleteUserFromTeam'][0])
+    public function deleteUserFromGroupAsync($userId, $deleteUserFromGroupRequest, string $contentType = self::contentTypes['deleteUserFromGroup'][0])
     {
-        return $this->deleteUserFromTeamAsyncWithHttpInfo($userId, $userTeamParams, $contentType)
+        return $this->deleteUserFromGroupAsyncWithHttpInfo($userId, $deleteUserFromGroupRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2007,21 +1852,21 @@ class UserApi
     }
 
     /**
-     * Operation deleteUserFromTeamAsyncWithHttpInfo
+     * Operation deleteUserFromGroupAsyncWithHttpInfo
      *
-     * Unlink a team from user
+     * Unlink a group from user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\DeleteUserFromGroupRequest $deleteUserFromGroupRequest The user group data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteUserFromTeamAsyncWithHttpInfo($userId, $userTeamParams, string $contentType = self::contentTypes['deleteUserFromTeam'][0])
+    public function deleteUserFromGroupAsyncWithHttpInfo($userId, $deleteUserFromGroupRequest, string $contentType = self::contentTypes['deleteUserFromGroup'][0])
     {
         $returnType = '\Gopad\Model\Notification';
-        $request = $this->deleteUserFromTeamRequest($userId, $userTeamParams, $contentType);
+        $request = $this->deleteUserFromGroupRequest($userId, $deleteUserFromGroupRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2060,34 +1905,34 @@ class UserApi
     }
 
     /**
-     * Create request for operation 'deleteUserFromTeam'
+     * Create request for operation 'deleteUserFromGroup'
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\DeleteUserFromGroupRequest $deleteUserFromGroupRequest The user group data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserFromGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteUserFromTeamRequest($userId, $userTeamParams, string $contentType = self::contentTypes['deleteUserFromTeam'][0])
+    public function deleteUserFromGroupRequest($userId, $deleteUserFromGroupRequest, string $contentType = self::contentTypes['deleteUserFromGroup'][0])
     {
 
         // verify the required parameter 'userId' is set
         if ($userId === null || (is_array($userId) && count($userId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userId when calling deleteUserFromTeam'
+                'Missing the required parameter $userId when calling deleteUserFromGroup'
             );
         }
 
-        // verify the required parameter 'userTeamParams' is set
-        if ($userTeamParams === null || (is_array($userTeamParams) && count($userTeamParams) === 0)) {
+        // verify the required parameter 'deleteUserFromGroupRequest' is set
+        if ($deleteUserFromGroupRequest === null || (is_array($deleteUserFromGroupRequest) && count($deleteUserFromGroupRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userTeamParams when calling deleteUserFromTeam'
+                'Missing the required parameter $deleteUserFromGroupRequest when calling deleteUserFromGroup'
             );
         }
 
 
-        $resourcePath = '/users/{user_id}/teams';
+        $resourcePath = '/users/{user_id}/groups';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2113,12 +1958,12 @@ class UserApi
         );
 
         // for model (json/xml)
-        if (isset($userTeamParams)) {
+        if (isset($deleteUserFromGroupRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($userTeamParams));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($deleteUserFromGroupRequest));
             } else {
-                $httpBody = $userTeamParams;
+                $httpBody = $deleteUserFromGroupRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2144,11 +1989,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -2185,48 +2025,48 @@ class UserApi
     }
 
     /**
-     * Operation listUserTeams
+     * Operation listUserGroups
      *
-     * Fetch all teams attached to user
+     * Fetch all groups attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserGroups'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\UserTeams|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\ListUserGroups200Response|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function listUserTeams($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserGroups($userId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUserGroups'][0])
     {
-        list($response) = $this->listUserTeamsWithHttpInfo($userId, $search, $sort, $order, $limit, $offset, $contentType);
+        list($response) = $this->listUserGroupsWithHttpInfo($userId, $search, $sort, $order, $limit, $offset, $contentType);
         return $response;
     }
 
     /**
-     * Operation listUserTeamsWithHttpInfo
+     * Operation listUserGroupsWithHttpInfo
      *
-     * Fetch all teams attached to user
+     * Fetch all groups attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserGroups'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\UserTeams|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\ListUserGroups200Response|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listUserTeamsWithHttpInfo($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserGroupsWithHttpInfo($userId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUserGroups'][0])
     {
-        $request = $this->listUserTeamsRequest($userId, $search, $sort, $order, $limit, $offset, $contentType);
+        $request = $this->listUserGroupsRequest($userId, $search, $sort, $order, $limit, $offset, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2265,11 +2105,11 @@ class UserApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Gopad\Model\UserTeams' === '\SplFileObject') {
+                    if ('\Gopad\Model\ListUserGroups200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Gopad\Model\UserTeams' !== 'string') {
+                        if ('\Gopad\Model\ListUserGroups200Response' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2287,7 +2127,7 @@ class UserApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\UserTeams', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\ListUserGroups200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2372,36 +2212,9 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
-            $returnType = '\Gopad\Model\UserTeams';
+            $returnType = '\Gopad\Model\ListUserGroups200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2434,7 +2247,7 @@ class UserApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\UserTeams',
+                        '\Gopad\Model\ListUserGroups200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2463,38 +2276,30 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation listUserTeamsAsync
+     * Operation listUserGroupsAsync
      *
-     * Fetch all teams attached to user
+     * Fetch all groups attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserTeamsAsync($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserGroupsAsync($userId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUserGroups'][0])
     {
-        return $this->listUserTeamsAsyncWithHttpInfo($userId, $search, $sort, $order, $limit, $offset, $contentType)
+        return $this->listUserGroupsAsyncWithHttpInfo($userId, $search, $sort, $order, $limit, $offset, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2503,25 +2308,25 @@ class UserApi
     }
 
     /**
-     * Operation listUserTeamsAsyncWithHttpInfo
+     * Operation listUserGroupsAsyncWithHttpInfo
      *
-     * Fetch all teams attached to user
+     * Fetch all groups attached to user
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserTeamsAsyncWithHttpInfo($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserGroupsAsyncWithHttpInfo($userId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUserGroups'][0])
     {
-        $returnType = '\Gopad\Model\UserTeams';
-        $request = $this->listUserTeamsRequest($userId, $search, $sort, $order, $limit, $offset, $contentType);
+        $returnType = '\Gopad\Model\ListUserGroups200Response';
+        $request = $this->listUserGroupsRequest($userId, $search, $sort, $order, $limit, $offset, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2560,26 +2365,26 @@ class UserApi
     }
 
     /**
-     * Create request for operation 'listUserTeams'
+     * Create request for operation 'listUserGroups'
      *
      * @param  string $userId A user identifier or slug (required)
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional)
-     * @param  int $offset Paging offset (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserTeams'] to see the possible values for this operation
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listUserTeamsRequest($userId, $search = null, $sort = 'name', $order = 'asc', $limit = null, $offset = null, string $contentType = self::contentTypes['listUserTeams'][0])
+    public function listUserGroupsRequest($userId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUserGroups'][0])
     {
 
         // verify the required parameter 'userId' is set
         if ($userId === null || (is_array($userId) && count($userId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userId when calling listUserTeams'
+                'Missing the required parameter $userId when calling listUserGroups'
             );
         }
 
@@ -2589,7 +2394,7 @@ class UserApi
 
 
 
-        $resourcePath = '/users/{user_id}/teams';
+        $resourcePath = '/users/{user_id}/groups';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2684,11 +2489,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -2730,7 +2530,7 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional, default to 100)
      * @param  int $offset Paging offset (optional, default to 0)
@@ -2738,9 +2538,9 @@ class UserApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Users|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\ListUsers200Response|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function listUsers($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsers($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         list($response) = $this->listUsersWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType);
         return $response;
@@ -2752,7 +2552,7 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional, default to 100)
      * @param  int $offset Paging offset (optional, default to 0)
@@ -2760,9 +2560,9 @@ class UserApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Users|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\ListUsers200Response|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listUsersWithHttpInfo($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersWithHttpInfo($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         $request = $this->listUsersRequest($search, $sort, $order, $limit, $offset, $contentType);
 
@@ -2803,11 +2603,11 @@ class UserApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Gopad\Model\Users' === '\SplFileObject') {
+                    if ('\Gopad\Model\ListUsers200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Users' !== 'string') {
+                        if ('\Gopad\Model\ListUsers200Response' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2825,7 +2625,7 @@ class UserApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Users', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\ListUsers200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2883,36 +2683,9 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
-            $returnType = '\Gopad\Model\Users';
+            $returnType = '\Gopad\Model\ListUsers200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2945,7 +2718,7 @@ class UserApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Users',
+                        '\Gopad\Model\ListUsers200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2966,14 +2739,6 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -2985,7 +2750,7 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional, default to 100)
      * @param  int $offset Paging offset (optional, default to 0)
@@ -2994,7 +2759,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUsersAsync($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersAsync($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
         return $this->listUsersAsyncWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType)
             ->then(
@@ -3010,7 +2775,7 @@ class UserApi
      * Fetch all available users
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional, default to 100)
      * @param  int $offset Paging offset (optional, default to 0)
@@ -3019,9 +2784,9 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUsersAsyncWithHttpInfo($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersAsyncWithHttpInfo($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
-        $returnType = '\Gopad\Model\Users';
+        $returnType = '\Gopad\Model\ListUsers200Response';
         $request = $this->listUsersRequest($search, $sort, $order, $limit, $offset, $contentType);
 
         return $this->client
@@ -3064,7 +2829,7 @@ class UserApi
      * Create request for operation 'listUsers'
      *
      * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
+     * @param  string $sort Sorting column (optional)
      * @param  string $order Sorting order (optional, default to 'asc')
      * @param  int $limit Paging limit (optional, default to 100)
      * @param  int $offset Paging offset (optional, default to 0)
@@ -3073,7 +2838,7 @@ class UserApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listUsersRequest($search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
+    public function listUsersRequest($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listUsers'][0])
     {
 
 
@@ -3169,11 +2934,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -3210,40 +2970,40 @@ class UserApi
     }
 
     /**
-     * Operation permitUserTeam
+     * Operation permitUserGroup
      *
-     * Update team perms for user
+     * Update group perms for user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function permitUserTeam($userId, $userTeamParams, string $contentType = self::contentTypes['permitUserTeam'][0])
+    public function permitUserGroup($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['permitUserGroup'][0])
     {
-        list($response) = $this->permitUserTeamWithHttpInfo($userId, $userTeamParams, $contentType);
+        list($response) = $this->permitUserGroupWithHttpInfo($userId, $permitUserGroupRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation permitUserTeamWithHttpInfo
+     * Operation permitUserGroupWithHttpInfo
      *
-     * Update team perms for user
+     * Update group perms for user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function permitUserTeamWithHttpInfo($userId, $userTeamParams, string $contentType = self::contentTypes['permitUserTeam'][0])
+    public function permitUserGroupWithHttpInfo($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['permitUserGroup'][0])
     {
-        $request = $this->permitUserTeamRequest($userId, $userTeamParams, $contentType);
+        $request = $this->permitUserGroupRequest($userId, $permitUserGroupRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3443,33 +3203,6 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Notification';
@@ -3550,34 +3283,26 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation permitUserTeamAsync
+     * Operation permitUserGroupAsync
      *
-     * Update team perms for user
+     * Update group perms for user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function permitUserTeamAsync($userId, $userTeamParams, string $contentType = self::contentTypes['permitUserTeam'][0])
+    public function permitUserGroupAsync($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['permitUserGroup'][0])
     {
-        return $this->permitUserTeamAsyncWithHttpInfo($userId, $userTeamParams, $contentType)
+        return $this->permitUserGroupAsyncWithHttpInfo($userId, $permitUserGroupRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3586,21 +3311,21 @@ class UserApi
     }
 
     /**
-     * Operation permitUserTeamAsyncWithHttpInfo
+     * Operation permitUserGroupAsyncWithHttpInfo
      *
-     * Update team perms for user
+     * Update group perms for user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function permitUserTeamAsyncWithHttpInfo($userId, $userTeamParams, string $contentType = self::contentTypes['permitUserTeam'][0])
+    public function permitUserGroupAsyncWithHttpInfo($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['permitUserGroup'][0])
     {
         $returnType = '\Gopad\Model\Notification';
-        $request = $this->permitUserTeamRequest($userId, $userTeamParams, $contentType);
+        $request = $this->permitUserGroupRequest($userId, $permitUserGroupRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3639,34 +3364,34 @@ class UserApi
     }
 
     /**
-     * Create request for operation 'permitUserTeam'
+     * Create request for operation 'permitUserGroup'
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\UserTeamParams $userTeamParams The user team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\PermitUserGroupRequest $permitUserGroupRequest The user group data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitUserGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function permitUserTeamRequest($userId, $userTeamParams, string $contentType = self::contentTypes['permitUserTeam'][0])
+    public function permitUserGroupRequest($userId, $permitUserGroupRequest, string $contentType = self::contentTypes['permitUserGroup'][0])
     {
 
         // verify the required parameter 'userId' is set
         if ($userId === null || (is_array($userId) && count($userId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userId when calling permitUserTeam'
+                'Missing the required parameter $userId when calling permitUserGroup'
             );
         }
 
-        // verify the required parameter 'userTeamParams' is set
-        if ($userTeamParams === null || (is_array($userTeamParams) && count($userTeamParams) === 0)) {
+        // verify the required parameter 'permitUserGroupRequest' is set
+        if ($permitUserGroupRequest === null || (is_array($permitUserGroupRequest) && count($permitUserGroupRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userTeamParams when calling permitUserTeam'
+                'Missing the required parameter $permitUserGroupRequest when calling permitUserGroup'
             );
         }
 
 
-        $resourcePath = '/users/{user_id}/teams';
+        $resourcePath = '/users/{user_id}/groups';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3692,12 +3417,12 @@ class UserApi
         );
 
         // for model (json/xml)
-        if (isset($userTeamParams)) {
+        if (isset($permitUserGroupRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($userTeamParams));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($permitUserGroupRequest));
             } else {
-                $httpBody = $userTeamParams;
+                $httpBody = $permitUserGroupRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3723,11 +3448,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -3773,7 +3493,7 @@ class UserApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
     public function showUser($userId, string $contentType = self::contentTypes['showUser'][0])
     {
@@ -3791,7 +3511,7 @@ class UserApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
     public function showUserWithHttpInfo($userId, string $contentType = self::contentTypes['showUser'][0])
     {
@@ -3941,33 +3661,6 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\User';
@@ -4025,14 +3718,6 @@ class UserApi
                     $e->setResponseObject($data);
                     break;
                 case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gopad\Model\Notification',
@@ -4188,11 +3873,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -4234,16 +3914,16 @@ class UserApi
      * Update a specific user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\User $user The user data to update (required)
+     * @param  \Gopad\Model\UpdateUserRequest $updateUserRequest The user data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function updateUser($userId, $user, string $contentType = self::contentTypes['updateUser'][0])
+    public function updateUser($userId, $updateUserRequest, string $contentType = self::contentTypes['updateUser'][0])
     {
-        list($response) = $this->updateUserWithHttpInfo($userId, $user, $contentType);
+        list($response) = $this->updateUserWithHttpInfo($userId, $updateUserRequest, $contentType);
         return $response;
     }
 
@@ -4253,16 +3933,16 @@ class UserApi
      * Update a specific user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\User $user The user data to update (required)
+     * @param  \Gopad\Model\UpdateUserRequest $updateUserRequest The user data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\User|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateUserWithHttpInfo($userId, $user, string $contentType = self::contentTypes['updateUser'][0])
+    public function updateUserWithHttpInfo($userId, $updateUserRequest, string $contentType = self::contentTypes['updateUser'][0])
     {
-        $request = $this->updateUserRequest($userId, $user, $contentType);
+        $request = $this->updateUserRequest($userId, $updateUserRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4435,33 +4115,6 @@ class UserApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\User';
@@ -4534,14 +4187,6 @@ class UserApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -4553,15 +4198,15 @@ class UserApi
      * Update a specific user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\User $user The user data to update (required)
+     * @param  \Gopad\Model\UpdateUserRequest $updateUserRequest The user data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateUserAsync($userId, $user, string $contentType = self::contentTypes['updateUser'][0])
+    public function updateUserAsync($userId, $updateUserRequest, string $contentType = self::contentTypes['updateUser'][0])
     {
-        return $this->updateUserAsyncWithHttpInfo($userId, $user, $contentType)
+        return $this->updateUserAsyncWithHttpInfo($userId, $updateUserRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4575,16 +4220,16 @@ class UserApi
      * Update a specific user
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\User $user The user data to update (required)
+     * @param  \Gopad\Model\UpdateUserRequest $updateUserRequest The user data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateUserAsyncWithHttpInfo($userId, $user, string $contentType = self::contentTypes['updateUser'][0])
+    public function updateUserAsyncWithHttpInfo($userId, $updateUserRequest, string $contentType = self::contentTypes['updateUser'][0])
     {
         $returnType = '\Gopad\Model\User';
-        $request = $this->updateUserRequest($userId, $user, $contentType);
+        $request = $this->updateUserRequest($userId, $updateUserRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4626,13 +4271,13 @@ class UserApi
      * Create request for operation 'updateUser'
      *
      * @param  string $userId A user identifier or slug (required)
-     * @param  \Gopad\Model\User $user The user data to update (required)
+     * @param  \Gopad\Model\UpdateUserRequest $updateUserRequest The user data to update (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateUserRequest($userId, $user, string $contentType = self::contentTypes['updateUser'][0])
+    public function updateUserRequest($userId, $updateUserRequest, string $contentType = self::contentTypes['updateUser'][0])
     {
 
         // verify the required parameter 'userId' is set
@@ -4642,10 +4287,10 @@ class UserApi
             );
         }
 
-        // verify the required parameter 'user' is set
-        if ($user === null || (is_array($user) && count($user) === 0)) {
+        // verify the required parameter 'updateUserRequest' is set
+        if ($updateUserRequest === null || (is_array($updateUserRequest) && count($updateUserRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $user when calling updateUser'
+                'Missing the required parameter $updateUserRequest when calling updateUser'
             );
         }
 
@@ -4676,12 +4321,12 @@ class UserApi
         );
 
         // for model (json/xml)
-        if (isset($user)) {
+        if (isset($updateUserRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($user));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($updateUserRequest));
             } else {
-                $httpBody = $user;
+                $httpBody = $updateUserRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4707,11 +4352,6 @@ class UserApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());

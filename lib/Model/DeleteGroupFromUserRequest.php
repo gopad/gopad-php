@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAuth
+ * DeleteGroupFromUserRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserAuth Class Doc Comment
+ * DeleteGroupFromUserRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent user auth
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeleteGroupFromUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAuth';
+    protected static $openAPIModelName = 'DeleteGroupFromUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +58,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'provider' => 'string',
-        'ref' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'user' => 'string'
     ];
 
     /**
@@ -73,10 +69,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'provider' => null,
-        'ref' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'user' => null
     ];
 
     /**
@@ -85,10 +78,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'provider' => false,
-        'ref' => false,
-        'createdAt' => false,
-        'updatedAt' => false
+        'user' => false
     ];
 
     /**
@@ -177,10 +167,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'provider' => 'provider',
-        'ref' => 'ref',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'user' => 'user'
     ];
 
     /**
@@ -189,10 +176,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'provider' => 'setProvider',
-        'ref' => 'setRef',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'user' => 'setUser'
     ];
 
     /**
@@ -201,10 +185,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'provider' => 'getProvider',
-        'ref' => 'getRef',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'user' => 'getUser'
     ];
 
     /**
@@ -264,10 +245,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('provider', $data ?? [], null);
-        $this->setIfExists('ref', $data ?? [], null);
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
     }
 
     /**
@@ -297,6 +275,9 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['user'] === null) {
+            $invalidProperties[] = "'user' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -313,109 +294,28 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets provider
+     * Gets user
      *
-     * @return string|null
+     * @return string
      */
-    public function getProvider()
+    public function getUser()
     {
-        return $this->container['provider'];
+        return $this->container['user'];
     }
 
     /**
-     * Sets provider
+     * Sets user
      *
-     * @param string|null $provider provider
+     * @param string $user user
      *
      * @return self
      */
-    public function setProvider($provider)
+    public function setUser($user)
     {
-        if (is_null($provider)) {
-            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        if (is_null($user)) {
+            throw new \InvalidArgumentException('non-nullable user cannot be null');
         }
-        $this->container['provider'] = $provider;
-
-        return $this;
-    }
-
-    /**
-     * Gets ref
-     *
-     * @return string|null
-     */
-    public function getRef()
-    {
-        return $this->container['ref'];
-    }
-
-    /**
-     * Sets ref
-     *
-     * @param string|null $ref ref
-     *
-     * @return self
-     */
-    public function setRef($ref)
-    {
-        if (is_null($ref)) {
-            throw new \InvalidArgumentException('non-nullable ref cannot be null');
-        }
-        $this->container['ref'] = $ref;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
-        }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['user'] = $user;
 
         return $this;
     }
