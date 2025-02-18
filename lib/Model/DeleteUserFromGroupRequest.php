@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthLogin
+ * DeleteUserFromGroupRequest
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * AuthLogin Class Doc Comment
+ * DeleteUserFromGroupRequest Class Doc Comment
  *
  * @category Class
  * @package  Gopad
@@ -41,7 +41,7 @@ use \Gopad\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeleteUserFromGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'auth_login';
+    protected static $openAPIModelName = 'DeleteUserFromGroup_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'username' => 'string',
-        'password' => 'string'
+        'group' => 'string'
     ];
 
     /**
@@ -70,8 +69,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'username' => null,
-        'password' => 'password'
+        'group' => null
     ];
 
     /**
@@ -80,8 +78,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'username' => false,
-        'password' => false
+        'group' => false
     ];
 
     /**
@@ -170,8 +167,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'username' => 'username',
-        'password' => 'password'
+        'group' => 'group'
     ];
 
     /**
@@ -180,8 +176,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'username' => 'setUsername',
-        'password' => 'setPassword'
+        'group' => 'setGroup'
     ];
 
     /**
@@ -190,8 +185,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'username' => 'getUsername',
-        'password' => 'getPassword'
+        'group' => 'getGroup'
     ];
 
     /**
@@ -251,8 +245,7 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('group', $data ?? [], null);
     }
 
     /**
@@ -282,11 +275,8 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['username'] === null) {
-            $invalidProperties[] = "'username' can't be null";
-        }
-        if ($this->container['password'] === null) {
-            $invalidProperties[] = "'password' can't be null";
+        if ($this->container['group'] === null) {
+            $invalidProperties[] = "'group' can't be null";
         }
         return $invalidProperties;
     }
@@ -304,55 +294,28 @@ class AuthLogin implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets username
+     * Gets group
      *
      * @return string
      */
-    public function getUsername()
+    public function getGroup()
     {
-        return $this->container['username'];
+        return $this->container['group'];
     }
 
     /**
-     * Sets username
+     * Sets group
      *
-     * @param string $username username
+     * @param string $group group
      *
      * @return self
      */
-    public function setUsername($username)
+    public function setGroup($group)
     {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        if (is_null($group)) {
+            throw new \InvalidArgumentException('non-nullable group cannot be null');
         }
-        $this->container['username'] = $username;
-
-        return $this;
-    }
-
-    /**
-     * Gets password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->container['password'];
-    }
-
-    /**
-     * Sets password
-     *
-     * @param string $password password
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        if (is_null($password)) {
-            throw new \InvalidArgumentException('non-nullable password cannot be null');
-        }
-        $this->container['password'] = $password;
+        $this->container['group'] = $group;
 
         return $this;
     }

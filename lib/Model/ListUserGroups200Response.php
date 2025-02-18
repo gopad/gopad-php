@@ -1,6 +1,6 @@
 <?php
 /**
- * UserTeams
+ * ListUserGroups200Response
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserTeams Class Doc Comment
+ * ListUserGroups200Response Class Doc Comment
  *
  * @category Class
- * @description Model to represent user teams
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListUserGroups200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'user_teams';
+    protected static $openAPIModelName = 'ListUserGroups_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +58,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user' => '\Gopad\Model\User',
         'total' => 'int',
-        'teams' => '\Gopad\Model\UserTeam[]'
+        'limit' => 'int',
+        'offset' => 'int',
+        'user' => '\Gopad\Model\User',
+        'groups' => '\Gopad\Model\UserGroup[]'
     ];
 
     /**
@@ -72,9 +73,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user' => null,
         'total' => 'int64',
-        'teams' => null
+        'limit' => 'int64',
+        'offset' => 'int64',
+        'user' => null,
+        'groups' => null
     ];
 
     /**
@@ -83,9 +86,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user' => false,
         'total' => false,
-        'teams' => false
+        'limit' => false,
+        'offset' => false,
+        'user' => false,
+        'groups' => false
     ];
 
     /**
@@ -174,9 +179,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'user' => 'user',
         'total' => 'total',
-        'teams' => 'teams'
+        'limit' => 'limit',
+        'offset' => 'offset',
+        'user' => 'user',
+        'groups' => 'groups'
     ];
 
     /**
@@ -185,9 +192,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'user' => 'setUser',
         'total' => 'setTotal',
-        'teams' => 'setTeams'
+        'limit' => 'setLimit',
+        'offset' => 'setOffset',
+        'user' => 'setUser',
+        'groups' => 'setGroups'
     ];
 
     /**
@@ -196,9 +205,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'user' => 'getUser',
         'total' => 'getTotal',
-        'teams' => 'getTeams'
+        'limit' => 'getLimit',
+        'offset' => 'getOffset',
+        'user' => 'getUser',
+        'groups' => 'getGroups'
     ];
 
     /**
@@ -258,9 +269,11 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('user', $data ?? [], null);
         $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('teams', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
+        $this->setIfExists('offset', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
+        $this->setIfExists('groups', $data ?? [], null);
     }
 
     /**
@@ -290,6 +303,18 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['total'] === null) {
+            $invalidProperties[] = "'total' can't be null";
+        }
+        if ($this->container['limit'] === null) {
+            $invalidProperties[] = "'limit' can't be null";
+        }
+        if ($this->container['offset'] === null) {
+            $invalidProperties[] = "'offset' can't be null";
+        }
+        if ($this->container['groups'] === null) {
+            $invalidProperties[] = "'groups' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -304,6 +329,87 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets total
+     *
+     * @return int
+     */
+    public function getTotal()
+    {
+        return $this->container['total'];
+    }
+
+    /**
+     * Sets total
+     *
+     * @param int $total total
+     *
+     * @return self
+     */
+    public function setTotal($total)
+    {
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
+        }
+        $this->container['total'] = $total;
+
+        return $this;
+    }
+
+    /**
+     * Gets limit
+     *
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->container['limit'];
+    }
+
+    /**
+     * Sets limit
+     *
+     * @param int $limit limit
+     *
+     * @return self
+     */
+    public function setLimit($limit)
+    {
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
+        }
+        $this->container['limit'] = $limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets offset
+     *
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->container['offset'];
+    }
+
+    /**
+     * Sets offset
+     *
+     * @param int $offset offset
+     *
+     * @return self
+     */
+    public function setOffset($offset)
+    {
+        if (is_null($offset)) {
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
+        }
+        $this->container['offset'] = $offset;
+
+        return $this;
+    }
 
     /**
      * Gets user
@@ -333,55 +439,28 @@ class UserTeams implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets total
+     * Gets groups
      *
-     * @return int|null
+     * @return \Gopad\Model\UserGroup[]
      */
-    public function getTotal()
+    public function getGroups()
     {
-        return $this->container['total'];
+        return $this->container['groups'];
     }
 
     /**
-     * Sets total
+     * Sets groups
      *
-     * @param int|null $total total
+     * @param \Gopad\Model\UserGroup[] $groups groups
      *
      * @return self
      */
-    public function setTotal($total)
+    public function setGroups($groups)
     {
-        if (is_null($total)) {
-            throw new \InvalidArgumentException('non-nullable total cannot be null');
+        if (is_null($groups)) {
+            throw new \InvalidArgumentException('non-nullable groups cannot be null');
         }
-        $this->container['total'] = $total;
-
-        return $this;
-    }
-
-    /**
-     * Gets teams
-     *
-     * @return \Gopad\Model\UserTeam[]|null
-     */
-    public function getTeams()
-    {
-        return $this->container['teams'];
-    }
-
-    /**
-     * Sets teams
-     *
-     * @param \Gopad\Model\UserTeam[]|null $teams teams
-     *
-     * @return self
-     */
-    public function setTeams($teams)
-    {
-        if (is_null($teams)) {
-            throw new \InvalidArgumentException('non-nullable teams cannot be null');
-        }
-        $this->container['teams'] = $teams;
+        $this->container['groups'] = $groups;
 
         return $this;
     }

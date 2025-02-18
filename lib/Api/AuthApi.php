@@ -72,16 +72,19 @@ class AuthApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'externalCallback' => [
+        'callbackProvider' => [
             'application/json',
         ],
-        'externalInitialize' => [
+        'listProviders' => [
             'application/json',
         ],
         'loginAuth' => [
             'application/json',
         ],
         'refreshAuth' => [
+            'application/json',
+        ],
+        'requestProvider' => [
             'application/json',
         ],
         'verifyAuth' => [
@@ -136,42 +139,41 @@ class AuthApi
     }
 
     /**
-     * Operation externalCallback
+     * Operation callbackProvider
      *
-     * Callback for external authentication
+     * Callback to parse the defined provider
      *
      * @param  string $provider An identifier for the auth provider (required)
      * @param  string $state Auth state (optional)
      * @param  string $code Auth code (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalCallback'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callbackProvider'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return |\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return void
      */
-    public function externalCallback($provider, $state = null, $code = null, string $contentType = self::contentTypes['externalCallback'][0])
+    public function callbackProvider($provider, $state = null, $code = null, string $contentType = self::contentTypes['callbackProvider'][0])
     {
-        list($response) = $this->externalCallbackWithHttpInfo($provider, $state, $code, $contentType);
-        return $response;
+        $this->callbackProviderWithHttpInfo($provider, $state, $code, $contentType);
     }
 
     /**
-     * Operation externalCallbackWithHttpInfo
+     * Operation callbackProviderWithHttpInfo
      *
-     * Callback for external authentication
+     * Callback to parse the defined provider
      *
      * @param  string $provider An identifier for the auth provider (required)
      * @param  string $state Auth state (optional)
      * @param  string $code Auth code (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalCallback'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callbackProvider'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of |\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function externalCallbackWithHttpInfo($provider, $state = null, $code = null, string $contentType = self::contentTypes['externalCallback'][0])
+    public function callbackProviderWithHttpInfo($provider, $state = null, $code = null, string $contentType = self::contentTypes['callbackProvider'][0])
     {
-        $request = $this->externalCallbackRequest($provider, $state, $code, $contentType);
+        $request = $this->callbackProviderRequest($provider, $state, $code, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -208,124 +210,14 @@ class AuthApi
                 );
             }
 
-            switch($statusCode) {
-                case 404:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 412:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Gopad\Model\Notification';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
+                case 308:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
+                        'string',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -333,15 +225,23 @@ class AuthApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
+                        'string',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -352,21 +252,21 @@ class AuthApi
     }
 
     /**
-     * Operation externalCallbackAsync
+     * Operation callbackProviderAsync
      *
-     * Callback for external authentication
+     * Callback to parse the defined provider
      *
      * @param  string $provider An identifier for the auth provider (required)
      * @param  string $state Auth state (optional)
      * @param  string $code Auth code (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalCallback'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callbackProvider'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function externalCallbackAsync($provider, $state = null, $code = null, string $contentType = self::contentTypes['externalCallback'][0])
+    public function callbackProviderAsync($provider, $state = null, $code = null, string $contentType = self::contentTypes['callbackProvider'][0])
     {
-        return $this->externalCallbackAsyncWithHttpInfo($provider, $state, $code, $contentType)
+        return $this->callbackProviderAsyncWithHttpInfo($provider, $state, $code, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -375,41 +275,28 @@ class AuthApi
     }
 
     /**
-     * Operation externalCallbackAsyncWithHttpInfo
+     * Operation callbackProviderAsyncWithHttpInfo
      *
-     * Callback for external authentication
+     * Callback to parse the defined provider
      *
      * @param  string $provider An identifier for the auth provider (required)
      * @param  string $state Auth state (optional)
      * @param  string $code Auth code (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalCallback'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callbackProvider'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function externalCallbackAsyncWithHttpInfo($provider, $state = null, $code = null, string $contentType = self::contentTypes['externalCallback'][0])
+    public function callbackProviderAsyncWithHttpInfo($provider, $state = null, $code = null, string $contentType = self::contentTypes['callbackProvider'][0])
     {
-        $returnType = '\Gopad\Model\Notification';
-        $request = $this->externalCallbackRequest($provider, $state, $code, $contentType);
+        $returnType = '';
+        $request = $this->callbackProviderRequest($provider, $state, $code, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -429,23 +316,23 @@ class AuthApi
     }
 
     /**
-     * Create request for operation 'externalCallback'
+     * Create request for operation 'callbackProvider'
      *
      * @param  string $provider An identifier for the auth provider (required)
      * @param  string $state Auth state (optional)
      * @param  string $code Auth code (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalCallback'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callbackProvider'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function externalCallbackRequest($provider, $state = null, $code = null, string $contentType = self::contentTypes['externalCallback'][0])
+    public function callbackProviderRequest($provider, $state = null, $code = null, string $contentType = self::contentTypes['callbackProvider'][0])
     {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $provider when calling externalCallback'
+                'Missing the required parameter $provider when calling callbackProvider'
             );
         }
 
@@ -490,7 +377,7 @@ class AuthApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['text/html', ],
             $contentType,
             $multipart
         );
@@ -543,40 +430,36 @@ class AuthApi
     }
 
     /**
-     * Operation externalInitialize
+     * Operation listProviders
      *
-     * Initialize the external authentication
+     * Fetch the available auth providers
      *
-     * @param  string $provider An identifier for the auth provider (required)
-     * @param  string $state Auth state (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalInitialize'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProviders'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return |\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\ListProviders200Response
      */
-    public function externalInitialize($provider, $state = null, string $contentType = self::contentTypes['externalInitialize'][0])
+    public function listProviders(string $contentType = self::contentTypes['listProviders'][0])
     {
-        list($response) = $this->externalInitializeWithHttpInfo($provider, $state, $contentType);
+        list($response) = $this->listProvidersWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation externalInitializeWithHttpInfo
+     * Operation listProvidersWithHttpInfo
      *
-     * Initialize the external authentication
+     * Fetch the available auth providers
      *
-     * @param  string $provider An identifier for the auth provider (required)
-     * @param  string $state Auth state (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalInitialize'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProviders'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of |\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\ListProviders200Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function externalInitializeWithHttpInfo($provider, $state = null, string $contentType = self::contentTypes['externalInitialize'][0])
+    public function listProvidersWithHttpInfo(string $contentType = self::contentTypes['listProviders'][0])
     {
-        $request = $this->externalInitializeRequest($provider, $state, $contentType);
+        $request = $this->listProvidersRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -614,12 +497,12 @@ class AuthApi
             }
 
             switch($statusCode) {
-                case 404:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                case 200:
+                    if ('\Gopad\Model\ListProviders200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
+                        if ('\Gopad\Model\ListProviders200Response' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -637,67 +520,13 @@ class AuthApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 412:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\ListProviders200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Gopad\Model\Notification';
+            $returnType = '\Gopad\Model\ListProviders200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -727,26 +556,10 @@ class AuthApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 412:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
+                        '\Gopad\Model\ListProviders200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -757,20 +570,18 @@ class AuthApi
     }
 
     /**
-     * Operation externalInitializeAsync
+     * Operation listProvidersAsync
      *
-     * Initialize the external authentication
+     * Fetch the available auth providers
      *
-     * @param  string $provider An identifier for the auth provider (required)
-     * @param  string $state Auth state (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalInitialize'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProviders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function externalInitializeAsync($provider, $state = null, string $contentType = self::contentTypes['externalInitialize'][0])
+    public function listProvidersAsync(string $contentType = self::contentTypes['listProviders'][0])
     {
-        return $this->externalInitializeAsyncWithHttpInfo($provider, $state, $contentType)
+        return $this->listProvidersAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -779,21 +590,19 @@ class AuthApi
     }
 
     /**
-     * Operation externalInitializeAsyncWithHttpInfo
+     * Operation listProvidersAsyncWithHttpInfo
      *
-     * Initialize the external authentication
+     * Fetch the available auth providers
      *
-     * @param  string $provider An identifier for the auth provider (required)
-     * @param  string $state Auth state (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalInitialize'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProviders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function externalInitializeAsyncWithHttpInfo($provider, $state = null, string $contentType = self::contentTypes['externalInitialize'][0])
+    public function listProvidersAsyncWithHttpInfo(string $contentType = self::contentTypes['listProviders'][0])
     {
-        $returnType = '\Gopad\Model\Notification';
-        $request = $this->externalInitializeRequest($provider, $state, $contentType);
+        $returnType = '\Gopad\Model\ListProviders200Response';
+        $request = $this->listProvidersRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -832,53 +641,26 @@ class AuthApi
     }
 
     /**
-     * Create request for operation 'externalInitialize'
+     * Create request for operation 'listProviders'
      *
-     * @param  string $provider An identifier for the auth provider (required)
-     * @param  string $state Auth state (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['externalInitialize'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProviders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function externalInitializeRequest($provider, $state = null, string $contentType = self::contentTypes['externalInitialize'][0])
+    public function listProvidersRequest(string $contentType = self::contentTypes['listProviders'][0])
     {
 
-        // verify the required parameter 'provider' is set
-        if ($provider === null || (is_array($provider) && count($provider) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $provider when calling externalInitialize'
-            );
-        }
 
-
-
-        $resourcePath = '/auth/{provider}/initialize';
+        $resourcePath = '/auth/providers';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $state,
-            'state', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
 
 
-        // path params
-        if ($provider !== null) {
-            $resourcePath = str_replace(
-                '{' . 'provider' . '}',
-                ObjectSerializer::toPathValue($provider),
-                $resourcePath
-            );
-        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -939,16 +721,16 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\AuthLogin $authLogin The credentials to authenticate (required)
+     * @param  \Gopad\Model\LoginAuthRequest $loginAuthRequest The credentials to authenticate (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginAuth'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function loginAuth($authLogin, string $contentType = self::contentTypes['loginAuth'][0])
+    public function loginAuth($loginAuthRequest, string $contentType = self::contentTypes['loginAuth'][0])
     {
-        list($response) = $this->loginAuthWithHttpInfo($authLogin, $contentType);
+        list($response) = $this->loginAuthWithHttpInfo($loginAuthRequest, $contentType);
         return $response;
     }
 
@@ -957,16 +739,16 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\AuthLogin $authLogin The credentials to authenticate (required)
+     * @param  \Gopad\Model\LoginAuthRequest $loginAuthRequest The credentials to authenticate (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginAuth'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function loginAuthWithHttpInfo($authLogin, string $contentType = self::contentTypes['loginAuth'][0])
+    public function loginAuthWithHttpInfo($loginAuthRequest, string $contentType = self::contentTypes['loginAuth'][0])
     {
-        $request = $this->loginAuthRequest($authLogin, $contentType);
+        $request = $this->loginAuthRequest($loginAuthRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1085,33 +867,6 @@ class AuthApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\AuthToken';
@@ -1168,14 +923,6 @@ class AuthApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -1186,15 +933,15 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\AuthLogin $authLogin The credentials to authenticate (required)
+     * @param  \Gopad\Model\LoginAuthRequest $loginAuthRequest The credentials to authenticate (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginAuth'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginAuthAsync($authLogin, string $contentType = self::contentTypes['loginAuth'][0])
+    public function loginAuthAsync($loginAuthRequest, string $contentType = self::contentTypes['loginAuth'][0])
     {
-        return $this->loginAuthAsyncWithHttpInfo($authLogin, $contentType)
+        return $this->loginAuthAsyncWithHttpInfo($loginAuthRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1207,16 +954,16 @@ class AuthApi
      *
      * Authenticate an user by credentials
      *
-     * @param  \Gopad\Model\AuthLogin $authLogin The credentials to authenticate (required)
+     * @param  \Gopad\Model\LoginAuthRequest $loginAuthRequest The credentials to authenticate (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginAuth'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginAuthAsyncWithHttpInfo($authLogin, string $contentType = self::contentTypes['loginAuth'][0])
+    public function loginAuthAsyncWithHttpInfo($loginAuthRequest, string $contentType = self::contentTypes['loginAuth'][0])
     {
         $returnType = '\Gopad\Model\AuthToken';
-        $request = $this->loginAuthRequest($authLogin, $contentType);
+        $request = $this->loginAuthRequest($loginAuthRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1257,19 +1004,19 @@ class AuthApi
     /**
      * Create request for operation 'loginAuth'
      *
-     * @param  \Gopad\Model\AuthLogin $authLogin The credentials to authenticate (required)
+     * @param  \Gopad\Model\LoginAuthRequest $loginAuthRequest The credentials to authenticate (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginAuth'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function loginAuthRequest($authLogin, string $contentType = self::contentTypes['loginAuth'][0])
+    public function loginAuthRequest($loginAuthRequest, string $contentType = self::contentTypes['loginAuth'][0])
     {
 
-        // verify the required parameter 'authLogin' is set
-        if ($authLogin === null || (is_array($authLogin) && count($authLogin) === 0)) {
+        // verify the required parameter 'loginAuthRequest' is set
+        if ($loginAuthRequest === null || (is_array($loginAuthRequest) && count($loginAuthRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $authLogin when calling loginAuth'
+                'Missing the required parameter $loginAuthRequest when calling loginAuth'
             );
         }
 
@@ -1292,12 +1039,12 @@ class AuthApi
         );
 
         // for model (json/xml)
-        if (isset($authLogin)) {
+        if (isset($loginAuthRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($authLogin));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($loginAuthRequest));
             } else {
-                $httpBody = $authLogin;
+                $httpBody = $loginAuthRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1354,7 +1101,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
     public function refreshAuth(string $contentType = self::contentTypes['refreshAuth'][0])
     {
@@ -1371,7 +1118,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthToken|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
     public function refreshAuthWithHttpInfo(string $contentType = self::contentTypes['refreshAuth'][0])
     {
@@ -1494,33 +1241,6 @@ class AuthApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\AuthToken';
@@ -1570,14 +1290,6 @@ class AuthApi
                     $e->setResponseObject($data);
                     break;
                 case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gopad\Model\Notification',
@@ -1715,11 +1427,6 @@ class AuthApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -1756,6 +1463,259 @@ class AuthApi
     }
 
     /**
+     * Operation requestProvider
+     *
+     * Request the redirect to defined provider
+     *
+     * @param  string $provider An identifier for the auth provider (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['requestProvider'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function requestProvider($provider, string $contentType = self::contentTypes['requestProvider'][0])
+    {
+        $this->requestProviderWithHttpInfo($provider, $contentType);
+    }
+
+    /**
+     * Operation requestProviderWithHttpInfo
+     *
+     * Request the redirect to defined provider
+     *
+     * @param  string $provider An identifier for the auth provider (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['requestProvider'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function requestProviderWithHttpInfo($provider, string $contentType = self::contentTypes['requestProvider'][0])
+    {
+        $request = $this->requestProviderRequest($provider, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 308:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation requestProviderAsync
+     *
+     * Request the redirect to defined provider
+     *
+     * @param  string $provider An identifier for the auth provider (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['requestProvider'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function requestProviderAsync($provider, string $contentType = self::contentTypes['requestProvider'][0])
+    {
+        return $this->requestProviderAsyncWithHttpInfo($provider, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation requestProviderAsyncWithHttpInfo
+     *
+     * Request the redirect to defined provider
+     *
+     * @param  string $provider An identifier for the auth provider (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['requestProvider'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function requestProviderAsyncWithHttpInfo($provider, string $contentType = self::contentTypes['requestProvider'][0])
+    {
+        $returnType = '';
+        $request = $this->requestProviderRequest($provider, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'requestProvider'
+     *
+     * @param  string $provider An identifier for the auth provider (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['requestProvider'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function requestProviderRequest($provider, string $contentType = self::contentTypes['requestProvider'][0])
+    {
+
+        // verify the required parameter 'provider' is set
+        if ($provider === null || (is_array($provider) && count($provider) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $provider when calling requestProvider'
+            );
+        }
+
+
+        $resourcePath = '/auth/{provider}/request';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($provider !== null) {
+            $resourcePath = str_replace(
+                '{' . 'provider' . '}',
+                ObjectSerializer::toPathValue($provider),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/html', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation verifyAuth
      *
      * Verify validity for an authentication token
@@ -1764,7 +1724,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\AuthVerify|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\AuthVerify|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
     public function verifyAuth(string $contentType = self::contentTypes['verifyAuth'][0])
     {
@@ -1781,7 +1741,7 @@ class AuthApi
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\AuthVerify|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\AuthVerify|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
     public function verifyAuthWithHttpInfo(string $contentType = self::contentTypes['verifyAuth'][0])
     {
@@ -1904,33 +1864,6 @@ class AuthApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\AuthVerify';
@@ -1980,14 +1913,6 @@ class AuthApi
                     $e->setResponseObject($data);
                     break;
                 case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gopad\Model\Notification',
@@ -2125,11 +2050,6 @@ class AuthApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());

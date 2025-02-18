@@ -1,6 +1,6 @@
 <?php
 /**
- * UserTeamParams
+ * UpdateUserRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserTeamParams Class Doc Comment
+ * UpdateUserRequest Class Doc Comment
  *
  * @category Class
- * @description Parameters to attach or unlink user team
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'user_team_params';
+    protected static $openAPIModelName = 'UpdateUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'team' => 'string',
-        'perm' => 'string'
+        'username' => 'string',
+        'password' => 'string',
+        'email' => 'string',
+        'fullname' => 'string',
+        'admin' => 'bool',
+        'active' => 'bool'
     ];
 
     /**
@@ -71,8 +74,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'team' => null,
-        'perm' => null
+        'username' => null,
+        'password' => 'password',
+        'email' => null,
+        'fullname' => null,
+        'admin' => null,
+        'active' => null
     ];
 
     /**
@@ -81,8 +88,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'team' => false,
-        'perm' => false
+        'username' => true,
+        'password' => true,
+        'email' => true,
+        'fullname' => true,
+        'admin' => true,
+        'active' => true
     ];
 
     /**
@@ -171,8 +182,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'team' => 'team',
-        'perm' => 'perm'
+        'username' => 'username',
+        'password' => 'password',
+        'email' => 'email',
+        'fullname' => 'fullname',
+        'admin' => 'admin',
+        'active' => 'active'
     ];
 
     /**
@@ -181,8 +196,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'team' => 'setTeam',
-        'perm' => 'setPerm'
+        'username' => 'setUsername',
+        'password' => 'setPassword',
+        'email' => 'setEmail',
+        'fullname' => 'setFullname',
+        'admin' => 'setAdmin',
+        'active' => 'setActive'
     ];
 
     /**
@@ -191,8 +210,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'team' => 'getTeam',
-        'perm' => 'getPerm'
+        'username' => 'getUsername',
+        'password' => 'getPassword',
+        'email' => 'getEmail',
+        'fullname' => 'getFullname',
+        'admin' => 'getAdmin',
+        'active' => 'getActive'
     ];
 
     /**
@@ -236,23 +259,6 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const PERM_USER = 'user';
-    public const PERM_ADMIN = 'admin';
-    public const PERM_OWNER = 'owner';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPermAllowableValues()
-    {
-        return [
-            self::PERM_USER,
-            self::PERM_ADMIN,
-            self::PERM_OWNER,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -269,8 +275,12 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('team', $data ?? [], null);
-        $this->setIfExists('perm', $data ?? [], 'user');
+        $this->setIfExists('username', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('fullname', $data ?? [], null);
+        $this->setIfExists('admin', $data ?? [], null);
+        $this->setIfExists('active', $data ?? [], null);
     }
 
     /**
@@ -300,18 +310,6 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['team'] === null) {
-            $invalidProperties[] = "'team' can't be null";
-        }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!is_null($this->container['perm']) && !in_array($this->container['perm'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'perm', must be one of '%s'",
-                $this->container['perm'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -328,65 +326,205 @@ class UserTeamParams implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets team
+     * Gets username
      *
-     * @return string
+     * @return string|null
      */
-    public function getTeam()
+    public function getUsername()
     {
-        return $this->container['team'];
+        return $this->container['username'];
     }
 
     /**
-     * Sets team
+     * Sets username
      *
-     * @param string $team team
+     * @param string|null $username username
      *
      * @return self
      */
-    public function setTeam($team)
+    public function setUsername($username)
     {
-        if (is_null($team)) {
-            throw new \InvalidArgumentException('non-nullable team cannot be null');
+        if (is_null($username)) {
+            array_push($this->openAPINullablesSetToNull, 'username');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('username', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['team'] = $team;
+        $this->container['username'] = $username;
 
         return $this;
     }
 
     /**
-     * Gets perm
+     * Gets password
      *
      * @return string|null
      */
-    public function getPerm()
+    public function getPassword()
     {
-        return $this->container['perm'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets perm
+     * Sets password
      *
-     * @param string|null $perm perm
+     * @param string|null $password password
      *
      * @return self
      */
-    public function setPerm($perm)
+    public function setPassword($password)
     {
-        if (is_null($perm)) {
-            throw new \InvalidArgumentException('non-nullable perm cannot be null');
+        if (is_null($password)) {
+            array_push($this->openAPINullablesSetToNull, 'password');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('password', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!in_array($perm, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'perm', must be one of '%s'",
-                    $perm,
-                    implode("', '", $allowedValues)
-                )
-            );
+        $this->container['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string|null $email email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        if (is_null($email)) {
+            array_push($this->openAPINullablesSetToNull, 'email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['perm'] = $perm;
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets fullname
+     *
+     * @return string|null
+     */
+    public function getFullname()
+    {
+        return $this->container['fullname'];
+    }
+
+    /**
+     * Sets fullname
+     *
+     * @param string|null $fullname fullname
+     *
+     * @return self
+     */
+    public function setFullname($fullname)
+    {
+        if (is_null($fullname)) {
+            array_push($this->openAPINullablesSetToNull, 'fullname');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fullname', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fullname'] = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Gets admin
+     *
+     * @return bool|null
+     */
+    public function getAdmin()
+    {
+        return $this->container['admin'];
+    }
+
+    /**
+     * Sets admin
+     *
+     * @param bool|null $admin admin
+     *
+     * @return self
+     */
+    public function setAdmin($admin)
+    {
+        if (is_null($admin)) {
+            array_push($this->openAPINullablesSetToNull, 'admin');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('admin', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['admin'] = $admin;
+
+        return $this;
+    }
+
+    /**
+     * Gets active
+     *
+     * @return bool|null
+     */
+    public function getActive()
+    {
+        return $this->container['active'];
+    }
+
+    /**
+     * Sets active
+     *
+     * @param bool|null $active active
+     *
+     * @return self
+     */
+    public function setActive($active)
+    {
+        if (is_null($active)) {
+            array_push($this->openAPINullablesSetToNull, 'active');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('active', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['active'] = $active;
 
         return $this;
     }

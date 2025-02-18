@@ -1,27 +1,27 @@
-# Gopad\UserApi
+# Gopad\GroupApi
 
 All URIs are relative to https://try.gopad.eu/api/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**attachUserToGroup()**](UserApi.md#attachUserToGroup) | **POST** /users/{user_id}/groups | Attach a group to user |
-| [**createUser()**](UserApi.md#createUser) | **POST** /users | Create a new user |
-| [**deleteUser()**](UserApi.md#deleteUser) | **DELETE** /users/{user_id} | Delete a specific user |
-| [**deleteUserFromGroup()**](UserApi.md#deleteUserFromGroup) | **DELETE** /users/{user_id}/groups | Unlink a group from user |
-| [**listUserGroups()**](UserApi.md#listUserGroups) | **GET** /users/{user_id}/groups | Fetch all groups attached to user |
-| [**listUsers()**](UserApi.md#listUsers) | **GET** /users | Fetch all available users |
-| [**permitUserGroup()**](UserApi.md#permitUserGroup) | **PUT** /users/{user_id}/groups | Update group perms for user |
-| [**showUser()**](UserApi.md#showUser) | **GET** /users/{user_id} | Fetch a specific user |
-| [**updateUser()**](UserApi.md#updateUser) | **PUT** /users/{user_id} | Update a specific user |
+| [**attachGroupToUser()**](GroupApi.md#attachGroupToUser) | **POST** /groups/{group_id}/users | Attach a user to group |
+| [**createGroup()**](GroupApi.md#createGroup) | **POST** /groups | Create a new group |
+| [**deleteGroup()**](GroupApi.md#deleteGroup) | **DELETE** /groups/{group_id} | Delete a specific group |
+| [**deleteGroupFromUser()**](GroupApi.md#deleteGroupFromUser) | **DELETE** /groups/{group_id}/users | Unlink a user from group |
+| [**listGroupUsers()**](GroupApi.md#listGroupUsers) | **GET** /groups/{group_id}/users | Fetch all users attached to group |
+| [**listGroups()**](GroupApi.md#listGroups) | **GET** /groups | Fetch all available groups |
+| [**permitGroupUser()**](GroupApi.md#permitGroupUser) | **PUT** /groups/{group_id}/users | Update user perms for group |
+| [**showGroup()**](GroupApi.md#showGroup) | **GET** /groups/{group_id} | Fetch a specific group |
+| [**updateGroup()**](GroupApi.md#updateGroup) | **PUT** /groups/{group_id} | Update a specific group |
 
 
-## `attachUserToGroup()`
+## `attachGroupToUser()`
 
 ```php
-attachUserToGroup($userId, $permitUserGroupRequest): \Gopad\Model\Notification
+attachGroupToUser($groupId, $permitGroupUserRequest): \Gopad\Model\Notification
 ```
 
-Attach a group to user
+Attach a user to group
 
 ### Example
 
@@ -44,20 +44,20 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
-$permitUserGroupRequest = new \Gopad\Model\PermitUserGroupRequest(); // \Gopad\Model\PermitUserGroupRequest | The user group data to permit
+$groupId = 'groupId_example'; // string | A group identifier or slug
+$permitGroupUserRequest = new \Gopad\Model\PermitGroupUserRequest(); // \Gopad\Model\PermitGroupUserRequest | The group user data to permit
 
 try {
-    $result = $apiInstance->attachUserToGroup($userId, $permitUserGroupRequest);
+    $result = $apiInstance->attachGroupToUser($groupId, $permitGroupUserRequest);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->attachUserToGroup: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->attachGroupToUser: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -65,8 +65,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
-| **permitUserGroupRequest** | [**\Gopad\Model\PermitUserGroupRequest**](../Model/PermitUserGroupRequest.md)| The user group data to permit | |
+| **groupId** | **string**| A group identifier or slug | |
+| **permitGroupUserRequest** | [**\Gopad\Model\PermitGroupUserRequest**](../Model/PermitGroupUserRequest.md)| The group user data to permit | |
 
 ### Return type
 
@@ -85,13 +85,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `createUser()`
+## `createGroup()`
 
 ```php
-createUser($createUserRequest): \Gopad\Model\User
+createGroup($createGroupRequest): \Gopad\Model\Group
 ```
 
-Create a new user
+Create a new group
 
 ### Example
 
@@ -114,19 +114,19 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$createUserRequest = new \Gopad\Model\CreateUserRequest(); // \Gopad\Model\CreateUserRequest | The user data to create
+$createGroupRequest = new \Gopad\Model\CreateGroupRequest(); // \Gopad\Model\CreateGroupRequest | The group data to create
 
 try {
-    $result = $apiInstance->createUser($createUserRequest);
+    $result = $apiInstance->createGroup($createGroupRequest);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->createUser: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->createGroup: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -134,11 +134,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **createUserRequest** | [**\Gopad\Model\CreateUserRequest**](../Model/CreateUserRequest.md)| The user data to create | |
+| **createGroupRequest** | [**\Gopad\Model\CreateGroupRequest**](../Model/CreateGroupRequest.md)| The group data to create | |
 
 ### Return type
 
-[**\Gopad\Model\User**](../Model/User.md)
+[**\Gopad\Model\Group**](../Model/Group.md)
 
 ### Authorization
 
@@ -153,13 +153,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `deleteUser()`
+## `deleteGroup()`
 
 ```php
-deleteUser($userId): \Gopad\Model\Notification
+deleteGroup($groupId): \Gopad\Model\Notification
 ```
 
-Delete a specific user
+Delete a specific group
 
 ### Example
 
@@ -182,19 +182,19 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
+$groupId = 'groupId_example'; // string | A group identifier or slug
 
 try {
-    $result = $apiInstance->deleteUser($userId);
+    $result = $apiInstance->deleteGroup($groupId);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->deleteUser: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->deleteGroup: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -202,7 +202,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
+| **groupId** | **string**| A group identifier or slug | |
 
 ### Return type
 
@@ -221,13 +221,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `deleteUserFromGroup()`
+## `deleteGroupFromUser()`
 
 ```php
-deleteUserFromGroup($userId, $deleteUserFromGroupRequest): \Gopad\Model\Notification
+deleteGroupFromUser($groupId, $deleteGroupFromUserRequest): \Gopad\Model\Notification
 ```
 
-Unlink a group from user
+Unlink a user from group
 
 ### Example
 
@@ -250,20 +250,20 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
-$deleteUserFromGroupRequest = new \Gopad\Model\DeleteUserFromGroupRequest(); // \Gopad\Model\DeleteUserFromGroupRequest | The user group data to unlink
+$groupId = 'groupId_example'; // string | A group identifier or slug
+$deleteGroupFromUserRequest = new \Gopad\Model\DeleteGroupFromUserRequest(); // \Gopad\Model\DeleteGroupFromUserRequest | The group user data to unlink
 
 try {
-    $result = $apiInstance->deleteUserFromGroup($userId, $deleteUserFromGroupRequest);
+    $result = $apiInstance->deleteGroupFromUser($groupId, $deleteGroupFromUserRequest);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->deleteUserFromGroup: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->deleteGroupFromUser: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -271,8 +271,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
-| **deleteUserFromGroupRequest** | [**\Gopad\Model\DeleteUserFromGroupRequest**](../Model/DeleteUserFromGroupRequest.md)| The user group data to unlink | |
+| **groupId** | **string**| A group identifier or slug | |
+| **deleteGroupFromUserRequest** | [**\Gopad\Model\DeleteGroupFromUserRequest**](../Model/DeleteGroupFromUserRequest.md)| The group user data to unlink | |
 
 ### Return type
 
@@ -291,13 +291,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `listUserGroups()`
+## `listGroupUsers()`
 
 ```php
-listUserGroups($userId, $search, $sort, $order, $limit, $offset): \Gopad\Model\ListUserGroups200Response
+listGroupUsers($groupId, $search, $sort, $order, $limit, $offset): \Gopad\Model\ListGroupUsers200Response
 ```
 
-Fetch all groups attached to user
+Fetch all users attached to group
 
 ### Example
 
@@ -320,13 +320,13 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
+$groupId = 'groupId_example'; // string | A group identifier or slug
 $search = 'search_example'; // string | Search query
 $sort = 'sort_example'; // string | Sorting column
 $order = 'asc'; // string | Sorting order
@@ -334,10 +334,10 @@ $limit = 100; // int | Paging limit
 $offset = 0; // int | Paging offset
 
 try {
-    $result = $apiInstance->listUserGroups($userId, $search, $sort, $order, $limit, $offset);
+    $result = $apiInstance->listGroupUsers($groupId, $search, $sort, $order, $limit, $offset);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->listUserGroups: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->listGroupUsers: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -345,7 +345,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
+| **groupId** | **string**| A group identifier or slug | |
 | **search** | **string**| Search query | [optional] |
 | **sort** | **string**| Sorting column | [optional] |
 | **order** | **string**| Sorting order | [optional] [default to &#39;asc&#39;] |
@@ -354,7 +354,7 @@ try {
 
 ### Return type
 
-[**\Gopad\Model\ListUserGroups200Response**](../Model/ListUserGroups200Response.md)
+[**\Gopad\Model\ListGroupUsers200Response**](../Model/ListGroupUsers200Response.md)
 
 ### Authorization
 
@@ -369,13 +369,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `listUsers()`
+## `listGroups()`
 
 ```php
-listUsers($search, $sort, $order, $limit, $offset): \Gopad\Model\ListUsers200Response
+listGroups($search, $sort, $order, $limit, $offset): \Gopad\Model\ListGroups200Response
 ```
 
-Fetch all available users
+Fetch all available groups
 
 ### Example
 
@@ -398,7 +398,7 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -411,10 +411,10 @@ $limit = 100; // int | Paging limit
 $offset = 0; // int | Paging offset
 
 try {
-    $result = $apiInstance->listUsers($search, $sort, $order, $limit, $offset);
+    $result = $apiInstance->listGroups($search, $sort, $order, $limit, $offset);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->listUsers: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->listGroups: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -430,7 +430,7 @@ try {
 
 ### Return type
 
-[**\Gopad\Model\ListUsers200Response**](../Model/ListUsers200Response.md)
+[**\Gopad\Model\ListGroups200Response**](../Model/ListGroups200Response.md)
 
 ### Authorization
 
@@ -445,13 +445,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `permitUserGroup()`
+## `permitGroupUser()`
 
 ```php
-permitUserGroup($userId, $permitUserGroupRequest): \Gopad\Model\Notification
+permitGroupUser($groupId, $permitGroupUserRequest): \Gopad\Model\Notification
 ```
 
-Update group perms for user
+Update user perms for group
 
 ### Example
 
@@ -474,20 +474,20 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
-$permitUserGroupRequest = new \Gopad\Model\PermitUserGroupRequest(); // \Gopad\Model\PermitUserGroupRequest | The user group data to permit
+$groupId = 'groupId_example'; // string | A group identifier or slug
+$permitGroupUserRequest = new \Gopad\Model\PermitGroupUserRequest(); // \Gopad\Model\PermitGroupUserRequest | The group user data to permit
 
 try {
-    $result = $apiInstance->permitUserGroup($userId, $permitUserGroupRequest);
+    $result = $apiInstance->permitGroupUser($groupId, $permitGroupUserRequest);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->permitUserGroup: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->permitGroupUser: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -495,8 +495,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
-| **permitUserGroupRequest** | [**\Gopad\Model\PermitUserGroupRequest**](../Model/PermitUserGroupRequest.md)| The user group data to permit | |
+| **groupId** | **string**| A group identifier or slug | |
+| **permitGroupUserRequest** | [**\Gopad\Model\PermitGroupUserRequest**](../Model/PermitGroupUserRequest.md)| The group user data to permit | |
 
 ### Return type
 
@@ -515,13 +515,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `showUser()`
+## `showGroup()`
 
 ```php
-showUser($userId): \Gopad\Model\User
+showGroup($groupId): \Gopad\Model\Group
 ```
 
-Fetch a specific user
+Fetch a specific group
 
 ### Example
 
@@ -544,19 +544,19 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
+$groupId = 'groupId_example'; // string | A group identifier or slug
 
 try {
-    $result = $apiInstance->showUser($userId);
+    $result = $apiInstance->showGroup($groupId);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->showUser: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->showGroup: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -564,11 +564,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
+| **groupId** | **string**| A group identifier or slug | |
 
 ### Return type
 
-[**\Gopad\Model\User**](../Model/User.md)
+[**\Gopad\Model\Group**](../Model/Group.md)
 
 ### Authorization
 
@@ -583,13 +583,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `updateUser()`
+## `updateGroup()`
 
 ```php
-updateUser($userId, $updateUserRequest): \Gopad\Model\User
+updateGroup($groupId, $createGroupRequest): \Gopad\Model\Group
 ```
 
-Update a specific user
+Update a specific group
 
 ### Example
 
@@ -612,20 +612,20 @@ $config = Gopad\Configuration::getDefaultConfiguration()->setApiKey('X-API-Key',
 $config = Gopad\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Gopad\Api\UserApi(
+$apiInstance = new Gopad\Api\GroupApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$userId = 'userId_example'; // string | A user identifier or slug
-$updateUserRequest = new \Gopad\Model\UpdateUserRequest(); // \Gopad\Model\UpdateUserRequest | The user data to update
+$groupId = 'groupId_example'; // string | A group identifier or slug
+$createGroupRequest = new \Gopad\Model\CreateGroupRequest(); // \Gopad\Model\CreateGroupRequest | The group data to update
 
 try {
-    $result = $apiInstance->updateUser($userId, $updateUserRequest);
+    $result = $apiInstance->updateGroup($groupId, $createGroupRequest);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->updateUser: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GroupApi->updateGroup: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -633,12 +633,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **userId** | **string**| A user identifier or slug | |
-| **updateUserRequest** | [**\Gopad\Model\UpdateUserRequest**](../Model/UpdateUserRequest.md)| The user data to update | |
+| **groupId** | **string**| A group identifier or slug | |
+| **createGroupRequest** | [**\Gopad\Model\CreateGroupRequest**](../Model/CreateGroupRequest.md)| The group data to update | |
 
 ### Return type
 
-[**\Gopad\Model\User**](../Model/User.md)
+[**\Gopad\Model\Group**](../Model/Group.md)
 
 ### Authorization
 

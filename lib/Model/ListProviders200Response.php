@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAuth
+ * ListProviders200Response
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserAuth Class Doc Comment
+ * ListProviders200Response Class Doc Comment
  *
  * @category Class
- * @description Model to represent user auth
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListProviders200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAuth';
+    protected static $openAPIModelName = 'ListProviders_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +58,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'provider' => 'string',
-        'ref' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'total' => 'int',
+        'providers' => '\Gopad\Model\Provider[]'
     ];
 
     /**
@@ -73,10 +70,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'provider' => null,
-        'ref' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'total' => 'int64',
+        'providers' => null
     ];
 
     /**
@@ -85,10 +80,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'provider' => false,
-        'ref' => false,
-        'createdAt' => false,
-        'updatedAt' => false
+        'total' => false,
+        'providers' => false
     ];
 
     /**
@@ -177,10 +170,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'provider' => 'provider',
-        'ref' => 'ref',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'total' => 'total',
+        'providers' => 'providers'
     ];
 
     /**
@@ -189,10 +180,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'provider' => 'setProvider',
-        'ref' => 'setRef',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'total' => 'setTotal',
+        'providers' => 'setProviders'
     ];
 
     /**
@@ -201,10 +190,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'provider' => 'getProvider',
-        'ref' => 'getRef',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'total' => 'getTotal',
+        'providers' => 'getProviders'
     ];
 
     /**
@@ -264,10 +251,8 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('provider', $data ?? [], null);
-        $this->setIfExists('ref', $data ?? [], null);
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
+        $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('providers', $data ?? [], null);
     }
 
     /**
@@ -297,6 +282,12 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['total'] === null) {
+            $invalidProperties[] = "'total' can't be null";
+        }
+        if ($this->container['providers'] === null) {
+            $invalidProperties[] = "'providers' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -313,109 +304,55 @@ class UserAuth implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets provider
+     * Gets total
      *
-     * @return string|null
+     * @return int
      */
-    public function getProvider()
+    public function getTotal()
     {
-        return $this->container['provider'];
+        return $this->container['total'];
     }
 
     /**
-     * Sets provider
+     * Sets total
      *
-     * @param string|null $provider provider
+     * @param int $total total
      *
      * @return self
      */
-    public function setProvider($provider)
+    public function setTotal($total)
     {
-        if (is_null($provider)) {
-            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
-        $this->container['provider'] = $provider;
+        $this->container['total'] = $total;
 
         return $this;
     }
 
     /**
-     * Gets ref
+     * Gets providers
      *
-     * @return string|null
+     * @return \Gopad\Model\Provider[]
      */
-    public function getRef()
+    public function getProviders()
     {
-        return $this->container['ref'];
+        return $this->container['providers'];
     }
 
     /**
-     * Sets ref
+     * Sets providers
      *
-     * @param string|null $ref ref
+     * @param \Gopad\Model\Provider[] $providers providers
      *
      * @return self
      */
-    public function setRef($ref)
+    public function setProviders($providers)
     {
-        if (is_null($ref)) {
-            throw new \InvalidArgumentException('non-nullable ref cannot be null');
+        if (is_null($providers)) {
+            throw new \InvalidArgumentException('non-nullable providers cannot be null');
         }
-        $this->container['ref'] = $ref;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
-        }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['providers'] = $providers;
 
         return $this;
     }

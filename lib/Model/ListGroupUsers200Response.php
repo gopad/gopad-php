@@ -1,6 +1,6 @@
 <?php
 /**
- * TeamUserParams
+ * ListGroupUsers200Response
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * TeamUserParams Class Doc Comment
+ * ListGroupUsers200Response Class Doc Comment
  *
  * @category Class
- * @description Parameters to attach or unlink team user
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListGroupUsers200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'team_user_params';
+    protected static $openAPIModelName = 'ListGroupUsers_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user' => 'string',
-        'perm' => 'string'
+        'total' => 'int',
+        'limit' => 'int',
+        'offset' => 'int',
+        'group' => '\Gopad\Model\Group',
+        'users' => '\Gopad\Model\UserGroup[]'
     ];
 
     /**
@@ -71,8 +73,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user' => null,
-        'perm' => null
+        'total' => 'int64',
+        'limit' => 'int64',
+        'offset' => 'int64',
+        'group' => null,
+        'users' => null
     ];
 
     /**
@@ -81,8 +86,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user' => false,
-        'perm' => false
+        'total' => false,
+        'limit' => false,
+        'offset' => false,
+        'group' => false,
+        'users' => false
     ];
 
     /**
@@ -171,8 +179,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'user' => 'user',
-        'perm' => 'perm'
+        'total' => 'total',
+        'limit' => 'limit',
+        'offset' => 'offset',
+        'group' => 'group',
+        'users' => 'users'
     ];
 
     /**
@@ -181,8 +192,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'user' => 'setUser',
-        'perm' => 'setPerm'
+        'total' => 'setTotal',
+        'limit' => 'setLimit',
+        'offset' => 'setOffset',
+        'group' => 'setGroup',
+        'users' => 'setUsers'
     ];
 
     /**
@@ -191,8 +205,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'user' => 'getUser',
-        'perm' => 'getPerm'
+        'total' => 'getTotal',
+        'limit' => 'getLimit',
+        'offset' => 'getOffset',
+        'group' => 'getGroup',
+        'users' => 'getUsers'
     ];
 
     /**
@@ -236,23 +253,6 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const PERM_USER = 'user';
-    public const PERM_ADMIN = 'admin';
-    public const PERM_OWNER = 'owner';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPermAllowableValues()
-    {
-        return [
-            self::PERM_USER,
-            self::PERM_ADMIN,
-            self::PERM_OWNER,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -269,8 +269,11 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('user', $data ?? [], null);
-        $this->setIfExists('perm', $data ?? [], 'user');
+        $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
+        $this->setIfExists('offset', $data ?? [], null);
+        $this->setIfExists('group', $data ?? [], null);
+        $this->setIfExists('users', $data ?? [], null);
     }
 
     /**
@@ -300,18 +303,18 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['user'] === null) {
-            $invalidProperties[] = "'user' can't be null";
+        if ($this->container['total'] === null) {
+            $invalidProperties[] = "'total' can't be null";
         }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!is_null($this->container['perm']) && !in_array($this->container['perm'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'perm', must be one of '%s'",
-                $this->container['perm'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['limit'] === null) {
+            $invalidProperties[] = "'limit' can't be null";
         }
-
+        if ($this->container['offset'] === null) {
+            $invalidProperties[] = "'offset' can't be null";
+        }
+        if ($this->container['users'] === null) {
+            $invalidProperties[] = "'users' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -328,65 +331,136 @@ class TeamUserParams implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets user
+     * Gets total
      *
-     * @return string
+     * @return int
      */
-    public function getUser()
+    public function getTotal()
     {
-        return $this->container['user'];
+        return $this->container['total'];
     }
 
     /**
-     * Sets user
+     * Sets total
      *
-     * @param string $user user
+     * @param int $total total
      *
      * @return self
      */
-    public function setUser($user)
+    public function setTotal($total)
     {
-        if (is_null($user)) {
-            throw new \InvalidArgumentException('non-nullable user cannot be null');
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
-        $this->container['user'] = $user;
+        $this->container['total'] = $total;
 
         return $this;
     }
 
     /**
-     * Gets perm
+     * Gets limit
      *
-     * @return string|null
+     * @return int
      */
-    public function getPerm()
+    public function getLimit()
     {
-        return $this->container['perm'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets perm
+     * Sets limit
      *
-     * @param string|null $perm perm
+     * @param int $limit limit
      *
      * @return self
      */
-    public function setPerm($perm)
+    public function setLimit($limit)
     {
-        if (is_null($perm)) {
-            throw new \InvalidArgumentException('non-nullable perm cannot be null');
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!in_array($perm, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'perm', must be one of '%s'",
-                    $perm,
-                    implode("', '", $allowedValues)
-                )
-            );
+        $this->container['limit'] = $limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets offset
+     *
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->container['offset'];
+    }
+
+    /**
+     * Sets offset
+     *
+     * @param int $offset offset
+     *
+     * @return self
+     */
+    public function setOffset($offset)
+    {
+        if (is_null($offset)) {
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
         }
-        $this->container['perm'] = $perm;
+        $this->container['offset'] = $offset;
+
+        return $this;
+    }
+
+    /**
+     * Gets group
+     *
+     * @return \Gopad\Model\Group|null
+     */
+    public function getGroup()
+    {
+        return $this->container['group'];
+    }
+
+    /**
+     * Sets group
+     *
+     * @param \Gopad\Model\Group|null $group group
+     *
+     * @return self
+     */
+    public function setGroup($group)
+    {
+        if (is_null($group)) {
+            throw new \InvalidArgumentException('non-nullable group cannot be null');
+        }
+        $this->container['group'] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Gets users
+     *
+     * @return \Gopad\Model\UserGroup[]
+     */
+    public function getUsers()
+    {
+        return $this->container['users'];
+    }
+
+    /**
+     * Sets users
+     *
+     * @param \Gopad\Model\UserGroup[] $users users
+     *
+     * @return self
+     */
+    public function setUsers($users)
+    {
+        if (is_null($users)) {
+            throw new \InvalidArgumentException('non-nullable users cannot be null');
+        }
+        $this->container['users'] = $users;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Teams
+ * PermitUserGroupRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * Teams Class Doc Comment
+ * PermitUserGroupRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent list of teams
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
+class PermitUserGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'teams';
+    protected static $openAPIModelName = 'PermitUserGroup_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'total' => 'int',
-        'teams' => '\Gopad\Model\Team[]'
+        'group' => 'string',
+        'perm' => 'string'
     ];
 
     /**
@@ -71,8 +70,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'total' => 'int64',
-        'teams' => null
+        'group' => null,
+        'perm' => null
     ];
 
     /**
@@ -81,8 +80,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'total' => false,
-        'teams' => false
+        'group' => false,
+        'perm' => false
     ];
 
     /**
@@ -171,8 +170,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'total' => 'total',
-        'teams' => 'teams'
+        'group' => 'group',
+        'perm' => 'perm'
     ];
 
     /**
@@ -181,8 +180,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'total' => 'setTotal',
-        'teams' => 'setTeams'
+        'group' => 'setGroup',
+        'perm' => 'setPerm'
     ];
 
     /**
@@ -191,8 +190,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'total' => 'getTotal',
-        'teams' => 'getTeams'
+        'group' => 'getGroup',
+        'perm' => 'getPerm'
     ];
 
     /**
@@ -252,8 +251,8 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('teams', $data ?? [], null);
+        $this->setIfExists('group', $data ?? [], null);
+        $this->setIfExists('perm', $data ?? [], null);
     }
 
     /**
@@ -283,6 +282,12 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['group'] === null) {
+            $invalidProperties[] = "'group' can't be null";
+        }
+        if ($this->container['perm'] === null) {
+            $invalidProperties[] = "'perm' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -299,55 +304,55 @@ class Teams implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets total
+     * Gets group
      *
-     * @return int|null
+     * @return string
      */
-    public function getTotal()
+    public function getGroup()
     {
-        return $this->container['total'];
+        return $this->container['group'];
     }
 
     /**
-     * Sets total
+     * Sets group
      *
-     * @param int|null $total total
+     * @param string $group group
      *
      * @return self
      */
-    public function setTotal($total)
+    public function setGroup($group)
     {
-        if (is_null($total)) {
-            throw new \InvalidArgumentException('non-nullable total cannot be null');
+        if (is_null($group)) {
+            throw new \InvalidArgumentException('non-nullable group cannot be null');
         }
-        $this->container['total'] = $total;
+        $this->container['group'] = $group;
 
         return $this;
     }
 
     /**
-     * Gets teams
+     * Gets perm
      *
-     * @return \Gopad\Model\Team[]|null
+     * @return string
      */
-    public function getTeams()
+    public function getPerm()
     {
-        return $this->container['teams'];
+        return $this->container['perm'];
     }
 
     /**
-     * Sets teams
+     * Sets perm
      *
-     * @param \Gopad\Model\Team[]|null $teams teams
+     * @param string $perm perm
      *
      * @return self
      */
-    public function setTeams($teams)
+    public function setPerm($perm)
     {
-        if (is_null($teams)) {
-            throw new \InvalidArgumentException('non-nullable teams cannot be null');
+        if (is_null($perm)) {
+            throw new \InvalidArgumentException('non-nullable perm cannot be null');
         }
-        $this->container['teams'] = $teams;
+        $this->container['perm'] = $perm;
 
         return $this;
     }

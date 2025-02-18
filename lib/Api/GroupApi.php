@@ -1,6 +1,6 @@
 <?php
 /**
- * TeamApi
+ * GroupApi
  * PHP version 7.4
  *
  * @category Class
@@ -41,14 +41,14 @@ use Gopad\HeaderSelector;
 use Gopad\ObjectSerializer;
 
 /**
- * TeamApi Class Doc Comment
+ * GroupApi Class Doc Comment
  *
  * @category Class
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class TeamApi
+class GroupApi
 {
     /**
      * @var ClientInterface
@@ -72,31 +72,31 @@ class TeamApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'attachTeamToUser' => [
+        'attachGroupToUser' => [
             'application/json',
         ],
-        'createTeam' => [
+        'createGroup' => [
             'application/json',
         ],
-        'deleteTeam' => [
+        'deleteGroup' => [
             'application/json',
         ],
-        'deleteTeamFromUser' => [
+        'deleteGroupFromUser' => [
             'application/json',
         ],
-        'listTeamUsers' => [
+        'listGroupUsers' => [
             'application/json',
         ],
-        'listTeams' => [
+        'listGroups' => [
             'application/json',
         ],
-        'permitTeamUser' => [
+        'permitGroupUser' => [
             'application/json',
         ],
-        'showTeam' => [
+        'showGroup' => [
             'application/json',
         ],
-        'updateTeam' => [
+        'updateGroup' => [
             'application/json',
         ],
     ];
@@ -148,40 +148,40 @@ class TeamApi
     }
 
     /**
-     * Operation attachTeamToUser
+     * Operation attachGroupToUser
      *
-     * Attach a user to team
+     * Attach a user to group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachTeamToUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachGroupToUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function attachTeamToUser($teamId, $teamUserParams, string $contentType = self::contentTypes['attachTeamToUser'][0])
+    public function attachGroupToUser($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['attachGroupToUser'][0])
     {
-        list($response) = $this->attachTeamToUserWithHttpInfo($teamId, $teamUserParams, $contentType);
+        list($response) = $this->attachGroupToUserWithHttpInfo($groupId, $permitGroupUserRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation attachTeamToUserWithHttpInfo
+     * Operation attachGroupToUserWithHttpInfo
      *
-     * Attach a user to team
+     * Attach a user to group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachTeamToUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachGroupToUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function attachTeamToUserWithHttpInfo($teamId, $teamUserParams, string $contentType = self::contentTypes['attachTeamToUser'][0])
+    public function attachGroupToUserWithHttpInfo($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['attachGroupToUser'][0])
     {
-        $request = $this->attachTeamToUserRequest($teamId, $teamUserParams, $contentType);
+        $request = $this->attachGroupToUserRequest($groupId, $permitGroupUserRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -355,33 +355,6 @@ class TeamApi
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
                     if ('\Gopad\Model\Notification' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
@@ -488,34 +461,26 @@ class TeamApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation attachTeamToUserAsync
+     * Operation attachGroupToUserAsync
      *
-     * Attach a user to team
+     * Attach a user to group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachTeamToUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachGroupToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function attachTeamToUserAsync($teamId, $teamUserParams, string $contentType = self::contentTypes['attachTeamToUser'][0])
+    public function attachGroupToUserAsync($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['attachGroupToUser'][0])
     {
-        return $this->attachTeamToUserAsyncWithHttpInfo($teamId, $teamUserParams, $contentType)
+        return $this->attachGroupToUserAsyncWithHttpInfo($groupId, $permitGroupUserRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -524,21 +489,21 @@ class TeamApi
     }
 
     /**
-     * Operation attachTeamToUserAsyncWithHttpInfo
+     * Operation attachGroupToUserAsyncWithHttpInfo
      *
-     * Attach a user to team
+     * Attach a user to group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachTeamToUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachGroupToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function attachTeamToUserAsyncWithHttpInfo($teamId, $teamUserParams, string $contentType = self::contentTypes['attachTeamToUser'][0])
+    public function attachGroupToUserAsyncWithHttpInfo($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['attachGroupToUser'][0])
     {
         $returnType = '\Gopad\Model\Notification';
-        $request = $this->attachTeamToUserRequest($teamId, $teamUserParams, $contentType);
+        $request = $this->attachGroupToUserRequest($groupId, $permitGroupUserRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -577,34 +542,34 @@ class TeamApi
     }
 
     /**
-     * Create request for operation 'attachTeamToUser'
+     * Create request for operation 'attachGroupToUser'
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to attach (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachTeamToUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['attachGroupToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function attachTeamToUserRequest($teamId, $teamUserParams, string $contentType = self::contentTypes['attachTeamToUser'][0])
+    public function attachGroupToUserRequest($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['attachGroupToUser'][0])
     {
 
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling attachTeamToUser'
+                'Missing the required parameter $groupId when calling attachGroupToUser'
             );
         }
 
-        // verify the required parameter 'teamUserParams' is set
-        if ($teamUserParams === null || (is_array($teamUserParams) && count($teamUserParams) === 0)) {
+        // verify the required parameter 'permitGroupUserRequest' is set
+        if ($permitGroupUserRequest === null || (is_array($permitGroupUserRequest) && count($permitGroupUserRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamUserParams when calling attachTeamToUser'
+                'Missing the required parameter $permitGroupUserRequest when calling attachGroupToUser'
             );
         }
 
 
-        $resourcePath = '/teams/{team_id}/users';
+        $resourcePath = '/groups/{group_id}/users';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -614,10 +579,10 @@ class TeamApi
 
 
         // path params
-        if ($teamId !== null) {
+        if ($groupId !== null) {
             $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
                 $resourcePath
             );
         }
@@ -630,12 +595,12 @@ class TeamApi
         );
 
         // for model (json/xml)
-        if (isset($teamUserParams)) {
+        if (isset($permitGroupUserRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($teamUserParams));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($permitGroupUserRequest));
             } else {
-                $httpBody = $teamUserParams;
+                $httpBody = $permitGroupUserRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -661,11 +626,6 @@ class TeamApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -702,38 +662,38 @@ class TeamApi
     }
 
     /**
-     * Operation createTeam
+     * Operation createGroup
      *
-     * Create a new team
+     * Create a new group
      *
-     * @param  \Gopad\Model\Team $team The team data to create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to create (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Team|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Group|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function createTeam($team, string $contentType = self::contentTypes['createTeam'][0])
+    public function createGroup($createGroupRequest, string $contentType = self::contentTypes['createGroup'][0])
     {
-        list($response) = $this->createTeamWithHttpInfo($team, $contentType);
+        list($response) = $this->createGroupWithHttpInfo($createGroupRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation createTeamWithHttpInfo
+     * Operation createGroupWithHttpInfo
      *
-     * Create a new team
+     * Create a new group
      *
-     * @param  \Gopad\Model\Team $team The team data to create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to create (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Team|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Group|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createTeamWithHttpInfo($team, string $contentType = self::contentTypes['createTeam'][0])
+    public function createGroupWithHttpInfo($createGroupRequest, string $contentType = self::contentTypes['createGroup'][0])
     {
-        $request = $this->createTeamRequest($team, $contentType);
+        $request = $this->createGroupRequest($createGroupRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -772,11 +732,11 @@ class TeamApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Gopad\Model\Team' === '\SplFileObject') {
+                    if ('\Gopad\Model\Group' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Team' !== 'string') {
+                        if ('\Gopad\Model\Group' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -794,7 +754,7 @@ class TeamApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Team', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Group', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -879,36 +839,9 @@ class TeamApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
-            $returnType = '\Gopad\Model\Team';
+            $returnType = '\Gopad\Model\Group';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -941,7 +874,7 @@ class TeamApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Team',
+                        '\Gopad\Model\Group',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -970,33 +903,25 @@ class TeamApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation createTeamAsync
+     * Operation createGroupAsync
      *
-     * Create a new team
+     * Create a new group
      *
-     * @param  \Gopad\Model\Team $team The team data to create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to create (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createTeamAsync($team, string $contentType = self::contentTypes['createTeam'][0])
+    public function createGroupAsync($createGroupRequest, string $contentType = self::contentTypes['createGroup'][0])
     {
-        return $this->createTeamAsyncWithHttpInfo($team, $contentType)
+        return $this->createGroupAsyncWithHttpInfo($createGroupRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1005,20 +930,20 @@ class TeamApi
     }
 
     /**
-     * Operation createTeamAsyncWithHttpInfo
+     * Operation createGroupAsyncWithHttpInfo
      *
-     * Create a new team
+     * Create a new group
      *
-     * @param  \Gopad\Model\Team $team The team data to create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to create (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createTeamAsyncWithHttpInfo($team, string $contentType = self::contentTypes['createTeam'][0])
+    public function createGroupAsyncWithHttpInfo($createGroupRequest, string $contentType = self::contentTypes['createGroup'][0])
     {
-        $returnType = '\Gopad\Model\Team';
-        $request = $this->createTeamRequest($team, $contentType);
+        $returnType = '\Gopad\Model\Group';
+        $request = $this->createGroupRequest($createGroupRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1057,26 +982,26 @@ class TeamApi
     }
 
     /**
-     * Create request for operation 'createTeam'
+     * Create request for operation 'createGroup'
      *
-     * @param  \Gopad\Model\Team $team The team data to create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTeam'] to see the possible values for this operation
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to create (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createTeamRequest($team, string $contentType = self::contentTypes['createTeam'][0])
+    public function createGroupRequest($createGroupRequest, string $contentType = self::contentTypes['createGroup'][0])
     {
 
-        // verify the required parameter 'team' is set
-        if ($team === null || (is_array($team) && count($team) === 0)) {
+        // verify the required parameter 'createGroupRequest' is set
+        if ($createGroupRequest === null || (is_array($createGroupRequest) && count($createGroupRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $team when calling createTeam'
+                'Missing the required parameter $createGroupRequest when calling createGroup'
             );
         }
 
 
-        $resourcePath = '/teams';
+        $resourcePath = '/groups';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1094,12 +1019,12 @@ class TeamApi
         );
 
         // for model (json/xml)
-        if (isset($team)) {
+        if (isset($createGroupRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($team));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($createGroupRequest));
             } else {
-                $httpBody = $team;
+                $httpBody = $createGroupRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1125,11 +1050,6 @@ class TeamApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -1166,38 +1086,38 @@ class TeamApi
     }
 
     /**
-     * Operation deleteTeam
+     * Operation deleteGroup
      *
-     * Delete a specific team
+     * Delete a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function deleteTeam($teamId, string $contentType = self::contentTypes['deleteTeam'][0])
+    public function deleteGroup($groupId, string $contentType = self::contentTypes['deleteGroup'][0])
     {
-        list($response) = $this->deleteTeamWithHttpInfo($teamId, $contentType);
+        list($response) = $this->deleteGroupWithHttpInfo($groupId, $contentType);
         return $response;
     }
 
     /**
-     * Operation deleteTeamWithHttpInfo
+     * Operation deleteGroupWithHttpInfo
      *
-     * Delete a specific team
+     * Delete a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteTeamWithHttpInfo($teamId, string $contentType = self::contentTypes['deleteTeam'][0])
+    public function deleteGroupWithHttpInfo($groupId, string $contentType = self::contentTypes['deleteGroup'][0])
     {
-        $request = $this->deleteTeamRequest($teamId, $contentType);
+        $request = $this->deleteGroupRequest($groupId, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1370,33 +1290,6 @@ class TeamApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Notification';
@@ -1469,33 +1362,25 @@ class TeamApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation deleteTeamAsync
+     * Operation deleteGroupAsync
      *
-     * Delete a specific team
+     * Delete a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteTeamAsync($teamId, string $contentType = self::contentTypes['deleteTeam'][0])
+    public function deleteGroupAsync($groupId, string $contentType = self::contentTypes['deleteGroup'][0])
     {
-        return $this->deleteTeamAsyncWithHttpInfo($teamId, $contentType)
+        return $this->deleteGroupAsyncWithHttpInfo($groupId, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1504,20 +1389,20 @@ class TeamApi
     }
 
     /**
-     * Operation deleteTeamAsyncWithHttpInfo
+     * Operation deleteGroupAsyncWithHttpInfo
      *
-     * Delete a specific team
+     * Delete a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteTeamAsyncWithHttpInfo($teamId, string $contentType = self::contentTypes['deleteTeam'][0])
+    public function deleteGroupAsyncWithHttpInfo($groupId, string $contentType = self::contentTypes['deleteGroup'][0])
     {
         $returnType = '\Gopad\Model\Notification';
-        $request = $this->deleteTeamRequest($teamId, $contentType);
+        $request = $this->deleteGroupRequest($groupId, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1556,26 +1441,26 @@ class TeamApi
     }
 
     /**
-     * Create request for operation 'deleteTeam'
+     * Create request for operation 'deleteGroup'
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteTeamRequest($teamId, string $contentType = self::contentTypes['deleteTeam'][0])
+    public function deleteGroupRequest($groupId, string $contentType = self::contentTypes['deleteGroup'][0])
     {
 
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling deleteTeam'
+                'Missing the required parameter $groupId when calling deleteGroup'
             );
         }
 
 
-        $resourcePath = '/teams/{team_id}';
+        $resourcePath = '/groups/{group_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1585,10 +1470,10 @@ class TeamApi
 
 
         // path params
-        if ($teamId !== null) {
+        if ($groupId !== null) {
             $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
                 $resourcePath
             );
         }
@@ -1625,11 +1510,6 @@ class TeamApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -1666,1584 +1546,1464 @@ class TeamApi
     }
 
     /**
-     * Operation deleteTeamFromUser
+     * Operation deleteGroupFromUser
      *
-     * Unlink a user from team
+     * Unlink a user from group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamFromUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\DeleteGroupFromUserRequest $deleteGroupFromUserRequest The group user data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupFromUser'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     */
+    public function deleteGroupFromUser($groupId, $deleteGroupFromUserRequest, string $contentType = self::contentTypes['deleteGroupFromUser'][0])
+    {
+        list($response) = $this->deleteGroupFromUserWithHttpInfo($groupId, $deleteGroupFromUserRequest, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteGroupFromUserWithHttpInfo
+     *
+     * Unlink a user from group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\DeleteGroupFromUserRequest $deleteGroupFromUserRequest The group user data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupFromUser'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteGroupFromUserWithHttpInfo($groupId, $deleteGroupFromUserRequest, string $contentType = self::contentTypes['deleteGroupFromUser'][0])
+    {
+        $request = $this->deleteGroupFromUserRequest($groupId, $deleteGroupFromUserRequest, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 412:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Gopad\Model\Notification';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 412:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteGroupFromUserAsync
+     *
+     * Unlink a user from group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\DeleteGroupFromUserRequest $deleteGroupFromUserRequest The group user data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupFromUser'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteGroupFromUserAsync($groupId, $deleteGroupFromUserRequest, string $contentType = self::contentTypes['deleteGroupFromUser'][0])
+    {
+        return $this->deleteGroupFromUserAsyncWithHttpInfo($groupId, $deleteGroupFromUserRequest, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteGroupFromUserAsyncWithHttpInfo
+     *
+     * Unlink a user from group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\DeleteGroupFromUserRequest $deleteGroupFromUserRequest The group user data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupFromUser'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteGroupFromUserAsyncWithHttpInfo($groupId, $deleteGroupFromUserRequest, string $contentType = self::contentTypes['deleteGroupFromUser'][0])
+    {
+        $returnType = '\Gopad\Model\Notification';
+        $request = $this->deleteGroupFromUserRequest($groupId, $deleteGroupFromUserRequest, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteGroupFromUser'
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\DeleteGroupFromUserRequest $deleteGroupFromUserRequest The group user data to unlink (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupFromUser'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteGroupFromUserRequest($groupId, $deleteGroupFromUserRequest, string $contentType = self::contentTypes['deleteGroupFromUser'][0])
+    {
+
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $groupId when calling deleteGroupFromUser'
+            );
+        }
+
+        // verify the required parameter 'deleteGroupFromUserRequest' is set
+        if ($deleteGroupFromUserRequest === null || (is_array($deleteGroupFromUserRequest) && count($deleteGroupFromUserRequest) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $deleteGroupFromUserRequest when calling deleteGroupFromUser'
+            );
+        }
+
+
+        $resourcePath = '/groups/{group_id}/users';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($groupId !== null) {
+            $resourcePath = str_replace(
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($deleteGroupFromUserRequest)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($deleteGroupFromUserRequest));
+            } else {
+                $httpBody = $deleteGroupFromUserRequest;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listGroupUsers
+     *
+     * Fetch all users attached to group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUsers'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Gopad\Model\ListGroupUsers200Response|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     */
+    public function listGroupUsers($groupId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroupUsers'][0])
+    {
+        list($response) = $this->listGroupUsersWithHttpInfo($groupId, $search, $sort, $order, $limit, $offset, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listGroupUsersWithHttpInfo
+     *
+     * Fetch all users attached to group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUsers'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Gopad\Model\ListGroupUsers200Response|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listGroupUsersWithHttpInfo($groupId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroupUsers'][0])
+    {
+        $request = $this->listGroupUsersRequest($groupId, $search, $sort, $order, $limit, $offset, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Gopad\Model\ListGroupUsers200Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\ListGroupUsers200Response' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\ListGroupUsers200Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Gopad\Model\ListGroupUsers200Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\ListGroupUsers200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listGroupUsersAsync
+     *
+     * Fetch all users attached to group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUsers'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listGroupUsersAsync($groupId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroupUsers'][0])
+    {
+        return $this->listGroupUsersAsyncWithHttpInfo($groupId, $search, $sort, $order, $limit, $offset, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listGroupUsersAsyncWithHttpInfo
+     *
+     * Fetch all users attached to group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUsers'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listGroupUsersAsyncWithHttpInfo($groupId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroupUsers'][0])
+    {
+        $returnType = '\Gopad\Model\ListGroupUsers200Response';
+        $request = $this->listGroupUsersRequest($groupId, $search, $sort, $order, $limit, $offset, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listGroupUsers'
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUsers'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listGroupUsersRequest($groupId, $search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroupUsers'][0])
+    {
+
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $groupId when calling listGroupUsers'
+            );
+        }
+
+
+
+
+
+
+
+        $resourcePath = '/groups/{group_id}/users';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $order,
+            'order', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($groupId !== null) {
+            $resourcePath = str_replace(
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listGroups
+     *
+     * Fetch all available groups
+     *
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Gopad\Model\ListGroups200Response|\Gopad\Model\Notification|\Gopad\Model\Notification
+     */
+    public function listGroups($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroups'][0])
+    {
+        list($response) = $this->listGroupsWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listGroupsWithHttpInfo
+     *
+     * Fetch all available groups
+     *
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
+     *
+     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Gopad\Model\ListGroups200Response|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listGroupsWithHttpInfo($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroups'][0])
+    {
+        $request = $this->listGroupsRequest($search, $sort, $order, $limit, $offset, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Gopad\Model\ListGroups200Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\ListGroups200Response' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\ListGroups200Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Gopad\Model\Notification' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Gopad\Model\ListGroups200Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\ListGroups200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gopad\Model\Notification',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listGroupsAsync
+     *
+     * Fetch all available groups
+     *
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listGroupsAsync($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroups'][0])
+    {
+        return $this->listGroupsAsyncWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listGroupsAsyncWithHttpInfo
+     *
+     * Fetch all available groups
+     *
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listGroupsAsyncWithHttpInfo($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroups'][0])
+    {
+        $returnType = '\Gopad\Model\ListGroups200Response';
+        $request = $this->listGroupsRequest($search, $sort, $order, $limit, $offset, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listGroups'
+     *
+     * @param  string $search Search query (optional)
+     * @param  string $sort Sorting column (optional)
+     * @param  string $order Sorting order (optional, default to 'asc')
+     * @param  int $limit Paging limit (optional, default to 100)
+     * @param  int $offset Paging offset (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listGroupsRequest($search = null, $sort = null, $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listGroups'][0])
+    {
+
+
+
+
+
+
+
+        $resourcePath = '/groups';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $order,
+            'order', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation permitGroupUser
+     *
+     * Update user perms for group
+     *
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitGroupUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function deleteTeamFromUser($teamId, $teamUserParams, string $contentType = self::contentTypes['deleteTeamFromUser'][0])
+    public function permitGroupUser($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['permitGroupUser'][0])
     {
-        list($response) = $this->deleteTeamFromUserWithHttpInfo($teamId, $teamUserParams, $contentType);
+        list($response) = $this->permitGroupUserWithHttpInfo($groupId, $permitGroupUserRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation deleteTeamFromUserWithHttpInfo
+     * Operation permitGroupUserWithHttpInfo
      *
-     * Unlink a user from team
+     * Update user perms for group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamFromUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitGroupUser'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteTeamFromUserWithHttpInfo($teamId, $teamUserParams, string $contentType = self::contentTypes['deleteTeamFromUser'][0])
+    public function permitGroupUserWithHttpInfo($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['permitGroupUser'][0])
     {
-        $request = $this->deleteTeamFromUserRequest($teamId, $teamUserParams, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 403:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 404:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 412:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 500:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Gopad\Model\Notification';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 412:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation deleteTeamFromUserAsync
-     *
-     * Unlink a user from team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamFromUser'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteTeamFromUserAsync($teamId, $teamUserParams, string $contentType = self::contentTypes['deleteTeamFromUser'][0])
-    {
-        return $this->deleteTeamFromUserAsyncWithHttpInfo($teamId, $teamUserParams, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation deleteTeamFromUserAsyncWithHttpInfo
-     *
-     * Unlink a user from team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamFromUser'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteTeamFromUserAsyncWithHttpInfo($teamId, $teamUserParams, string $contentType = self::contentTypes['deleteTeamFromUser'][0])
-    {
-        $returnType = '\Gopad\Model\Notification';
-        $request = $this->deleteTeamFromUserRequest($teamId, $teamUserParams, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'deleteTeamFromUser'
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to unlink (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamFromUser'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteTeamFromUserRequest($teamId, $teamUserParams, string $contentType = self::contentTypes['deleteTeamFromUser'][0])
-    {
-
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling deleteTeamFromUser'
-            );
-        }
-
-        // verify the required parameter 'teamUserParams' is set
-        if ($teamUserParams === null || (is_array($teamUserParams) && count($teamUserParams) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $teamUserParams when calling deleteTeamFromUser'
-            );
-        }
-
-
-        $resourcePath = '/teams/{team_id}/users';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($teamId !== null) {
-            $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($teamUserParams)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($teamUserParams));
-            } else {
-                $httpBody = $teamUserParams;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
-        // this endpoint requires HTTP basic authentication
-        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
-            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
-        if ($apiKey !== null) {
-            $headers['X-API-Key'] = $apiKey;
-        }
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation listTeamUsers
-     *
-     * Fetch all users attached to team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
-     *
-     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Gopad\Model\TeamUsers|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
-     */
-    public function listTeamUsers($teamId, $search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeamUsers'][0])
-    {
-        list($response) = $this->listTeamUsersWithHttpInfo($teamId, $search, $sort, $order, $limit, $offset, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation listTeamUsersWithHttpInfo
-     *
-     * Fetch all users attached to team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
-     *
-     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\TeamUsers|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function listTeamUsersWithHttpInfo($teamId, $search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeamUsers'][0])
-    {
-        $request = $this->listTeamUsersRequest($teamId, $search, $sort, $order, $limit, $offset, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Gopad\Model\TeamUsers' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\TeamUsers' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\TeamUsers', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 403:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 404:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 500:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Gopad\Model\TeamUsers';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\TeamUsers',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listTeamUsersAsync
-     *
-     * Fetch all users attached to team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listTeamUsersAsync($teamId, $search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeamUsers'][0])
-    {
-        return $this->listTeamUsersAsyncWithHttpInfo($teamId, $search, $sort, $order, $limit, $offset, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listTeamUsersAsyncWithHttpInfo
-     *
-     * Fetch all users attached to team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listTeamUsersAsyncWithHttpInfo($teamId, $search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeamUsers'][0])
-    {
-        $returnType = '\Gopad\Model\TeamUsers';
-        $request = $this->listTeamUsersRequest($teamId, $search, $sort, $order, $limit, $offset, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listTeamUsers'
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'username')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function listTeamUsersRequest($teamId, $search = null, $sort = 'username', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeamUsers'][0])
-    {
-
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling listTeamUsers'
-            );
-        }
-
-
-
-
-
-
-
-        $resourcePath = '/teams/{team_id}/users';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $search,
-            'search', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $sort,
-            'sort', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $order,
-            'order', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $limit,
-            'limit', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $offset,
-            'offset', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-
-        // path params
-        if ($teamId !== null) {
-            $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
-        // this endpoint requires HTTP basic authentication
-        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
-            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
-        if ($apiKey !== null) {
-            $headers['X-API-Key'] = $apiKey;
-        }
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation listTeams
-     *
-     * Fetch all available teams
-     *
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeams'] to see the possible values for this operation
-     *
-     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Teams|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
-     */
-    public function listTeams($search = null, $sort = 'name', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeams'][0])
-    {
-        list($response) = $this->listTeamsWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation listTeamsWithHttpInfo
-     *
-     * Fetch all available teams
-     *
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeams'] to see the possible values for this operation
-     *
-     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Teams|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function listTeamsWithHttpInfo($search = null, $sort = 'name', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeams'][0])
-    {
-        $request = $this->listTeamsRequest($search, $sort, $order, $limit, $offset, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Gopad\Model\Teams' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Teams' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Teams', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 403:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 500:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Gopad\Model\Teams';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Teams',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listTeamsAsync
-     *
-     * Fetch all available teams
-     *
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeams'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listTeamsAsync($search = null, $sort = 'name', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeams'][0])
-    {
-        return $this->listTeamsAsyncWithHttpInfo($search, $sort, $order, $limit, $offset, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listTeamsAsyncWithHttpInfo
-     *
-     * Fetch all available teams
-     *
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeams'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listTeamsAsyncWithHttpInfo($search = null, $sort = 'name', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeams'][0])
-    {
-        $returnType = '\Gopad\Model\Teams';
-        $request = $this->listTeamsRequest($search, $sort, $order, $limit, $offset, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listTeams'
-     *
-     * @param  string $search Search query (optional)
-     * @param  string $sort Sorting column (optional, default to 'name')
-     * @param  string $order Sorting order (optional, default to 'asc')
-     * @param  int $limit Paging limit (optional, default to 100)
-     * @param  int $offset Paging offset (optional, default to 0)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeams'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function listTeamsRequest($search = null, $sort = 'name', $order = 'asc', $limit = 100, $offset = 0, string $contentType = self::contentTypes['listTeams'][0])
-    {
-
-
-
-
-
-
-
-        $resourcePath = '/teams';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $search,
-            'search', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $sort,
-            'sort', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $order,
-            'order', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $limit,
-            'limit', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $offset,
-            'offset', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
-        // this endpoint requires HTTP basic authentication
-        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
-            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
-        if ($apiKey !== null) {
-            $headers['X-API-Key'] = $apiKey;
-        }
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation permitTeamUser
-     *
-     * Update user perms for team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitTeamUser'] to see the possible values for this operation
-     *
-     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
-     */
-    public function permitTeamUser($teamId, $teamUserParams, string $contentType = self::contentTypes['permitTeamUser'][0])
-    {
-        list($response) = $this->permitTeamUserWithHttpInfo($teamId, $teamUserParams, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation permitTeamUserWithHttpInfo
-     *
-     * Update user perms for team
-     *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitTeamUser'] to see the possible values for this operation
-     *
-     * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function permitTeamUserWithHttpInfo($teamId, $teamUserParams, string $contentType = self::contentTypes['permitTeamUser'][0])
-    {
-        $request = $this->permitTeamUserRequest($teamId, $teamUserParams, $contentType);
+        $request = $this->permitGroupUserRequest($groupId, $permitGroupUserRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3443,33 +3203,6 @@ class TeamApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Gopad\Model\Notification';
@@ -3550,34 +3283,26 @@ class TeamApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation permitTeamUserAsync
+     * Operation permitGroupUserAsync
      *
-     * Update user perms for team
+     * Update user perms for group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitTeamUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitGroupUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function permitTeamUserAsync($teamId, $teamUserParams, string $contentType = self::contentTypes['permitTeamUser'][0])
+    public function permitGroupUserAsync($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['permitGroupUser'][0])
     {
-        return $this->permitTeamUserAsyncWithHttpInfo($teamId, $teamUserParams, $contentType)
+        return $this->permitGroupUserAsyncWithHttpInfo($groupId, $permitGroupUserRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3586,21 +3311,21 @@ class TeamApi
     }
 
     /**
-     * Operation permitTeamUserAsyncWithHttpInfo
+     * Operation permitGroupUserAsyncWithHttpInfo
      *
-     * Update user perms for team
+     * Update user perms for group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitTeamUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitGroupUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function permitTeamUserAsyncWithHttpInfo($teamId, $teamUserParams, string $contentType = self::contentTypes['permitTeamUser'][0])
+    public function permitGroupUserAsyncWithHttpInfo($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['permitGroupUser'][0])
     {
         $returnType = '\Gopad\Model\Notification';
-        $request = $this->permitTeamUserRequest($teamId, $teamUserParams, $contentType);
+        $request = $this->permitGroupUserRequest($groupId, $permitGroupUserRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3639,34 +3364,34 @@ class TeamApi
     }
 
     /**
-     * Create request for operation 'permitTeamUser'
+     * Create request for operation 'permitGroupUser'
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\TeamUserParams $teamUserParams The team user data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitTeamUser'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\PermitGroupUserRequest $permitGroupUserRequest The group user data to permit (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['permitGroupUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function permitTeamUserRequest($teamId, $teamUserParams, string $contentType = self::contentTypes['permitTeamUser'][0])
+    public function permitGroupUserRequest($groupId, $permitGroupUserRequest, string $contentType = self::contentTypes['permitGroupUser'][0])
     {
 
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling permitTeamUser'
+                'Missing the required parameter $groupId when calling permitGroupUser'
             );
         }
 
-        // verify the required parameter 'teamUserParams' is set
-        if ($teamUserParams === null || (is_array($teamUserParams) && count($teamUserParams) === 0)) {
+        // verify the required parameter 'permitGroupUserRequest' is set
+        if ($permitGroupUserRequest === null || (is_array($permitGroupUserRequest) && count($permitGroupUserRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamUserParams when calling permitTeamUser'
+                'Missing the required parameter $permitGroupUserRequest when calling permitGroupUser'
             );
         }
 
 
-        $resourcePath = '/teams/{team_id}/users';
+        $resourcePath = '/groups/{group_id}/users';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3676,10 +3401,10 @@ class TeamApi
 
 
         // path params
-        if ($teamId !== null) {
+        if ($groupId !== null) {
             $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
                 $resourcePath
             );
         }
@@ -3692,12 +3417,12 @@ class TeamApi
         );
 
         // for model (json/xml)
-        if (isset($teamUserParams)) {
+        if (isset($permitGroupUserRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($teamUserParams));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($permitGroupUserRequest));
             } else {
-                $httpBody = $teamUserParams;
+                $httpBody = $permitGroupUserRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3723,11 +3448,6 @@ class TeamApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -3764,38 +3484,38 @@ class TeamApi
     }
 
     /**
-     * Operation showTeam
+     * Operation showGroup
      *
-     * Fetch a specific team
+     * Fetch a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Team|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Group|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function showTeam($teamId, string $contentType = self::contentTypes['showTeam'][0])
+    public function showGroup($groupId, string $contentType = self::contentTypes['showGroup'][0])
     {
-        list($response) = $this->showTeamWithHttpInfo($teamId, $contentType);
+        list($response) = $this->showGroupWithHttpInfo($groupId, $contentType);
         return $response;
     }
 
     /**
-     * Operation showTeamWithHttpInfo
+     * Operation showGroupWithHttpInfo
      *
-     * Fetch a specific team
+     * Fetch a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Team|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Group|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function showTeamWithHttpInfo($teamId, string $contentType = self::contentTypes['showTeam'][0])
+    public function showGroupWithHttpInfo($groupId, string $contentType = self::contentTypes['showGroup'][0])
     {
-        $request = $this->showTeamRequest($teamId, $contentType);
+        $request = $this->showGroupRequest($groupId, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3834,11 +3554,11 @@ class TeamApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Gopad\Model\Team' === '\SplFileObject') {
+                    if ('\Gopad\Model\Group' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Team' !== 'string') {
+                        if ('\Gopad\Model\Group' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -3856,7 +3576,7 @@ class TeamApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Team', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Group', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -3941,36 +3661,9 @@ class TeamApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
-            $returnType = '\Gopad\Model\Team';
+            $returnType = '\Gopad\Model\Group';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -4003,7 +3696,7 @@ class TeamApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Team',
+                        '\Gopad\Model\Group',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4032,33 +3725,25 @@ class TeamApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation showTeamAsync
+     * Operation showGroupAsync
      *
-     * Fetch a specific team
+     * Fetch a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function showTeamAsync($teamId, string $contentType = self::contentTypes['showTeam'][0])
+    public function showGroupAsync($groupId, string $contentType = self::contentTypes['showGroup'][0])
     {
-        return $this->showTeamAsyncWithHttpInfo($teamId, $contentType)
+        return $this->showGroupAsyncWithHttpInfo($groupId, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4067,20 +3752,20 @@ class TeamApi
     }
 
     /**
-     * Operation showTeamAsyncWithHttpInfo
+     * Operation showGroupAsyncWithHttpInfo
      *
-     * Fetch a specific team
+     * Fetch a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function showTeamAsyncWithHttpInfo($teamId, string $contentType = self::contentTypes['showTeam'][0])
+    public function showGroupAsyncWithHttpInfo($groupId, string $contentType = self::contentTypes['showGroup'][0])
     {
-        $returnType = '\Gopad\Model\Team';
-        $request = $this->showTeamRequest($teamId, $contentType);
+        $returnType = '\Gopad\Model\Group';
+        $request = $this->showGroupRequest($groupId, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4119,26 +3804,26 @@ class TeamApi
     }
 
     /**
-     * Create request for operation 'showTeam'
+     * Create request for operation 'showGroup'
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['showGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function showTeamRequest($teamId, string $contentType = self::contentTypes['showTeam'][0])
+    public function showGroupRequest($groupId, string $contentType = self::contentTypes['showGroup'][0])
     {
 
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling showTeam'
+                'Missing the required parameter $groupId when calling showGroup'
             );
         }
 
 
-        $resourcePath = '/teams/{team_id}';
+        $resourcePath = '/groups/{group_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4148,10 +3833,10 @@ class TeamApi
 
 
         // path params
-        if ($teamId !== null) {
+        if ($groupId !== null) {
             $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
                 $resourcePath
             );
         }
@@ -4188,11 +3873,6 @@ class TeamApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
@@ -4229,40 +3909,40 @@ class TeamApi
     }
 
     /**
-     * Operation updateTeam
+     * Operation updateGroup
      *
-     * Update a specific team
+     * Update a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\Team $team The team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to update (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gopad\Model\Team|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
+     * @return \Gopad\Model\Group|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification
      */
-    public function updateTeam($teamId, $team, string $contentType = self::contentTypes['updateTeam'][0])
+    public function updateGroup($groupId, $createGroupRequest, string $contentType = self::contentTypes['updateGroup'][0])
     {
-        list($response) = $this->updateTeamWithHttpInfo($teamId, $team, $contentType);
+        list($response) = $this->updateGroupWithHttpInfo($groupId, $createGroupRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation updateTeamWithHttpInfo
+     * Operation updateGroupWithHttpInfo
      *
-     * Update a specific team
+     * Update a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\Team $team The team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to update (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \Gopad\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gopad\Model\Team|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gopad\Model\Group|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification|\Gopad\Model\Notification, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateTeamWithHttpInfo($teamId, $team, string $contentType = self::contentTypes['updateTeam'][0])
+    public function updateGroupWithHttpInfo($groupId, $createGroupRequest, string $contentType = self::contentTypes['updateGroup'][0])
     {
-        $request = $this->updateTeamRequest($teamId, $team, $contentType);
+        $request = $this->updateGroupRequest($groupId, $createGroupRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4301,11 +3981,11 @@ class TeamApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Gopad\Model\Team' === '\SplFileObject') {
+                    if ('\Gopad\Model\Group' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Team' !== 'string') {
+                        if ('\Gopad\Model\Group' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -4323,7 +4003,7 @@ class TeamApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Team', []),
+                        ObjectSerializer::deserialize($content, '\Gopad\Model\Group', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4435,36 +4115,9 @@ class TeamApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                default:
-                    if ('\Gopad\Model\Notification' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Gopad\Model\Notification' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Gopad\Model\Notification', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
-            $returnType = '\Gopad\Model\Team';
+            $returnType = '\Gopad\Model\Group';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -4497,7 +4150,7 @@ class TeamApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Gopad\Model\Team',
+                        '\Gopad\Model\Group',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4534,34 +4187,26 @@ class TeamApi
                     );
                     $e->setResponseObject($data);
                     break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Gopad\Model\Notification',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation updateTeamAsync
+     * Operation updateGroupAsync
      *
-     * Update a specific team
+     * Update a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\Team $team The team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to update (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateTeamAsync($teamId, $team, string $contentType = self::contentTypes['updateTeam'][0])
+    public function updateGroupAsync($groupId, $createGroupRequest, string $contentType = self::contentTypes['updateGroup'][0])
     {
-        return $this->updateTeamAsyncWithHttpInfo($teamId, $team, $contentType)
+        return $this->updateGroupAsyncWithHttpInfo($groupId, $createGroupRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4570,21 +4215,21 @@ class TeamApi
     }
 
     /**
-     * Operation updateTeamAsyncWithHttpInfo
+     * Operation updateGroupAsyncWithHttpInfo
      *
-     * Update a specific team
+     * Update a specific group
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\Team $team The team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to update (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateTeamAsyncWithHttpInfo($teamId, $team, string $contentType = self::contentTypes['updateTeam'][0])
+    public function updateGroupAsyncWithHttpInfo($groupId, $createGroupRequest, string $contentType = self::contentTypes['updateGroup'][0])
     {
-        $returnType = '\Gopad\Model\Team';
-        $request = $this->updateTeamRequest($teamId, $team, $contentType);
+        $returnType = '\Gopad\Model\Group';
+        $request = $this->updateGroupRequest($groupId, $createGroupRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4623,34 +4268,34 @@ class TeamApi
     }
 
     /**
-     * Create request for operation 'updateTeam'
+     * Create request for operation 'updateGroup'
      *
-     * @param  string $teamId A team identifier or slug (required)
-     * @param  \Gopad\Model\Team $team The team data to update (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
+     * @param  string $groupId A group identifier or slug (required)
+     * @param  \Gopad\Model\CreateGroupRequest $createGroupRequest The group data to update (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateTeamRequest($teamId, $team, string $contentType = self::contentTypes['updateTeam'][0])
+    public function updateGroupRequest($groupId, $createGroupRequest, string $contentType = self::contentTypes['updateGroup'][0])
     {
 
-        // verify the required parameter 'teamId' is set
-        if ($teamId === null || (is_array($teamId) && count($teamId) === 0)) {
+        // verify the required parameter 'groupId' is set
+        if ($groupId === null || (is_array($groupId) && count($groupId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $teamId when calling updateTeam'
+                'Missing the required parameter $groupId when calling updateGroup'
             );
         }
 
-        // verify the required parameter 'team' is set
-        if ($team === null || (is_array($team) && count($team) === 0)) {
+        // verify the required parameter 'createGroupRequest' is set
+        if ($createGroupRequest === null || (is_array($createGroupRequest) && count($createGroupRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $team when calling updateTeam'
+                'Missing the required parameter $createGroupRequest when calling updateGroup'
             );
         }
 
 
-        $resourcePath = '/teams/{team_id}';
+        $resourcePath = '/groups/{group_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4660,10 +4305,10 @@ class TeamApi
 
 
         // path params
-        if ($teamId !== null) {
+        if ($groupId !== null) {
             $resourcePath = str_replace(
-                '{' . 'team_id' . '}',
-                ObjectSerializer::toPathValue($teamId),
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($groupId),
                 $resourcePath
             );
         }
@@ -4676,12 +4321,12 @@ class TeamApi
         );
 
         // for model (json/xml)
-        if (isset($team)) {
+        if (isset($createGroupRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($team));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($createGroupRequest));
             } else {
-                $httpBody = $team;
+                $httpBody = $createGroupRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4707,11 +4352,6 @@ class TeamApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Cookie');
-        if ($apiKey !== null) {
-            $headers['Cookie'] = $apiKey;
-        }
         // this endpoint requires HTTP basic authentication
         if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());

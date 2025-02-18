@@ -51,7 +51,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'notification';
+    protected static $openAPIModelName = 'Notification';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

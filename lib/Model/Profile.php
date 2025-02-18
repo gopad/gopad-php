@@ -51,7 +51,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'profile';
+    protected static $openAPIModelName = 'Profile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -70,7 +70,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => '\DateTime',
         'updatedAt' => '\DateTime',
         'auths' => '\Gopad\Model\UserAuth[]',
-        'teams' => '\Gopad\Model\UserTeam[]'
+        'groups' => '\Gopad\Model\UserGroup[]'
     ];
 
     /**
@@ -92,7 +92,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'date-time',
         'updatedAt' => 'date-time',
         'auths' => null,
-        'teams' => null
+        'groups' => null
     ];
 
     /**
@@ -112,7 +112,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => false,
         'updatedAt' => false,
         'auths' => true,
-        'teams' => true
+        'groups' => true
     ];
 
     /**
@@ -212,7 +212,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'created_at',
         'updatedAt' => 'updated_at',
         'auths' => 'auths',
-        'teams' => 'teams'
+        'groups' => 'groups'
     ];
 
     /**
@@ -232,7 +232,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
         'auths' => 'setAuths',
-        'teams' => 'setTeams'
+        'groups' => 'setGroups'
     ];
 
     /**
@@ -252,7 +252,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
         'auths' => 'getAuths',
-        'teams' => 'getTeams'
+        'groups' => 'getGroups'
     ];
 
     /**
@@ -323,7 +323,7 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('createdAt', $data ?? [], null);
         $this->setIfExists('updatedAt', $data ?? [], null);
         $this->setIfExists('auths', $data ?? [], null);
-        $this->setIfExists('teams', $data ?? [], null);
+        $this->setIfExists('groups', $data ?? [], null);
     }
 
     /**
@@ -708,35 +708,35 @@ class Profile implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets teams
+     * Gets groups
      *
-     * @return \Gopad\Model\UserTeam[]|null
+     * @return \Gopad\Model\UserGroup[]|null
      */
-    public function getTeams()
+    public function getGroups()
     {
-        return $this->container['teams'];
+        return $this->container['groups'];
     }
 
     /**
-     * Sets teams
+     * Sets groups
      *
-     * @param \Gopad\Model\UserTeam[]|null $teams teams
+     * @param \Gopad\Model\UserGroup[]|null $groups groups
      *
      * @return self
      */
-    public function setTeams($teams)
+    public function setGroups($groups)
     {
-        if (is_null($teams)) {
-            array_push($this->openAPINullablesSetToNull, 'teams');
+        if (is_null($groups)) {
+            array_push($this->openAPINullablesSetToNull, 'groups');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('teams', $nullablesSetToNull);
+            $index = array_search('groups', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['teams'] = $teams;
+        $this->container['groups'] = $groups;
 
         return $this;
     }
