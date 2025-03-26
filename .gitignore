@@ -10,3 +10,4 @@ vendor/
 .phpunit.result.cache
 
 .pre-commit-config.yaml
+openapitools.json
