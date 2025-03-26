@@ -65,4 +65,3 @@ lib/Model/UserGroup.php
 lib/Model/Validation.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/RedirectAuthRequestTest.php
