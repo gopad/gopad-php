@@ -1,6 +1,6 @@
 <?php
 /**
- * UserGroup
+ * RedirectAuthRequest
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Gopad\ObjectSerializer;
 
 /**
- * UserGroup Class Doc Comment
+ * RedirectAuthRequest Class Doc Comment
  *
  * @category Class
- * @description Model to represent user group
  * @package  Gopad
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
+class RedirectAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserGroup';
+    protected static $openAPIModelName = 'RedirectAuth_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,13 +58,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'userId' => 'string',
-        'user' => '\Gopad\Model\User',
-        'groupId' => 'string',
-        'group' => '\Gopad\Model\Group',
-        'perm' => 'string',
-        'createdAt' => '\DateTime',
-        'updatedAt' => '\DateTime'
+        'token' => 'string'
     ];
 
     /**
@@ -76,13 +69,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'userId' => null,
-        'user' => null,
-        'groupId' => null,
-        'group' => null,
-        'perm' => null,
-        'createdAt' => 'date-time',
-        'updatedAt' => 'date-time'
+        'token' => null
     ];
 
     /**
@@ -91,13 +78,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'userId' => false,
-        'user' => false,
-        'groupId' => false,
-        'group' => false,
-        'perm' => false,
-        'createdAt' => false,
-        'updatedAt' => false
+        'token' => false
     ];
 
     /**
@@ -186,13 +167,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'userId' => 'user_id',
-        'user' => 'user',
-        'groupId' => 'group_id',
-        'group' => 'group',
-        'perm' => 'perm',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'token' => 'token'
     ];
 
     /**
@@ -201,13 +176,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'userId' => 'setUserId',
-        'user' => 'setUser',
-        'groupId' => 'setGroupId',
-        'group' => 'setGroup',
-        'perm' => 'setPerm',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt'
+        'token' => 'setToken'
     ];
 
     /**
@@ -216,13 +185,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'userId' => 'getUserId',
-        'user' => 'getUser',
-        'groupId' => 'getGroupId',
-        'group' => 'getGroup',
-        'perm' => 'getPerm',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt'
+        'token' => 'getToken'
     ];
 
     /**
@@ -266,23 +229,6 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const PERM_OWNER = 'owner';
-    public const PERM_USER = 'user';
-    public const PERM_ADMIN = 'admin';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPermAllowableValues()
-    {
-        return [
-            self::PERM_OWNER,
-            self::PERM_USER,
-            self::PERM_ADMIN,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -299,13 +245,7 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('userId', $data ?? [], null);
-        $this->setIfExists('user', $data ?? [], null);
-        $this->setIfExists('groupId', $data ?? [], null);
-        $this->setIfExists('group', $data ?? [], null);
-        $this->setIfExists('perm', $data ?? [], 'user');
-        $this->setIfExists('createdAt', $data ?? [], null);
-        $this->setIfExists('updatedAt', $data ?? [], null);
+        $this->setIfExists('token', $data ?? [], null);
     }
 
     /**
@@ -335,21 +275,9 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['userId'] === null) {
-            $invalidProperties[] = "'userId' can't be null";
+        if ($this->container['token'] === null) {
+            $invalidProperties[] = "'token' can't be null";
         }
-        if ($this->container['groupId'] === null) {
-            $invalidProperties[] = "'groupId' can't be null";
-        }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!is_null($this->container['perm']) && !in_array($this->container['perm'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'perm', must be one of '%s'",
-                $this->container['perm'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -366,200 +294,28 @@ class UserGroup implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets userId
+     * Gets token
      *
      * @return string
      */
-    public function getUserId()
+    public function getToken()
     {
-        return $this->container['userId'];
+        return $this->container['token'];
     }
 
     /**
-     * Sets userId
+     * Sets token
      *
-     * @param string $userId userId
+     * @param string $token token
      *
      * @return self
      */
-    public function setUserId($userId)
+    public function setToken($token)
     {
-        if (is_null($userId)) {
-            throw new \InvalidArgumentException('non-nullable userId cannot be null');
+        if (is_null($token)) {
+            throw new \InvalidArgumentException('non-nullable token cannot be null');
         }
-        $this->container['userId'] = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Gets user
-     *
-     * @return \Gopad\Model\User|null
-     */
-    public function getUser()
-    {
-        return $this->container['user'];
-    }
-
-    /**
-     * Sets user
-     *
-     * @param \Gopad\Model\User|null $user user
-     *
-     * @return self
-     */
-    public function setUser($user)
-    {
-        if (is_null($user)) {
-            throw new \InvalidArgumentException('non-nullable user cannot be null');
-        }
-        $this->container['user'] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Gets groupId
-     *
-     * @return string
-     */
-    public function getGroupId()
-    {
-        return $this->container['groupId'];
-    }
-
-    /**
-     * Sets groupId
-     *
-     * @param string $groupId groupId
-     *
-     * @return self
-     */
-    public function setGroupId($groupId)
-    {
-        if (is_null($groupId)) {
-            throw new \InvalidArgumentException('non-nullable groupId cannot be null');
-        }
-        $this->container['groupId'] = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Gets group
-     *
-     * @return \Gopad\Model\Group|null
-     */
-    public function getGroup()
-    {
-        return $this->container['group'];
-    }
-
-    /**
-     * Sets group
-     *
-     * @param \Gopad\Model\Group|null $group group
-     *
-     * @return self
-     */
-    public function setGroup($group)
-    {
-        if (is_null($group)) {
-            throw new \InvalidArgumentException('non-nullable group cannot be null');
-        }
-        $this->container['group'] = $group;
-
-        return $this;
-    }
-
-    /**
-     * Gets perm
-     *
-     * @return string|null
-     */
-    public function getPerm()
-    {
-        return $this->container['perm'];
-    }
-
-    /**
-     * Sets perm
-     *
-     * @param string|null $perm perm
-     *
-     * @return self
-     */
-    public function setPerm($perm)
-    {
-        if (is_null($perm)) {
-            throw new \InvalidArgumentException('non-nullable perm cannot be null');
-        }
-        $allowedValues = $this->getPermAllowableValues();
-        if (!in_array($perm, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'perm', must be one of '%s'",
-                    $perm,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['perm'] = $perm;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime|null $createdAt createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        if (is_null($createdAt)) {
-            throw new \InvalidArgumentException('non-nullable createdAt cannot be null');
-        }
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        if (is_null($updatedAt)) {
-            throw new \InvalidArgumentException('non-nullable updatedAt cannot be null');
-        }
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['token'] = $token;
 
         return $this;
     }

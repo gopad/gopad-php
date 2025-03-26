@@ -23,6 +23,7 @@ docs/Model/PermitGroupUserRequest.md
 docs/Model/PermitUserGroupRequest.md
 docs/Model/Profile.md
 docs/Model/Provider.md
+docs/Model/RedirectAuthRequest.md
 docs/Model/UpdateProfileRequest.md
 docs/Model/UpdateUserRequest.md
 docs/Model/User.md
@@ -55,6 +56,7 @@ lib/Model/PermitGroupUserRequest.php
 lib/Model/PermitUserGroupRequest.php
 lib/Model/Profile.php
 lib/Model/Provider.php
+lib/Model/RedirectAuthRequest.php
 lib/Model/UpdateProfileRequest.php
 lib/Model/UpdateUserRequest.php
 lib/Model/User.php
@@ -63,3 +65,4 @@ lib/Model/UserGroup.php
 lib/Model/Validation.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/RedirectAuthRequestTest.php
