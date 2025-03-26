@@ -1,7 +1,7 @@
 ---
 repository:
   name: gopad-php
-  description: "Gopad: SDK for PHP"
+  description: PHP SDK for Gopad
   homepage: https://gopad.eu
   topics: gopad, etherpad, sdk, openapi, php
 
