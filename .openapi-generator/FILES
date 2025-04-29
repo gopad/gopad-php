@@ -36,6 +36,7 @@ lib/Api/ProfileApi.php
 lib/Api/UserApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/AuthToken.php
 lib/Model/AuthVerify.php
