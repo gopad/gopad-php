@@ -2,6 +2,6 @@
 invokerPackage: Gopad
 packageName: gopad
 variableNamingConvention: camelCase
-artifactVersion: 2.2.0
+artifactVersion: 2.3.0
 
 ...
