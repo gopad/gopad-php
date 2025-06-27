@@ -66,8 +66,3 @@ lib/Model/UserGroup.php
 lib/Model/Validation.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/InlineObject1Test.php
-test/Model/InlineObject2Test.php
-test/Model/InlineObject3Test.php
-test/Model/InlineObject4Test.php
-test/Model/InlineObjectTest.php
