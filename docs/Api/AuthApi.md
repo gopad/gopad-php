@@ -73,7 +73,7 @@ No authorization required
 ## `listProviders()`
 
 ```php
-listProviders(): \Gopad\Model\InlineObject
+listProviders(): \Gopad\Model\ListProviders200Response
 ```
 
 Fetch the available auth providers
@@ -106,7 +106,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Gopad\Model\InlineObject**](../Model/InlineObject.md)
+[**\Gopad\Model\ListProviders200Response**](../Model/ListProviders200Response.md)
 
 ### Authorization
 

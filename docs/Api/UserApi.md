@@ -294,7 +294,7 @@ try {
 ## `listUserGroups()`
 
 ```php
-listUserGroups($userId, $search, $sort, $order, $limit, $offset): \Gopad\Model\InlineObject4
+listUserGroups($userId, $search, $sort, $order, $limit, $offset): \Gopad\Model\ListUserGroups200Response
 ```
 
 Fetch all groups attached to user
@@ -354,7 +354,7 @@ try {
 
 ### Return type
 
-[**\Gopad\Model\InlineObject4**](../Model/InlineObject4.md)
+[**\Gopad\Model\ListUserGroups200Response**](../Model/ListUserGroups200Response.md)
 
 ### Authorization
 
@@ -372,7 +372,7 @@ try {
 ## `listUsers()`
 
 ```php
-listUsers($search, $sort, $order, $limit, $offset): \Gopad\Model\InlineObject3
+listUsers($search, $sort, $order, $limit, $offset): \Gopad\Model\ListUsers200Response
 ```
 
 Fetch all available users
@@ -430,7 +430,7 @@ try {
 
 ### Return type
 
-[**\Gopad\Model\InlineObject3**](../Model/InlineObject3.md)
+[**\Gopad\Model\ListUsers200Response**](../Model/ListUsers200Response.md)
 
 ### Authorization
 
