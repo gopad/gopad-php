@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.8.0](https://github.com/gopad/gopad-php/compare/v2.7.0...v2.8.0) (2025-09-22)
+
+
+### Features
+
+* automated openapi client update ([aed29ef](https://github.com/gopad/gopad-php/commit/aed29ef17ba1789146d2edb9331dc4e648b3e4fb))
+* automated openapi client update ([1214b81](https://github.com/gopad/gopad-php/commit/1214b81ead70e93139c05442167fff07b99d5ab6))
+
 ## [2.7.0](https://github.com/gopad/gopad-php/compare/v2.6.0...v2.7.0) (2025-09-08)
 
 

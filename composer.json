@@ -1,6 +1,6 @@
 {
   "name": "gopad/gopad-php",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "type": "library",
   "description": "OpenAPI client for Gopad",
   "keywords": [
