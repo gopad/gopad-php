@@ -1,5 +1,7 @@
 # Gopad\GroupApi
 
+
+
 All URIs are relative to https://try.gopad.eu/api/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
