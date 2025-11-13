@@ -71,8 +71,10 @@
                 };
 
                 packages = with pkgs; [
+                  curl
+                  jq
+                  maven
                   nixfmt-rfc-style
-                  openapi-generator-cli
                 ];
               };
             };
