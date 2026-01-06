@@ -197,7 +197,7 @@
         [
             "@semantic-release/github",
             {
-                "publish": true
+                "assets": []
             }
         ]
     ]
