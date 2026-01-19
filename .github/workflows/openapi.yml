@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Generate token
         id: token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ secrets.TOKEN_EXCHANGE_APP }}
           private-key: ${{ secrets.TOKEN_EXCHANGE_KEY }}
@@ -26,10 +26,10 @@ jobs:
           permission-pull-requests: write
 
       - name: Checkout source
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@v6
 
       - name: Setup php
-        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2
+        uses: shivammathur/setup-php@v2
         with:
           php-version: "8.3"
 
@@ -41,7 +41,7 @@ jobs:
 
       - name: Create request
         id: pr
-        uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725 # v8
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "feat: automated openapi client update"
           delete-branch: true
