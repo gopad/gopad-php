@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0](https://github.com/gopad/gopad-php/compare/v2.11.0...v3.0.0) (2026-02-09)
+
+### Dependencies
+
+* **major:** update dependency phpunit/phpunit to v13 ([#100](https://github.com/gopad/gopad-php/issues/100)) ([f823008](https://github.com/gopad/gopad-php/commit/f823008fa6b06cb7bf1b50cf1a8ccb5a127e91da))
+
+### Miscellaneous
+
+* drop issue and pull request template ([8235c8b](https://github.com/gopad/gopad-php/commit/8235c8be29bc9a73c24bd0adf54154f06aa0cb4e))
+* **flake:** updated lockfile [skip ci] ([df8a69f](https://github.com/gopad/gopad-php/commit/df8a69f22b302509ccabb00c8d335ef8dd2f04eb))
+* **flake:** updated lockfile [skip ci] ([1771e51](https://github.com/gopad/gopad-php/commit/1771e51515fed95dfebfb2bf0c30dd21c4ed610e))
+* **flake:** updated lockfile [skip ci] ([130eadd](https://github.com/gopad/gopad-php/commit/130eadd2768e99f4bcaff604214dd8a0bfdc440a))
+* **flake:** updated lockfile [skip ci] ([8bffe08](https://github.com/gopad/gopad-php/commit/8bffe08e56b64af7a4b0a3dd809d5e7614619357))
+* **flake:** updated lockfile [skip ci] ([1452079](https://github.com/gopad/gopad-php/commit/1452079039cc5c2b6922eb8c63a07a13f6feae7d))
+* **flake:** updated lockfile [skip ci] ([c0265e1](https://github.com/gopad/gopad-php/commit/c0265e1c0ee10ef1d4416a1f204e7658bdf953de))
+* **flake:** updated lockfile [skip ci] ([07d5cd0](https://github.com/gopad/gopad-php/commit/07d5cd0369f001320218a4a326f216c94e537492))
+* **flake:** updated lockfile [skip ci] ([901adc8](https://github.com/gopad/gopad-php/commit/901adc84de697a93709042a3fa20386e9e4d7fb9))
+* **flake:** updated lockfile [skip ci] ([63a99b7](https://github.com/gopad/gopad-php/commit/63a99b75cd230f37dae67e2e0e566792973351fb))
+* **flake:** updated lockfile [skip ci] ([24d1bfc](https://github.com/gopad/gopad-php/commit/24d1bfc4d0d918385b33c8862f152db246ab5913))
+* **flake:** updated lockfile [skip ci] ([42cf853](https://github.com/gopad/gopad-php/commit/42cf8533cb24940b6a99f498da77802eed81a466))
+* **flake:** updated lockfile [skip ci] ([df39cb3](https://github.com/gopad/gopad-php/commit/df39cb3ec91376066c21ba1b52822a7f853b04b7))
+
 ## [2.11.0](https://github.com/gopad/gopad-php/compare/v2.10.0...v2.11.0) (2025-11-17)
 
 
