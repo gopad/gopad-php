@@ -1,5 +1,7 @@
 # Changelog
 
+## [4.0.0](https://github.com/gopad/gopad-php/compare/v3.0.0...v4.0.0) (2026-07-27)
+
 ## [3.0.0](https://github.com/gopad/gopad-php/compare/v2.11.0...v3.0.0) (2026-02-09)
 
 ### Dependencies
