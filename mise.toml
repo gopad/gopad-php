@@ -1,0 +1,7 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tools]
+java = "26.0.2"
+maven = "3.9.16"
+php = "8.3"
+pre-commit = "4.6.1"

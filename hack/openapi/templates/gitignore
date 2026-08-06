@@ -1,13 +1,12 @@
-.direnv/
-.devenv/
+mise.local.toml
 
 composer.phar
 composer.lock
-
 vendor/
-
 .php_cs.cache
 .phpunit.result.cache
 
-.pre-commit-config.yaml
 openapitools.json
+
+hack/wrapped-client.sh
+hack/*.jar
