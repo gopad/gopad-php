@@ -5,3 +5,6 @@ java = "26.0.2"
 maven = "3.9.16"
 php = "8.3"
 pre-commit = "4.6.1"
+
+[plugins]
+php = "https://github.com/verzly/mise-php#latest"
