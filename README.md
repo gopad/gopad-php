@@ -70,11 +70,6 @@ the following commands inside the repository to activate mise and install all
 tools defined in `mise.toml`:
 
 ```console
-mise plugin install \
-  php \
-  https://github.com/verzly/mise-php#latest \
-  --force
-
 mise trust
 mise install
 ```
