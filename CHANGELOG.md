@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.1.0](https://github.com/gopad/gopad-php/compare/v4.0.0...v4.1.0) (2026-08-10)
+
+### Features
+
+* restructure repo and build processes ([363cd6e](https://github.com/gopad/gopad-php/commit/363cd6ef18473a3eb8e1bc5b8e2026048aa7a82e))
+
+### Dependencies
+
+* **minor:** update dependency php to v8.5.9 ([#108](https://github.com/gopad/gopad-php/issues/108)) ([8139081](https://github.com/gopad/gopad-php/commit/81390819825e64a6b41f963675de5999e706f38a))
+
 ## [4.0.0](https://github.com/gopad/gopad-php/compare/v3.0.0...v4.0.0) (2026-07-27)
 
 ## [3.0.0](https://github.com/gopad/gopad-php/compare/v2.11.0...v3.0.0) (2026-02-09)
