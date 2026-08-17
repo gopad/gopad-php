@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.1](https://github.com/gopad/gopad-php/compare/v4.1.0...v4.1.1) (2026-08-17)
+
+### Dependencies
+
+* **patch:** update dependency pre-commit to v4.6.2 ([#111](https://github.com/gopad/gopad-php/issues/111)) ([30a9460](https://github.com/gopad/gopad-php/commit/30a9460208132665dc1f88739d60d378d71acc72))
+
 ## [4.1.0](https://github.com/gopad/gopad-php/compare/v4.0.0...v4.1.0) (2026-08-10)
 
 ### Features
