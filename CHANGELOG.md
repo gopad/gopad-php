@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.2](https://github.com/gopad/gopad-php/compare/v4.1.1...v4.1.2) (2026-08-31)
+
+### Dependencies
+
+* **patch:** update dependency php to v8.5.10 ([#112](https://github.com/gopad/gopad-php/issues/112)) ([07ffd69](https://github.com/gopad/gopad-php/commit/07ffd699e012b5f4523af6ad9abc90cd8a2a3dd6))
+
 ## [4.1.1](https://github.com/gopad/gopad-php/compare/v4.1.0...v4.1.1) (2026-08-17)
 
 ### Dependencies
