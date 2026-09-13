@@ -5,7 +5,7 @@ java = "26.0.2"
 maven = "3.9.16"
 node = "24"
 php = "8.5.10"
-prek = "0.5.2"
+prek = "0.5.3"
 
 [plugins]
 php = "https://github.com/verzly/mise-php#latest"
