@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.2.0](https://github.com/gopad/gopad-php/compare/v4.1.2...v4.2.0) (2026-10-19)
+
+### Features
+
+* automated openapi client update ([c9db54d](https://github.com/gopad/gopad-php/commit/c9db54d90730698e3a83a4db6f55c3102ab37641))
+
+### Dependencies
+
+* **mise:** update dependency php to v8.5.11 ([#114](https://github.com/gopad/gopad-php/issues/114)) ([793f850](https://github.com/gopad/gopad-php/commit/793f850ed4772c57d45c4201b0f511e3c7ee8a47))
+* **mise:** update dependency prek to v0.5.3 ([#113](https://github.com/gopad/gopad-php/issues/113)) ([941f277](https://github.com/gopad/gopad-php/commit/941f277bd228f91c1e05283555a884fafaf0fe5b))
+* **mise:** update dependency prek to v0.5.4 ([#115](https://github.com/gopad/gopad-php/issues/115)) ([91abdd0](https://github.com/gopad/gopad-php/commit/91abdd066f24abe927acc065fb66e2577b72a282))
+* **mise:** update dependency prek to v0.5.5 ([#117](https://github.com/gopad/gopad-php/issues/117)) ([68a7067](https://github.com/gopad/gopad-php/commit/68a7067101e2ede63d91aa181730042000bf093c))
+* **mise:** update dependency prek to v0.5.6 ([#119](https://github.com/gopad/gopad-php/issues/119)) ([3799903](https://github.com/gopad/gopad-php/commit/3799903e285c723712942771bf44668b9413db75))
+
 ## [4.1.2](https://github.com/gopad/gopad-php/compare/v4.1.1...v4.1.2) (2026-08-31)
 
 ### Dependencies
